@@ -3,5 +3,114 @@ $white: #fff;
 $nav-border: #d6d6d6;
 $red: #ff0000;
 $black: #000;
+$primary: #0b0d0e;
+$accent: #31a3dd;
 $light-grey: #f4f7f7;
 $page-bg-color: #f7f7f7;
+$quaternary: #E2E6E8;
+$tertiary: #72838C;
+$secondary: #444F54;
+$error: #ef2d56;
+$success: #09b66d;
+$warning: #f5c023;
+
+// screen sizes
+$mobile-small: "screen and (max-width: 360px)";
+$mobile: "screen and (max-width: 576px)";
+$tablet: "screen and (max-width: 768px)";
+$laptop: "screen and (max-width: 1024px)";
+$laptop-medium: "screen and (max-width: 1200px)";
+$laptop-large: "screen and (max-width: 1440px)";
+
+/////////////////////////////////
+//        SPACING VALUES       //
+/////////////////////////////////
+$sp-144: 144px;
+$sp-100: 100px;
+$sp-80: 80px;
+$sp-64: 64px;
+$sp-60: 60px;
+$sp-56: 56px;
+$sp-48: 48px;
+$sp-44: 44px;
+$sp-40: 40px;
+$sp-36: 36px;
+$sp-32: 32px;
+$sp-28: 28px;
+$sp-24: 24px;
+$sp-20: 20px;
+$sp-16: 16px;
+$sp-12: 12px;
+$sp-8: 8px;
+$sp-4: 4px;
+
+// Highlight colors
+$accent-highlight: #D6EDF8;
+$primary-highlight: #F0F2F3;
+$error-highlight: #FFDAE2;
+$success-highlight: #CEF0E2;
+$warning-highlight: #FDF2D3;
+
+// Gray
+$gray: #aab5ba; // gray-70
+$darkest-gray: #2d3438; // gray-20
+$light-gray: #e2e6e8;
+$dark-gray: #72838c; // gray-50,
+$darker-gray: #49556B; // gray-60
+
+// Mixins
+$corner-radius: 4px;
+@mixin scrollbar() {
+    &::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+        transition: .2s;
+        background: $quaternary;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $tertiary;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: $secondary;
+    }
+    // Firefox
+    scrollbar-color: $tertiary transparent;
+    scrollbar-width: thin;
+}
+
+@mixin scrollbar-thin() {
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        transition: .2s;
+        background: $quaternary;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $tertiary;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: $secondary;
+    }
+    // Firefox
+    scrollbar-color: $tertiary transparent;
+    scrollbar-width: thin;
+}
+
+@mixin flex-align-justify-center($direction: row) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @if $direction==column {
+        flex-direction: column;
+    }
+}
+
+@mixin flex-align-center($direction: row) {
+    display: flex;
+    align-items: center;
+    @if $direction==column {
+        flex-direction: column;
+    }
+}
+
+// End Mixins
