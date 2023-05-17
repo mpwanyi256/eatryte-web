@@ -9,6 +9,11 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
+// material design icons
+import "@mdi/font/css/materialdesignicons.css";
+import "@mdi/font/scss/materialdesignicons.scss";
+import "@mdi/font/css/materialdesignicons.css";
+
 const vuetify = createVuetify({
   components,
   directives,

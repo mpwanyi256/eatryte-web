@@ -63,11 +63,11 @@ export default defineComponent({
     // Define your routes here
     const routes: NavRoute[] = [
       {
-        icon: "mdi-cart",
+        icon: "mdi mdi-cart",
         name: "home",
       },
       {
-        icon: "mdi-cart",
+        icon: "mdi mdi-cart",
         name: "assigned",
       },
     ];
