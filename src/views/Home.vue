@@ -6,9 +6,12 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import NavBar from "@/components/nav/NavBar.vue";
 
 @Options({
-  components: {},
+  components: {
+    NavBar,
+  },
   props: {
     msg: String,
   },
