@@ -10,9 +10,6 @@ import NavBar from "@/components/nav/NavBar.vue";
   components: {
     NavBar,
   },
-  props: {
-    msg: String,
-  },
 })
 export default class HomeView extends Vue {}
 </script>

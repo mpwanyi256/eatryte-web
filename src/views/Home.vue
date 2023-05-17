@@ -1,16 +1,18 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-  </div>
+  <Page title="Home">
+    <template #content>
+      <h1>Home</h1>
+    </template>
+  </Page>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import NavBar from "@/components/nav/NavBar.vue";
+import Page from "@/components/generics/Page.vue";
 
 @Options({
   components: {
-    NavBar,
+    Page,
   },
   props: {
     msg: String,
