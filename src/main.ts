@@ -14,6 +14,9 @@ import "@mdi/font/css/materialdesignicons.css";
 import "@mdi/font/scss/materialdesignicons.scss";
 import "@mdi/font/css/materialdesignicons.css";
 
+// Global styles
+import "@/assets/styles/main.scss";
+
 const vuetify = createVuetify({
   components,
   directives,

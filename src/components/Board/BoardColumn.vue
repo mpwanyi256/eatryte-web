@@ -2,8 +2,8 @@
   <div class="column">
     <div class="column-container">
       <div class="column-header">
-        <h3 class="t-regular c-secondary column-label">Column name</h3>
-        <div class="tooltip-container">
+        <h3 class="t-regular c-secondary column-label">{{ columnLabel }}</h3>
+        <div class="tooltip-container" v-if="columnLabel === 'Backlog'">
           <Button
             class="iconic tertiary"
             icon="plus"
@@ -14,7 +14,7 @@
       <div class="column-body">
         <slot />
 
-        <div class="column-empty-state">
+        <div v-if="!hasCards" class="column-empty-state">
           <div>
             <i class="mdi mdi-selection-search"></i>
             <p class="t-regular bold">No results found in this column.</p>
@@ -32,6 +32,22 @@ export default defineComponent({
   name: "BoardColumn-component",
   components: {
     Button,
+  },
+  props: {
+    cards: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    columnLabel: {
+      type: String,
+      required: true,
+    },
+    hasCards: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   setup() {
     return {};
@@ -97,10 +113,6 @@ export default defineComponent({
   }
 
   &-body {
-    .card {
-      margin: 8px;
-    }
-
     &-empty-state {
       @include flex-align-justify-center;
       height: 100%;

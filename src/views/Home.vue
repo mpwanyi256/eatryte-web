@@ -2,32 +2,79 @@
   <Page title="Board">
     <template #content>
       <div class="board">
-        <BoardColumn />
-        <BoardColumn />
-        <BoardColumn />
-        <BoardColumn />
-        <BoardColumn />
-        <BoardColumn />
+        <BoardColumn
+          v-for="column in boardsColumns"
+          :key="column"
+          :columnLabel="column"
+          :hasCards="loadedCards.length > 0"
+        >
+          <BoardCard
+            :columnLabel="column"
+            v-for="card in loadedCards"
+            :key="card.id"
+            :card="card"
+          />
+        </BoardColumn>
       </div>
     </template>
   </Page>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, ref } from "vue";
 import Page from "@/components/generics/Page.vue";
 import BoardColumn from "@/components/Board/BoardColumn.vue";
+import BoardCard from "@/components/Board/BoardCard.vue";
 
-@Options({
+interface boardColumn {
+  id: number;
+  title: string;
+}
+
+interface card {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export default defineComponent({
+  name: "HomeView",
   components: {
     Page,
     BoardColumn,
+    BoardCard,
   },
-  props: {
-    msg: String,
+  setup() {
+    const boardColumns = ref<string[]>([
+      "Backlog",
+      "To Do",
+      "Blocked",
+      "In Progress",
+      "In Review",
+      "Done",
+    ]);
+
+    const generateCards = () => {
+      const array = [];
+      for (let i = 1; i <= 100; i++) {
+        const item: card = {
+          id: i,
+          title: `Card ${i}`,
+          description: "This is a card description",
+        };
+        array.push(item);
+      }
+      return array;
+    };
+
+    const cards = ref<card[]>(generateCards());
+
+    return {
+      boardsColumns: boardColumns.value,
+      loadedCards: cards.value,
+    };
   },
-})
-export default class HomeView extends Vue {}
+});
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";

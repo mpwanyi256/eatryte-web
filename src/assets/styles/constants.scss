@@ -5,6 +5,7 @@ $red: #ff0000;
 $black: #000;
 $primary: #0b0d0e;
 $accent: #31a3dd;
+$light-blue: #cbe8f6;
 $light-grey: #f4f7f7;
 $page-bg-color: #f7f7f7;
 $quaternary: #E2E6E8;
@@ -13,6 +14,10 @@ $secondary: #444F54;
 $error: #ef2d56;
 $success: #09b66d;
 $warning: #f5c023;
+$violet: #8B02D3;
+$indigo: #667EEA;
+$orange: #F4A259;
+$display-font: 'Inter', sans-serif;
 
 // screen sizes
 $mobile-small: "screen and (max-width: 360px)";
@@ -110,6 +115,14 @@ $corner-radius: 4px;
     align-items: center;
     @if $direction==column {
         flex-direction: column;
+    }
+}
+
+@mixin clear-list-formatting() {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
     }
 }
 
