@@ -25,17 +25,7 @@ import { defineComponent, ref } from "vue";
 import Page from "@/components/generics/Page.vue";
 import BoardColumn from "@/components/Board/BoardColumn.vue";
 import BoardCard from "@/components/Board/BoardCard.vue";
-
-interface boardColumn {
-  id: number;
-  title: string;
-}
-
-interface card {
-  id: number;
-  title: string;
-  description: string;
-}
+import { Card } from "@/types/generics";
 
 export default defineComponent({
   name: "HomeView",
@@ -57,17 +47,29 @@ export default defineComponent({
     const generateCards = () => {
       const array = [];
       for (let i = 1; i <= 100; i++) {
-        const item: card = {
+        const points = Math.random() * 10;
+        const item: Card = {
           id: i,
           title: `Card ${i}`,
           description: "This is a card description",
+          total_points: Math.round(points),
+          assignee: {
+            id: 1,
+            name: "John Doe",
+            avatar: "https://i.pravatar.cc/300",
+          },
+          comment_count: 1,
+          tags: [
+            { id: 1, name: "dev" },
+            { id: 2, name: "design" },
+          ],
         };
         array.push(item);
       }
       return array;
     };
 
-    const cards = ref<card[]>(generateCards());
+    const cards = ref<Card[]>(generateCards());
 
     return {
       boardsColumns: boardColumns.value,
