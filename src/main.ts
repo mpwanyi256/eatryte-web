@@ -1,10 +1,12 @@
 import { createApp } from "vue";
+
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
+import appConfig from "@/config/appConfig";
 
-axios.defaults.baseURL = "http://localhost:3000/";
+axios.defaults.baseURL = `${appConfig.api.baseURL}:${appConfig.api.port}`;
 
 // Vuetify
 import "vuetify/styles";
@@ -29,4 +31,5 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 app.use(vuetify);
+// app.use(eventBusSetUp);
 app.mount("#app");

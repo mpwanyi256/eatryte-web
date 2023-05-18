@@ -24,6 +24,7 @@
           />
         </BoardColumn>
       </div>
+      <router-view />
     </template>
   </Page>
 </template>
@@ -32,6 +33,7 @@
 import { defineComponent, ref, onMounted, computed } from "vue";
 import { State } from "@/store";
 import { useStore } from "vuex";
+import mitt from "mitt";
 
 import { Card, Column, MoveCardPayload } from "@/types/generics";
 import Page from "@/components/generics/Page.vue";
@@ -43,53 +45,56 @@ export default defineComponent({
   name: "HomeView",
   components: {
     Page,
-    BoardColumn,
     BoardCard,
+    BoardColumn,
     BoardActions,
   },
   setup() {
     const store = useStore<State>();
-
-    const boardColumns = ref<Column[]>([
-      { id: 1, name: "Backlog" },
-      { id: 2, name: "Blocked" },
-      { id: 3, name: "In Progress" },
-      { id: 4, name: "In Review" },
-      { id: 5, name: "Done" },
-    ]);
+    const emitter = mitt();
 
     const list = ref<HTMLElement | null>(null);
     const lists = ref<Element[]>([]);
 
-    const cards = ref<Card[]>(store.state.board.cards);
-
-    const trackCards = computed<Card[]>(() => {
+    const cards = computed<Card[]>(() => {
       return store.state.board.cards;
     });
 
+    const boardColumns = computed<Column[]>(() => {
+      return store.state.board.boardsColumns;
+    });
+
     const getColumnCards = (columnId: number) => {
-      return trackCards.value.filter((card) => card.column_id === columnId);
+      return cards.value.filter((card) => card.column_id === columnId);
     };
 
-    const moveCard = (data: MoveCardPayload) => {
-      // update card column_id
-      const card = cards.value.find((c) => c.id === data.card.id);
-      if (card) {
-        card.column_id = data.to_column_id;
+    const moveCard = async (data: MoveCardPayload) => {
+      const cardIdx = cards.value.findIndex((card) => card.id === data.card.id);
+      if (cardIdx >= 0) {
+        cards.value[cardIdx].column_id = data.to_column_id;
       }
+      await store.dispatch("board/updateCard", data);
+      emitter.emit("scroll-to-card", data);
+    };
+
+    const fetchColumns = async () => {
+      await store.dispatch("board/fetchBoardColumns");
+    };
+
+    const fetchCards = async () => {
+      await store.dispatch("board/fetchCards");
     };
 
     onMounted(async () => {
-      await store.dispatch("board/fetchCards");
+      await Promise.all([fetchColumns(), fetchCards()]);
       lists.value = [].slice.call(list.value);
-      console.log(cards.value);
     });
 
     return {
       list,
       lists,
-      boardsColumns: boardColumns.value,
-      loadedCards: trackCards,
+      boardsColumns: boardColumns,
+      loadedCards: cards,
       moveCard,
       getColumnCards,
     };

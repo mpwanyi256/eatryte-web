@@ -136,7 +136,7 @@ export default defineComponent({
     width: inherit;
     height: auto;
     min-height: inherit;
-    z-index: 1;
+    z-index: 0;
     font-size: 1em;
     font-family: inherit;
     font-weight: inherit;

@@ -1,5 +1,9 @@
 <template>
-  <button v-bind="$attrs" :disabled="disabled">
+  <button
+    v-bind="$attrs"
+    :disabled="disabled"
+    :class="{ 'text-center': !icon }"
+  >
     <i v-if="icon" :class="'icon mdi mdi-' + icon"></i>
     <slot />
     <i v-if="iconRight" :class="'icon right mdi mdi-' + iconRight"></i>

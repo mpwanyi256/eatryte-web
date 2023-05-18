@@ -17,7 +17,7 @@
               ></v-img>
             </v-avatar>
           </li>
-          <li v-if="card.total_points" class="card__misc-item">
+          <li class="card__misc-item">
             <i class="mdi mdi-star-circle-outline"></i>
             <p>
               {{ card.total_points }}
@@ -35,8 +35,10 @@
   </a>
 </template>
 <script lang="ts">
+import store from "@/store";
 import { defineComponent, onMounted, computed, ref, Ref, PropType } from "vue";
 import { Card, Column, MoveCardPayload } from "@/types/generics";
+import router from "@/router";
 
 export default defineComponent({
   name: "BoardCard-component",
@@ -58,9 +60,20 @@ export default defineComponent({
     const cardRef: Ref<null | HTMLElement> = ref(null);
     const moved = ref(false);
 
-    const handleClick = (e: any) => {
+    const fetchCardDetails = async (cardId: number) => {
+      await store.dispatch("board/fetchCardDetails", cardId);
+    };
+
+    const handleClick = async (e: any) => {
       e.preventDefault();
+      await fetchCardDetails(props.card.id);
       console.log("Handle view card details");
+      router.push({
+        name: "cardDetails",
+        params: {
+          id: props.card.id,
+        },
+      });
     };
 
     const triggerMoveCard = (data: MoveCardPayload) => emit("move-card", data);
@@ -190,6 +203,7 @@ export default defineComponent({
   padding: 12px 16px;
   background: white;
   border-radius: 4px;
+  z-index: 0;
   margin: 8px;
   cursor: pointer;
   color: unset;

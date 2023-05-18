@@ -1,23 +1,35 @@
 <template>
   <div class="board-actions">
     <input type="text" class="search" placeholder="Search" />
-    <Button>
+    <Button @click="toggleModal(true)">
       <i class="mdi mdi-plus mr-1"></i>
       Create Task
     </Button>
   </div>
+  <CreateTaskModal v-if="dialog" @close="toggleModal(false)" />
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import Button from "@/components/generics/Button.vue";
+import CreateTaskModal from "@/components/Board/CreateTaskModal.vue";
 
 export default defineComponent({
   name: "BoardActions",
   components: {
     Button,
+    CreateTaskModal,
   },
   setup() {
-    return {};
+    const dialog = ref(false);
+
+    const toggleModal = (status: boolean) => {
+      dialog.value = status;
+    };
+
+    return {
+      dialog,
+      toggleModal,
+    };
   },
 });
 </script>

@@ -3,13 +3,6 @@
     <div class="column-container">
       <div class="column-header">
         <h3 class="t-regular c-secondary column-label">{{ column.name }}</h3>
-        <div class="tooltip-container" v-if="column.name === 'Backlog'">
-          <Button
-            class="iconic tertiary"
-            icon="plus"
-            @click="$emit('open-create')"
-          />
-        </div>
       </div>
       <div class="column-body">
         <slot />
@@ -25,15 +18,12 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import Button from "@/components/generics/Button.vue";
+import { defineComponent, onMounted } from "vue";
 import { Column } from "@/types/generics";
+import mitt from "mitt";
 
 export default defineComponent({
   name: "BoardColumn-component",
-  components: {
-    Button,
-  },
   props: {
     cards: {
       type: Array,
@@ -51,6 +41,14 @@ export default defineComponent({
     },
   },
   setup() {
+    const emitter = mitt();
+
+    onMounted(() => {
+      emitter.on("scroll-to-card", () => {
+        alert("scroll to card");
+      });
+    });
+
     return {};
   },
 });
@@ -73,7 +71,7 @@ export default defineComponent({
   &-header {
     position: sticky;
     top: 0;
-    z-index: 4;
+    z-index: 0;
     background: #fcfcfc;
     box-shadow: 0 1px 0 0 $quaternary;
     height: 50px;
