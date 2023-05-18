@@ -39,3 +39,8 @@ export interface MoveCardPayload {
   from_column: Column;
   to_column_id: number;
 }
+
+export interface AddCardPayload {
+  title: string;
+  description: string;
+}

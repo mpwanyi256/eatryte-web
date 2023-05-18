@@ -1,5 +1,8 @@
 <template>
   <Page title="Board">
+    <template #options>
+      <BoardActions />
+    </template>
     <template #content>
       <div class="board">
         <BoardColumn
@@ -27,10 +30,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, computed } from "vue";
+import { State } from "@/store";
+import { useStore } from "vuex";
+
+import { Card, Column, MoveCardPayload } from "@/types/generics";
 import Page from "@/components/generics/Page.vue";
 import BoardColumn from "@/components/Board/BoardColumn.vue";
 import BoardCard from "@/components/Board/BoardCard.vue";
-import { Card, Column, MoveCardPayload } from "@/types/generics";
+import BoardActions from "@/components/Board/BoardActions.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -38,8 +45,11 @@ export default defineComponent({
     Page,
     BoardColumn,
     BoardCard,
+    BoardActions,
   },
   setup() {
+    const store = useStore<State>();
+
     const boardColumns = ref<Column[]>([
       { id: 1, name: "Backlog" },
       { id: 2, name: "Blocked" },
@@ -51,47 +61,17 @@ export default defineComponent({
     const list = ref<HTMLElement | null>(null);
     const lists = ref<Element[]>([]);
 
-    function getRandomNumberFromArray(numbers: number[]) {
-      const randomIndex = Math.floor(Math.random() * numbers.length);
-      return numbers[randomIndex];
-    }
+    const cards = ref<Card[]>(store.state.board.cards);
 
-    const generateCards = () => {
-      const array = [];
-      for (let i = 1; i <= 100; i++) {
-        const points = Math.random() * 10;
-        const item: Card = {
-          id: i,
-          title: `Card ${i}`,
-          description: "This is a card description",
-          total_points: Math.round(points),
-          column_id: getRandomNumberFromArray(
-            boardColumns.value.map((c) => c.id)
-          ),
-          assignee: {
-            id: 1,
-            name: "John Doe",
-            avatar: "https://i.pravatar.cc/300",
-          },
-          comment_count: 1,
-          tags: [
-            { id: 1, name: "dev" },
-            { id: 2, name: "design" },
-          ],
-        };
-        array.push(item);
-      }
-      return array;
-    };
-
-    const cards = ref<Card[]>([]);
+    const trackCards = computed<Card[]>(() => {
+      return store.state.board.cards;
+    });
 
     const getColumnCards = (columnId: number) => {
-      return cards.value.filter((card) => card.column_id === columnId);
+      return trackCards.value.filter((card) => card.column_id === columnId);
     };
 
     const moveCard = (data: MoveCardPayload) => {
-      console.log("move card", data);
       // update card column_id
       const card = cards.value.find((c) => c.id === data.card.id);
       if (card) {
@@ -99,16 +79,17 @@ export default defineComponent({
       }
     };
 
-    onMounted(() => {
-      cards.value = generateCards();
+    onMounted(async () => {
+      await store.dispatch("board/fetchCards");
       lists.value = [].slice.call(list.value);
+      console.log(cards.value);
     });
 
     return {
       list,
       lists,
       boardsColumns: boardColumns.value,
-      loadedCards: computed(() => cards.value),
+      loadedCards: trackCards,
       moveCard,
       getColumnCards,
     };

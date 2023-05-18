@@ -1,9 +1,12 @@
 import { createStore } from "vuex";
+import BoardModule, { BoardState } from "./modules/BoardModule";
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+export interface State {
+  board: BoardState;
+}
+
+export default createStore<State>({
+  modules: {
+    board: BoardModule,
+  },
 });

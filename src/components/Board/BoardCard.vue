@@ -35,15 +35,7 @@
   </a>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  onMounted,
-  computed,
-  ref,
-  Ref,
-  defineEmits,
-  PropType,
-} from "vue";
+import { defineComponent, onMounted, computed, ref, Ref, PropType } from "vue";
 import { Card, Column, MoveCardPayload } from "@/types/generics";
 
 export default defineComponent({
