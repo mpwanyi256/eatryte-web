@@ -1,3 +1,8 @@
+export interface Column {
+  id: number;
+  name: string;
+}
+
 export interface NavRoute {
   icon: string;
   name: string;
@@ -19,7 +24,18 @@ export interface Card {
   title: string;
   description: string;
   total_points: number;
+  column_id: number;
   comment_count: number;
   tags: Tag[];
   assignee: User;
+}
+
+export interface DocumentElement {
+  readonly DOMElement: Document;
+}
+
+export interface MoveCardPayload {
+  card: Card;
+  from_column: Column;
+  to_column_id: number;
 }

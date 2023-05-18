@@ -2,8 +2,8 @@
   <div class="column">
     <div class="column-container">
       <div class="column-header">
-        <h3 class="t-regular c-secondary column-label">{{ columnLabel }}</h3>
-        <div class="tooltip-container" v-if="columnLabel === 'Backlog'">
+        <h3 class="t-regular c-secondary column-label">{{ column.name }}</h3>
+        <div class="tooltip-container" v-if="column.name === 'Backlog'">
           <Button
             class="iconic tertiary"
             icon="plus"
@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Button from "@/components/generics/Button.vue";
+import { Column } from "@/types/generics";
 
 export default defineComponent({
   name: "BoardColumn-component",
@@ -39,8 +40,8 @@ export default defineComponent({
       required: false,
       default: () => [],
     },
-    columnLabel: {
-      type: String,
+    column: {
+      type: Object as () => Column,
       required: true,
     },
     hasCards: {
