@@ -1,5 +1,10 @@
 <template>
-  <a @click="handleClick" class="card" ref="cardRef">
+  <a
+    @click="handleClick"
+    class="card"
+    :class="{ selected: isSelectedCard }"
+    ref="cardRef"
+  >
     <div class="card__content">
       <div class="card__content_container">
         <p class="mr-2">#{{ card.id }}</p>
@@ -55,6 +60,11 @@ export default defineComponent({
       type: Array as PropType<Element[]>,
       required: true,
     },
+    selectedCard: {
+      type: Object as PropType<Card>,
+      required: false,
+      default: null,
+    },
   },
   setup(props, { emit }) {
     const cardRef: Ref<null | HTMLElement> = ref(null);
@@ -63,6 +73,10 @@ export default defineComponent({
     const fetchCardDetails = async (cardId: number) => {
       await store.dispatch("board/fetchCardDetails", cardId);
     };
+
+    const isSelectedCard = computed(() => {
+      return props.selectedCard && props.selectedCard.id === props.card.id;
+    });
 
     const handleClick = async (e: any) => {
       e.preventDefault();
@@ -188,8 +202,9 @@ export default defineComponent({
 
     return {
       cardRef,
-      handleClick,
       columnLabel: computed(() => props.column.name),
+      isSelectedCard,
+      handleClick,
     };
   },
 });
@@ -214,12 +229,8 @@ export default defineComponent({
   user-select: none;
 
   &:hover {
-    box-shadow: 0 0 0 1px $accent; // 0 0 0 5px rgba($accent, 0.25) !important;
+    box-shadow: 0 0 0 1px $accent;
     background-color: $light-blue;
-
-    /deep/ .more {
-      opacity: 1 !important;
-    }
   }
 
   &__content {
@@ -292,5 +303,10 @@ export default defineComponent({
       border-radius: 50%;
     }
   }
+}
+
+.selected {
+  box-shadow: 0 0 0 1px $accent;
+  background-color: $light-blue;
 }
 </style>

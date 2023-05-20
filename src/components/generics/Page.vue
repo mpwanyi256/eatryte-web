@@ -34,7 +34,7 @@ export default defineComponent({
 
 .page {
   height: calc(100vh - 52px);
-  width: 100vw;
+  width: 100%;
   background-color: $page-bg-color;
   overflow: hidden;
   display: flex;

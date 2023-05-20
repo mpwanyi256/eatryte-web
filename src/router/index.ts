@@ -5,7 +5,7 @@ import appConfig from "@/config/appConfig";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
+    name: "board",
     component: Home,
     meta: {
       title: "Board",

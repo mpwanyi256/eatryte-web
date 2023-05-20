@@ -1,38 +1,27 @@
 <template>
-  <v-card>
-    <v-layout>
-      <v-navigation-drawer
-        v-model="drawer"
-        :temporary="false"
-        location="right"
-        width="500"
-      >
-        <template v-if="cardDetails">
-          <Header :card="cardDetails" />
-          <v-divider></v-divider>
-
-          <v-main style="height: 250px">
-            <div class="d-flex justify-left align-left h-100">
-              <h3>Card details {{ cardId }}</h3>
-              {{ cardDetails }}
-            </div>
-          </v-main>
-        </template>
-      </v-navigation-drawer>
-    </v-layout>
-  </v-card>
+  <Modal :title="cardTitle" @close="closeModal" :size="1000">
+    <div v-if="cardDetails">
+      <!-- <Header :card="cardDetails" /> -->
+      <div class="justify-left align-left h-100">
+        <h3>Card details {{ cardId }}</h3>
+        {{ cardDetails }}
+      </div>
+    </div>
+  </Modal>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import Modal from "@/components/generics/Modal.vue";
 import router from "@/router";
 import { useStore } from "vuex";
 
-import Header from "./cardHeader.vue";
+// import Header from "./cardHeader.vue";
 
 export default defineComponent({
   name: "CardDetails-component",
   components: {
-    Header,
+    // Header,
+    Modal,
   },
   setup() {
     const store = useStore();
@@ -42,19 +31,23 @@ export default defineComponent({
       return router.currentRoute.value.params.id;
     });
 
-    watch(
-      () => router.currentRoute.value.params.id,
-      async () => {
-        await fetchCardDetails();
-      }
-    );
-
     const cardDetails = computed(() => {
       return store.state.board.selectedCard;
     });
 
+    const cardTitle = computed(() => {
+      return cardDetails.value?.title || "";
+    });
+
     const fetchCardDetails = async () => {
       await store.dispatch("board/fetchCardDetails", cardId.value);
+    };
+
+    const closeModal = async () => {
+      await store.dispatch("board/resetSelectedCard");
+      router.replace({
+        name: "board",
+      });
     };
 
     onMounted(async () => {
@@ -65,7 +58,9 @@ export default defineComponent({
     return {
       drawer,
       cardId,
+      cardTitle,
       cardDetails,
+      closeModal,
     };
   },
 });

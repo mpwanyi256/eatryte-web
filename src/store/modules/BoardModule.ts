@@ -64,6 +64,9 @@ export default {
       const card = await response.data;
       context.commit("setCard", card);
     },
+    resetSelectedCard(context: Context): void {
+      context.commit("setCard", null);
+    },
   },
   getters: {
     loadedCards: function (state: BoardState): Array<Card> {

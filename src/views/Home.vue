@@ -16,6 +16,7 @@
           <BoardCard
             :columnLabel="column"
             v-for="card in getColumnCards(column.id)"
+            :selected-card="selectedCard"
             :key="card.id"
             :card="card"
             :column="column"
@@ -64,6 +65,10 @@ export default defineComponent({
       return store.state.board.boardsColumns;
     });
 
+    const selectedCard = computed(() => {
+      return store.state.board.selectedCard;
+    });
+
     const getColumnCards = (columnId: number) => {
       return cards.value.filter((card) => card.column_id === columnId);
     };
@@ -95,6 +100,7 @@ export default defineComponent({
       lists,
       boardsColumns: boardColumns,
       loadedCards: cards,
+      selectedCard,
       moveCard,
       getColumnCards,
     };
@@ -109,6 +115,7 @@ export default defineComponent({
   flex-wrap: nowrap;
   padding: 16px 20px;
   height: 100%;
+  width: 100%;
   overflow-x: auto;
   @include scrollbar();
 

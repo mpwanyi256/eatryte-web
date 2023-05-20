@@ -34,7 +34,7 @@
       "title": "Create DB migration for the new schema",
       "description": "We will need a new migration file for the schema",
       "total_points": "2",
-      "column_id": 3,
+      "column_id": 5,
       "assignee": {
         "id": 1,
         "name": "John Doe",
@@ -62,7 +62,7 @@
       "title": "Listen to rush",
       "description": "Newly uploaded on youtube",
       "total_points": "4",
-      "column_id": 2,
+      "column_id": 6,
       "assignee": {
         "id": 1,
         "name": "John Doe",
@@ -76,7 +76,7 @@
       "title": "Book tickets for fast X tomorrow",
       "description": "Starts tomorrow at 7PM",
       "total_points": "6",
-      "column_id": 1,
+      "column_id": 7,
       "assignee": {
         "id": 1,
         "name": "John Doe",
@@ -85,6 +85,20 @@
       "comment_count": 0,
       "tags": [],
       "id": 4
+    },
+    {
+      "title": "jgfutrtyurfuy",
+      "description": "uoyuyiuiuyiuyiuyuiyui",
+      "total_points": 12,
+      "column_id": 2,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 5
     }
   ]
 }
