@@ -44,3 +44,16 @@ export interface AddCardPayload {
   title: string;
   description: string;
 }
+
+// Global App config
+export interface AppConfig {
+  api: {
+    baseURL: string;
+    port: number;
+  };
+  app: {
+    name: string;
+    baseUrl: string;
+    version: string;
+  };
+}

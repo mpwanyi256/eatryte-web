@@ -1,20 +1,15 @@
-const getCurrentUrl = (): string => {
-  // We can return prod base URL here
-  const { protocol, hostname, port } = window.location;
-  return `${protocol}//${hostname}`;
-};
+import { AppConfig } from "@/types/generics";
 
-export default {
+const appConfig: AppConfig = {
   api: {
-    baseURL:
-      process.env.VUE_APP_NODE_ENV == "dev"
-        ? "http://localhost"
-        : getCurrentUrl(),
+    baseURL: process.env.VUE_APP_API_URL,
     port: 3020,
   },
   app: {
-    name: "Kanban",
+    name: process.env.VUE_APP_NAME,
     baseUrl: "/",
     version: "1.0.0",
   },
 };
+
+export default appConfig;

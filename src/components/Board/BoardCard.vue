@@ -60,11 +60,6 @@ export default defineComponent({
       type: Array as PropType<Element[]>,
       required: true,
     },
-    selectedCard: {
-      type: Object as PropType<Card>,
-      required: false,
-      default: null,
-    },
   },
   setup(props, { emit }) {
     const cardRef: Ref<null | HTMLElement> = ref(null);
@@ -75,13 +70,15 @@ export default defineComponent({
     };
 
     const isSelectedCard = computed(() => {
-      return props.selectedCard && props.selectedCard.id === props.card.id;
+      return (
+        store.state.board.selectedCard &&
+        store.state.board.selectedCard.id === props.card.id
+      );
     });
 
-    const handleClick = async (e: any) => {
+    const handleClick = async (e: Event) => {
       e.preventDefault();
       await fetchCardDetails(props.card.id);
-      console.log("Handle view card details");
       router.push({
         name: "cardDetails",
         params: {
@@ -202,8 +199,8 @@ export default defineComponent({
 
     return {
       cardRef,
-      columnLabel: computed(() => props.column.name),
       isSelectedCard,
+      columnLabel: computed(() => props.column.name),
       handleClick,
     };
   },
@@ -211,6 +208,11 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
+
+@mixin selectedCard() {
+  box-shadow: 0 0 0 1px $accent 0 0 0 5px rgba($accent, 0.25) !important;
+  background-color: $light-blue;
+}
 
 .card {
   display: grid;
@@ -229,8 +231,7 @@ export default defineComponent({
   user-select: none;
 
   &:hover {
-    box-shadow: 0 0 0 1px $accent;
-    background-color: $light-blue;
+    @include selectedCard();
   }
 
   &__content {
@@ -306,7 +307,6 @@ export default defineComponent({
 }
 
 .selected {
-  box-shadow: 0 0 0 1px $accent;
-  background-color: $light-blue;
+  @include selectedCard();
 }
 </style>

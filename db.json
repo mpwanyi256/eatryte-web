@@ -99,6 +99,20 @@
       "comment_count": 0,
       "tags": [],
       "id": 5
+    },
+    {
+      "title": "City vs Chelsea",
+      "description": "City have a chance to go up",
+      "total_points": 8,
+      "column_id": 1,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 6
     }
   ]
 }

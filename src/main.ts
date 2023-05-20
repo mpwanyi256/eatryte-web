@@ -21,8 +21,6 @@ import "@mdi/font/css/materialdesignicons.css";
 
 // Global styles
 import "@/assets/styles/main.scss";
-const { protocol, hostname, port } = window.location;
-console.log("window.location.href", protocol, hostname, port);
 
 const vuetify = createVuetify({
   components,

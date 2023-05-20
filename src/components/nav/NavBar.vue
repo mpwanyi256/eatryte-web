@@ -4,12 +4,8 @@
       <div class="nav-content">
         <div class="title">
           <div class="menu_icons">
-            <!-- <v-app-bar-nav-icon
-              class="d-none d-sm-flex d-md-none"
-              @click="drawer = true"
-            /> -->
             <p>
-              Kanban |
+              {{ appName }} |
               <small class="user_name">Samuel</small>
             </p>
           </div>
@@ -35,31 +31,20 @@
         </div>
       </div>
     </div>
-    <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
-      <SalesNavBar :title="fullName" :links="filteredRoutes">
-        <template v-slot:logout>
-          <div class="menu">
-            <div class="tray">
-              <div class="side_bar_auth" @click="performLogout()">
-                <v-icon small class="icon" dark> mdi-lock </v-icon>
-                Logout
-              </div>
-            </div>
-          </div>
-        </template>
-      </SalesNavBar>
-    </v-navigation-drawer> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { NavRoute } from "@/types/generics";
+import { State } from "@/store";
 
 export default defineComponent({
   name: "Nav-bar",
   setup() {
+    const store = useStore<State>();
     // Define your routes here
     const routes: NavRoute[] = [
       {
@@ -76,6 +61,7 @@ export default defineComponent({
 
     // Compute the active route dynamically
     const activeRoute = computed(() => route.name);
+    const appName = computed(() => store.state.app.name);
 
     // Filter routes excluding the active route
     const navRoutes = computed(() =>
@@ -100,6 +86,8 @@ export default defineComponent({
     return {
       navRoutes,
       homeRoute,
+      activeRoute,
+      appName,
       isActiveRoute,
       gotTopage,
       performLogout,

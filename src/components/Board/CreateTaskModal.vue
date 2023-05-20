@@ -23,7 +23,7 @@
           ></v-textarea>
         </div>
         <v-btn :disabled="!isValidForm" type="submit" block class="mt-2"
-          >Submit
+          >Create Task
         </v-btn>
       </v-form>
     </div>
@@ -85,6 +85,9 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
 
+.create-task {
+  padding: 20px;
+}
 .create-task form {
   width: 100%;
   height: auto;

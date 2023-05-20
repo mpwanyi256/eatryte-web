@@ -1,7 +1,7 @@
 <template>
   <Page title="Board">
     <template #options>
-      <BoardActions />
+      <BoardActions @input="changeHandler" />
     </template>
     <template #content>
       <div class="board">
@@ -16,12 +16,11 @@
           <BoardCard
             :columnLabel="column"
             v-for="card in getColumnCards(column.id)"
-            :selected-card="selectedCard"
             :key="card.id"
             :card="card"
             :column="column"
-            :lists="[].slice.call(lists)"
             @move-card="moveCard"
+            :lists="[].slice.call(lists)"
           />
         </BoardColumn>
       </div>
@@ -54,8 +53,8 @@ export default defineComponent({
     const store = useStore<State>();
     const emitter = mitt();
 
-    const list = ref<HTMLElement | null>(null);
-    const lists = ref<Element[]>([]);
+    const list = ref<Card[] | null>(null);
+    let lists = ref<Element[]>([]);
 
     const cards = computed<Card[]>(() => {
       return store.state.board.cards;
@@ -63,10 +62,6 @@ export default defineComponent({
 
     const boardColumns = computed<Column[]>(() => {
       return store.state.board.boardsColumns;
-    });
-
-    const selectedCard = computed(() => {
-      return store.state.board.selectedCard;
     });
 
     const getColumnCards = (columnId: number) => {
@@ -90,9 +85,35 @@ export default defineComponent({
       await store.dispatch("board/fetchCards");
     };
 
+    let debounceTimer: any = null;
+    const debounceSearch = async (e: any) => {
+      let searchQuery = e.target.value;
+      clearTimeout(debounceTimer);
+
+      if (searchQuery.length >= 3) {
+        debounceTimer = setTimeout(() => {
+          setTimeout(() => {
+            store.state.board.cards = cards.value.filter((card) => {
+              return card.title
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase());
+            });
+          }, 500);
+        }, 300);
+      } else {
+        await store.dispatch("board/fetchCards");
+      }
+    };
+
+    const changeHandler = (e: any) => {
+      debounceSearch(e);
+    };
+
     onMounted(async () => {
       await Promise.all([fetchColumns(), fetchCards()]);
-      lists.value = [].slice.call(list.value);
+      if (list.value) {
+        lists.value = [].slice.call(list.value);
+      }
     });
 
     return {
@@ -100,9 +121,9 @@ export default defineComponent({
       lists,
       boardsColumns: boardColumns,
       loadedCards: cards,
-      selectedCard,
       moveCard,
       getColumnCards,
+      changeHandler,
     };
   },
 });

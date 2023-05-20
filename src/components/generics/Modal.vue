@@ -6,9 +6,9 @@
     :fullscreen="fullscreen"
   >
     <v-card class="modal_content">
-      <template v-slot:title>
+      <template v-if="title" v-slot:title>
         <div class="d-flex align-center">
-          <v-icon small @click="$emit('close')">mdi-close</v-icon>
+          <v-icon class="close" @click="$emit('close')">mdi-close</v-icon>
           <p class="ml-2 t-subtitle">{{ title }}</p>
         </div>
       </template>

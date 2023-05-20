@@ -1,6 +1,11 @@
 <template>
   <div class="board-actions">
-    <input type="text" class="search" placeholder="Search" />
+    <input
+      type="text"
+      class="search"
+      @input="$emit('input', $event)"
+      placeholder="Search"
+    />
     <Button @click="toggleModal(true)">
       <i class="mdi mdi-plus mr-1"></i>
       Create Task
