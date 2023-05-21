@@ -44,7 +44,7 @@ describe("BoardCardComponent", () => {
       card.total_points.toString()
     );
     expect(
-      wrapper.find(".card__misc-item .mdi-comment-text-outline").exists()
+      wrapper.find(".card__misc-item .mdi-star-circle-outline").exists()
     ).toBe(true);
   });
 });

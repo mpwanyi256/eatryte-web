@@ -20,7 +20,6 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import { Column } from "@/types/generics";
-import mitt from "mitt";
 
 export default defineComponent({
   name: "BoardColumn-component",
@@ -41,14 +40,6 @@ export default defineComponent({
     },
   },
   setup() {
-    const emitter = mitt();
-
-    onMounted(() => {
-      emitter.on("scroll-to-card", () => {
-        alert("scroll to card");
-      });
-    });
-
     return {};
   },
 });

@@ -28,12 +28,6 @@
               {{ card.total_points }}
             </p>
           </li>
-          <li v-if="card.comment_count" class="card__misc-item">
-            <i class="mdi mdi-comment-text-outline"></i>
-            <p>
-              {{ card.comment_count }}
-            </p>
-          </li>
         </ul>
       </div>
     </div>

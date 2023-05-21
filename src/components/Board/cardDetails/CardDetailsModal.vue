@@ -6,12 +6,10 @@
         <Header :card="cardDetails" @close="closeModal" />
         <div class="card-info-details">
           <div class="card-info-details-description">
-            <h3>Card details {{ cardId }}</h3>
-            {{ cardDetails }}
+            <CardDescription :card="cardDetails" />
           </div>
           <div class="card-info-details-info">
-            <h3>Card details {{ cardId }}</h3>
-            {{ cardDetails }}
+            <h3>Other details</h3>
           </div>
         </div>
       </template>
@@ -24,6 +22,7 @@ import Modal from "@/components/generics/Modal.vue";
 import router from "@/router";
 import { useStore } from "vuex";
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
+import CardDescription from "@/components/Board/cardDetails/CardDescription.vue";
 
 import Header from "./cardHeader.vue";
 
@@ -31,6 +30,7 @@ export default defineComponent({
   name: "CardDetails-component",
   components: {
     Header,
+    CardDescription,
     LoadingSpinner,
     Modal,
   },
@@ -87,7 +87,7 @@ export default defineComponent({
   &-details {
     height: calc(80vh - 52px);
     @include scrollbar-thin();
-    overflow: hidden;
+    overflow-y: auto;
     display: grid;
     grid-template-columns: 60% 40%;
   }

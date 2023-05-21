@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { NavRoute } from "@/types/generics";
@@ -104,7 +104,6 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 52px;
-  min-width: 1024px;
   font-family: $font-style;
   box-sizing: content-box;
   margin: 0;

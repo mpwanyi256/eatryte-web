@@ -19,13 +19,19 @@ export interface User {
   avatar: string;
 }
 
+export interface Comment {
+  id: number;
+  content: string;
+  author: User;
+  dateAdded: number;
+}
+
 export interface Card {
   id: number;
   title: string;
   description: string;
   total_points: number;
   column_id: number;
-  comment_count: number;
   tags: Tag[];
   assignee: User;
 }

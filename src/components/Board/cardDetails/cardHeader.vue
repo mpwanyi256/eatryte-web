@@ -4,14 +4,19 @@
       <h3>#{{ card.id }}</h3>
     </div>
     <div class="card_actions">
-      <!-- <v-btn>share</v-btn> -->
-      <v-icon class="" @click="copyToClipboard">mdi-share-variant</v-icon>
+      <v-tooltip :text="tooltipText" location="top">
+        <template v-slot:activator="{ props }">
+          <v-icon v-bind="props" @click="copyToClipboard"
+            >mdi-share-variant</v-icon
+          >
+        </template>
+      </v-tooltip>
       <v-icon class="" @click="handleClose">mdi-close</v-icon>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, ref, computed } from "vue";
 import router from "@/router";
 import { Card } from "@/types/generics";
 
@@ -24,6 +29,11 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const copied = ref(false);
+    const tooltipText = computed(() => {
+      return copied.value ? "Copied!" : "Copy link to ticket";
+    });
+
     const handleClose = async (e: Event) => {
       e.preventDefault();
       emit("close");
@@ -33,11 +43,16 @@ export default defineComponent({
       const currentPath = router.currentRoute.value;
       const url = `${window.location.origin}${currentPath.fullPath}`;
       navigator.clipboard.writeText(url);
-      alert("Copied to clipboard");
-      console.log("Current path", url);
+      copied.value = true;
+
+      setTimeout(() => {
+        copied.value = false;
+      }, 2000);
     };
 
     return {
+      copied,
+      tooltipText,
       handleClose,
       copyToClipboard,
     };

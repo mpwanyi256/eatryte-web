@@ -4,7 +4,7 @@
       type="text"
       class="search"
       @input="$emit('input', $event)"
-      placeholder="Search"
+      placeholder="Search card by title"
     />
     <Button @click="toggleModal(true)">
       <i class="mdi mdi-plus mr-1"></i>

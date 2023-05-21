@@ -1,7 +1,7 @@
 import { ActionContext } from "vuex";
 import axios, { AxiosResponse } from "axios";
 
-import { Card, Column, MoveCardPayload } from "@/types/generics";
+import { Card, Column, MoveCardPayload, Comment } from "@/types/generics";
 import { State } from "../";
 
 export interface BoardState {
@@ -66,6 +66,23 @@ export default {
     },
     resetSelectedCard(context: Context): void {
       context.commit("setCard", null);
+    },
+    addComment: async (context: Context, payload: Comment): Promise<void> => {
+      const response: AxiosResponse = await axios.post("comments", payload);
+      return await response.data;
+    },
+    fetchCardComments: async (
+      context: Context,
+      cardId: number
+    ): Promise<void> => {
+      const response: AxiosResponse = await axios.get(
+        `${`comments`}?card_id=${cardId}&_sort=id&_order=desc`
+      );
+      return await response.data;
+    },
+    deleteComment: async (context: Context, id: number): Promise<void> => {
+      const response: AxiosResponse = await axios.delete(`${`comments`}/${id}`);
+      return await response.data;
     },
   },
   getters: {

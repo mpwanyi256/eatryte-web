@@ -64,8 +64,8 @@ export default defineComponent({
           name: "John Doe",
           avatar: "https://i.pravatar.cc/300",
         },
-        comment_count: 0,
         tags: [],
+        comments: [],
       };
 
       await store.dispatch("board/createCard", payload);

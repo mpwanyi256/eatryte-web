@@ -33,7 +33,6 @@
 import { defineComponent, ref, onMounted, computed } from "vue";
 import { State } from "@/store";
 import { useStore } from "vuex";
-import mitt from "mitt";
 
 import { Card, Column, MoveCardPayload } from "@/types/generics";
 import Page from "@/components/generics/Page.vue";
@@ -51,7 +50,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<State>();
-    const emitter = mitt();
 
     const list = ref<Card[] | null>(null);
     let lists = ref<Element[]>([]);
@@ -74,7 +72,6 @@ export default defineComponent({
         cards.value[cardIdx].column_id = data.to_column_id;
       }
       await store.dispatch("board/updateCard", data);
-      emitter.emit("scroll-to-card", data);
     };
 
     const fetchColumns = async () => {

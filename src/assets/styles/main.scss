@@ -1,50 +1,11 @@
 @import "./constants.scss";
 
-html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-}
-
-body .modal-open {
-    overflow: hidden;
-    position: fixed;
-}
-
-.hidden {
-    display: none !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a {
-    margin: 0;
-    padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
     font-family: $display-font;
-    font-weight: bold;
-}
-
-strong {
-    font-weight: bold;
-    font-size: inherit;
-    font-family: inherit;
-}
-
-small {
+    background-color: $white;
     font-size: 14px;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
 }

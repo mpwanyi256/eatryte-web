@@ -8,7 +8,7 @@
   />
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "TextField-component",
@@ -18,10 +18,6 @@ export default defineComponent({
       required: false,
     },
     placeholder: {
-      type: String,
-      required: false,
-    },
-    value: {
       type: String,
       required: false,
     },
