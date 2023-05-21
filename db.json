@@ -1,0 +1,241 @@
+{
+  "columns": [
+    {
+      "id": 1,
+      "name": "Backlog"
+    },
+    {
+      "id": 2,
+      "name": "Blocked"
+    },
+    {
+      "id": 3,
+      "name": "In Progress"
+    },
+    {
+      "id": 4,
+      "name": "In Review"
+    },
+    {
+      "id": 5,
+      "name": "Testing"
+    },
+    {
+      "id": 6,
+      "name": "Pending release"
+    },
+    {
+      "id": 7,
+      "name": "Done"
+    }
+  ],
+  "cards": [
+    {
+      "title": "Create DB migration for the new schema",
+      "description": "We will need a new migration file for the schema",
+      "total_points": "2",
+      "column_id": 5,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 1
+    },
+    {
+      "title": "Iphone 13 review",
+      "description": "Upload new iphone 13 review for May",
+      "total_points": "6",
+      "column_id": 4,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 2
+    },
+    {
+      "title": "Listen to rush",
+      "description": "Newly uploaded on youtube",
+      "total_points": "4",
+      "column_id": 6,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 3
+    },
+    {
+      "title": "Book tickets for fast X tomorrow",
+      "description": "Starts tomorrow at 7PM",
+      "total_points": "6",
+      "column_id": 7,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 4
+    },
+    {
+      "title": "jgfutrtyurfuy",
+      "description": "uoyuyiuiuyiuyiuyuiyui",
+      "total_points": 12,
+      "column_id": 3,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 5
+    },
+    {
+      "title": "City vs Chelsea",
+      "description": "City have a chance to go up",
+      "total_points": 8,
+      "column_id": 1,
+      "assignee": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "comment_count": 0,
+      "tags": [],
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "card_id": 1,
+      "content": "cddjdhfkhdkfjhjkwdf",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T07:57:39.125Z",
+      "id": 3
+    },
+    {
+      "card_id": 1,
+      "content": "I think we need a new migration file to fix the old stuff. Something to think about down the road.",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:11:57.937Z",
+      "id": 4
+    },
+    {
+      "card_id": 1,
+      "content": "Yahh.. Let's check the previous migrations just to be sure",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:14:57.384Z",
+      "id": 5
+    },
+    {
+      "card_id": 1,
+      "content": "I agree",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:15:59.641Z",
+      "id": 6
+    },
+    {
+      "card_id": 6,
+      "content": "Am sure city will win this",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:17:27.587Z",
+      "id": 7
+    },
+    {
+      "card_id": 3,
+      "content": "Awesome song",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:21:36.806Z",
+      "id": 8
+    },
+    {
+      "card_id": 3,
+      "content": "awesome man...",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:26:26.110Z",
+      "id": 9
+    },
+    {
+      "card_id": 3,
+      "content": "Yahh... I like nigerian music",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:27:04.209Z",
+      "id": 10
+    },
+    {
+      "card_id": 3,
+      "content": "yahh... cool",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:28:18.755Z",
+      "id": 11
+    },
+    {
+      "card_id": 3,
+      "content": "Reklessly good",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:28:57.029Z",
+      "id": 12
+    },
+    {
+      "card_id": 3,
+      "content": "God is awesomely good",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-21T08:31:47.937Z",
+      "id": 13
+    }
+  ]
+}
