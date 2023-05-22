@@ -45,9 +45,9 @@ describe("BoardColumnComponent", () => {
       },
     });
 
-    const emptyState = wrapper.find(".column-empty-state");
+    const emptyState = wrapper.find(".column-body-empty-state");
     expect(emptyState.exists()).toBeTruthy();
-    expect(emptyState.text()).toContain("No results found in this column.");
+    expect(emptyState.text()).toContain("No cards found in this column.");
   });
 
   it('emits a "scroll-to-card" event when the component is mounted', () => {

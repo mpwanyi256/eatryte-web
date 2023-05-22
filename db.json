@@ -64,7 +64,7 @@
       "title": "Create User modal",
       "description": "User modal should have; \n\n- id\n- Username\n- email\n- Contact\n- Password",
       "total_points": 3,
-      "column_id": 1,
+      "column_id": 4,
       "dateAdded": "2023-05-22T08:38:17.360Z",
       "assignee": {
         "id": 1,
@@ -98,6 +98,17 @@
       },
       "dateAdded": "2023-05-22T08:40:21.647Z",
       "id": 3
+    },
+    {
+      "card_id": 1,
+      "content": "comment",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-22T08:53:33.560Z",
+      "id": 4
     }
   ]
 }

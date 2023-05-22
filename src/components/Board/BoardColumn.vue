@@ -4,7 +4,7 @@
       <div class="column-header">
         <h3 class="t-regular c-secondary column-label">{{ column.name }}</h3>
       </div>
-      <div class="column-body">
+      <div class="column-body" @scroll="handleScroll">
         <slot />
 
         <div v-if="!hasCards" class="column-body-empty-state">
@@ -39,8 +39,19 @@ export default defineComponent({
       default: false,
     },
   },
-  setup() {
-    return {};
+  setup(props, { emit }) {
+    const handleScroll = (e: any) => {
+      if (
+        e.srcElement.scrollTop + e.srcElement.offsetHeight + 1 >=
+        e.srcElement.scrollHeight
+      ) {
+        emit("load-more", props.column.id);
+      }
+    };
+
+    return {
+      handleScroll,
+    };
   },
 });
 </script>

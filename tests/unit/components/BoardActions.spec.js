@@ -8,7 +8,7 @@ describe("BoardActions", () => {
   it("renders the search input and create task button", () => {
     const wrapper = mount(BoardActions);
 
-    const searchInput = wrapper.find(".search");
+    const searchInput = wrapper.find(".board-actions_search");
     const createTaskButton = wrapper.findComponent(Button);
 
     expect(searchInput.exists()).toBe(true);

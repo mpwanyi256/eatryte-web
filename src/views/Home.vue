@@ -12,6 +12,7 @@
           :key="column.id"
           :column="column"
           :hasCards="getColumnCards(column.id).length > 0"
+          @load-more="fetchMoreCards"
         >
           <BoardCard
             :columnLabel="column"
@@ -84,6 +85,10 @@ export default defineComponent({
       await store.dispatch("board/fetchBoardColumns");
     };
 
+    const fetchMoreCards = (columnId: number) => {
+      console.log("Fetch more cards", columnId);
+    };
+
     const fetchCards = async () => {
       await store.dispatch("board/fetchCards");
     };
@@ -127,6 +132,7 @@ export default defineComponent({
       moveCard,
       getColumnCards,
       changeHandler,
+      fetchMoreCards,
     };
   },
 });
