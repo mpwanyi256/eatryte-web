@@ -25,6 +25,8 @@ Please send us an email (jobs@madewithlove.com) when you think the assignment is
 
 # Kanban Board
 This is the Vue App setup for Kanban “monorepo” Board app and Dummy REST Api. The app uses Vue 3 with composition API and typescript. The app also uses some components from vuetify library.
+![Screenshot 2023-05-22 at 11 41 51](https://github.com/madewithlove/technical-assignment-front-end-engineer-mpwanyi256/assets/20843520/1951977c-8bad-4c69-88bc-e45e9309515f)
+
 
 ## Requirements
 
