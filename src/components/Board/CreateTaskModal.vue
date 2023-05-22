@@ -111,5 +111,11 @@ export default defineComponent({
   ::v-deep .v-form {
     width: 100%;
   }
+
+  ::v-deep .v-textarea .v-field__field {
+    background-color: white;
+    border: 1px solid $tertiary;
+    border-radius: 4px;
+  }
 }
 </style>

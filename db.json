@@ -59,6 +59,21 @@
       "tags": [],
       "comments": [],
       "id": 2
+    },
+    {
+      "title": "Create User modal",
+      "description": "User modal should have; \n\n- id\n- Username\n- email\n- Contact\n- Password",
+      "total_points": 3,
+      "column_id": 1,
+      "dateAdded": "2023-05-22T08:38:17.360Z",
+      "assignee": {
+        "id": 1,
+        "name": "Samuel Mpwanyi",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "tags": [],
+      "comments": [],
+      "id": 3
     }
   ],
   "comments": [
@@ -72,6 +87,17 @@
       },
       "dateAdded": "2023-05-22T08:04:29.877Z",
       "id": 2
+    },
+    {
+      "card_id": 3,
+      "content": "Oh okay, are pulling in any new changes going forward?",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-22T08:40:21.647Z",
+      "id": 3
     }
   ]
 }
