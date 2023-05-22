@@ -31,95 +31,47 @@
   ],
   "cards": [
     {
-      "title": "UEFA Champions league",
-      "description": "The grand finale",
-      "points": "3",
-      "column_id": 5,
+      "title": "Arsenal slumped to yet another defeat, this time at the hands of Nottingham Forest thanks to a first half goal from Taiwo Awoniyi and handing Manchester City the title in the process.",
+      "description": "If fans needed any more convincing that this Arsenal team had run out of gas, then their 1-0 loss to Nottingham Forest all but confirmed it. With the team clearly struggling against Brighton last time out (a 3-0 loss at home), it was evident then, and Arsenal barely laid a glove on Forest, who were fully deserving of their 1-0 win. The Gunners, as usual, dominated possession, but one could argue it was as toothless as they have looked in attack all season. The mental and physical toll of the title race has caught up to them.",
+      "total_points": 8,
+      "column_id": 2,
+      "dateAdded": "2023-05-22T07:42:57.223Z",
       "assignee": {
         "id": 1,
-        "name": "John Doe",
+        "name": "Samuel Mpwanyi",
         "avatar": "https://i.pravatar.cc/300"
       },
-      "comment_count": 0,
       "tags": [],
+      "comments": [],
       "id": 1
     },
     {
-      "title": "Thursday special",
-      "description": "Another day to enjoy the week!",
-      "points": "5",
-      "column_id": 1,
+      "title": "Create migration",
+      "description": "We need a new migration to fix the old migration",
+      "total_points": 3,
+      "column_id": 4,
+      "dateAdded": "2023-05-22T08:09:39.919Z",
       "assignee": {
         "id": 1,
-        "name": "John Doe",
+        "name": "Samuel Mpwanyi",
         "avatar": "https://i.pravatar.cc/300"
       },
-      "comment_count": 0,
       "tags": [],
+      "comments": [],
       "id": 2
-    },
-    {
-      "title": "New Task",
-      "description": "This is an awesome story",
-      "total_points": 8,
-      "column_id": 3,
-      "assignee": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "tags": [],
-      "comments": [],
-      "id": 3
-    },
-    {
-      "title": "Arsenal slumped to yet another defeat, this time at the hands of Nottingham Forest thanks to a first half goal from Taiwo Awoniyi and handing Manchester City the title in the process.",
-      "description": "If fans needed any more convincing that this Arsenal team had run out of gas, then their 1-0 loss to Nottingham Forest all but confirmed it.\n\nWith the team clearly struggling against Brighton last time out (a 3-0 loss at home), it was evident then, and Arsenal barely laid a glove on Forest, who were fully deserving of their 1-0 win.\n\nThe Gunners, as usual, dominated possession, but one could argue it was as toothless as they have looked in attack all season. The mental and physical toll of the title race has caught up to them.",
-      "total_points": 5,
-      "column_id": 1,
-      "assignee": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "tags": [],
-      "comments": [],
-      "id": 4
     }
   ],
   "comments": [
     {
-      "card_id": 2,
-      "content": "sdsasdas",
+      "card_id": 1,
+      "content": "They invested massively",
       "author": {
         "id": 1,
         "name": "John Doe",
         "avatar": "https://i.pravatar.cc/300"
       },
-      "dateAdded": "2023-05-21T20:35:58.920Z",
-      "id": 1
-    },
-    {
-      "card_id": 2,
-      "content": "lol",
-      "author": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "dateAdded": "2023-05-21T20:46:56.915Z",
+      "dateAdded": "2023-05-22T08:04:29.877Z",
       "id": 2
-    },
-    {
-      "card_id": 4,
-      "content": "cool",
-      "author": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "dateAdded": "2023-05-21T20:51:37.089Z",
-      "id": 3
     }
   ]
 }

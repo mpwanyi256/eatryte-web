@@ -1,11 +1,15 @@
 <template>
   <div class="comments">
+    <p class="comments_title">Comments</p>
     <div class="comments_add">
       <v-avatar class="author" :size="40">
         <v-img :src="loggedInUser.avatar" :alt="loggedInUser.name"></v-img>
       </v-avatar>
       <input
         v-model.trim="comment"
+        @keypress="
+          ($event.keyCode === 13 || $event.which === 13) && addComment()
+        "
         placeholder="Write a comment..."
         outlined
         rows="1"
@@ -28,6 +32,7 @@
         v-for="comment in loadedComments"
         :key="comment.id"
         :comment="comment"
+        @delete="deleteComment"
       />
     </div>
   </div>
@@ -94,6 +99,11 @@ export default defineComponent({
       }
     };
 
+    const deleteComment = (commentId: number) => {
+      store.dispatch("board/deleteComment", commentId);
+      comments.value = comments.value.filter((c) => c.id !== commentId);
+    };
+
     onMounted(() => {
       fetchComments();
     });
@@ -103,6 +113,7 @@ export default defineComponent({
       loggedInUser,
       loadedComments,
       addComment,
+      deleteComment,
     };
   },
 });
@@ -116,6 +127,13 @@ export default defineComponent({
   flex-direction: column;
   gap: 10px;
   margin-top: 18px;
+  font-size: 14px;
+  font-weight: 500;
+
+  &_title {
+    color: $secondary;
+    font-weight: 700;
+  }
 
   &_add {
     display: flex;

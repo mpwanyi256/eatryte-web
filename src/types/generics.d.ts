@@ -33,6 +33,7 @@ export interface Card {
   total_points: number;
   column_id: number;
   tags: Tag[];
+  dateAdded: string;
   assignee: User;
 }
 

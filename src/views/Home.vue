@@ -11,7 +11,7 @@
           :id="`column-${column.id}`"
           :key="column.id"
           :column="column"
-          :hasCards="loadedCards.length > 0"
+          :hasCards="getColumnCards(column.id).length > 0"
         >
           <BoardCard
             :columnLabel="column"
@@ -67,11 +67,17 @@ export default defineComponent({
     };
 
     const moveCard = async (data: MoveCardPayload) => {
-      const cardIdx = cards.value.findIndex((card) => card.id === data.card.id);
-      if (cardIdx >= 0) {
-        cards.value[cardIdx].column_id = data.to_column_id;
+      try {
+        const cardIdx = cards.value.findIndex(
+          (card) => card.id === data.card.id
+        );
+        if (cardIdx >= 0) {
+          cards.value[cardIdx].column_id = data.to_column_id;
+        }
+        await store.dispatch("board/updateCard", data);
+      } catch (e) {
+        console.error(e);
       }
-      await store.dispatch("board/updateCard", data);
     };
 
     const fetchColumns = async () => {

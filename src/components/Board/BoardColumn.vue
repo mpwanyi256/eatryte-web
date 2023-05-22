@@ -7,10 +7,10 @@
       <div class="column-body">
         <slot />
 
-        <div v-if="!hasCards" class="column-empty-state">
+        <div v-if="!hasCards" class="column-body-empty-state">
           <div>
             <i class="mdi mdi-selection-search"></i>
-            <p class="t-regular bold">No results found in this column.</p>
+            <p class="t-regular bold">No cards found in this column.</p>
           </div>
         </div>
       </div>

@@ -5,25 +5,26 @@
     </div>
     <div class="card-details_actions">
       <v-btn
-        v-for="action in actions"
-        :key="action.text"
+        v-for="{ text, icon } in actions"
+        :key="icon"
         class="card-details_actions_btn"
         rounded="0"
         size="small"
       >
-        <v-icon class="mr-1">mdi-attachment</v-icon>
-        Attach
+        <v-icon class="mr-1">{{ icon }}</v-icon>
+        {{ text }}
       </v-btn>
     </div>
     <div class="card-details_description">
       <p>Description</p>
-      {{ card.description }}
+      <p>{{ card.description }}</p>
     </div>
     <Comments :card="card" />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
+import { useStore } from "vuex";
 import { Card } from "@/types/generics";
 import Comments from "./Comments.vue";
 
@@ -45,12 +46,12 @@ export default defineComponent({
         text: "Attach",
       },
       {
-        icon: "mdi-attachment",
-        text: "Attach",
+        icon: "mdi-sitemap",
+        text: "Add child issue",
       },
       {
-        icon: "mdi-attachment",
-        text: "Attach",
+        icon: "mdi-link-variant",
+        text: "Link issue",
       },
     ]);
 
@@ -76,8 +77,9 @@ export default defineComponent({
     flex-direction: column;
     gap: 10px;
     h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 700;
       color: $secondary;
     }
   }
@@ -101,10 +103,21 @@ export default defineComponent({
     flex-direction: column;
     gap: 8px;
     margin-top: 10px;
-    p {
+    font-style: normal;
+    font-weight: 400;
+
+    p:first-child {
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
+      margin-top: 0.75rem;
+    }
+
+    p {
       color: $secondary;
+      line-height: 1.714;
+      font-weight: normal;
+      margin: 0;
+      letter-spacing: -0.005em;
     }
   }
 }

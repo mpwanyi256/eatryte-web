@@ -9,7 +9,7 @@
             <CardDescription :card="cardDetails" />
           </div>
           <div class="card-info-details-info">
-            <h3>Other details</h3>
+            <CardAssigneeInfo :card="cardDetails" />
           </div>
         </div>
       </template>
@@ -23,6 +23,7 @@ import router from "@/router";
 import { useStore } from "vuex";
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
 import CardDescription from "@/components/Board/cardDetails/CardDescription.vue";
+import CardAssigneeInfo from "@/components/Board/cardDetails/CardAssigneeInfo.vue";
 
 import Header from "./cardHeader.vue";
 
@@ -32,6 +33,7 @@ export default defineComponent({
     Header,
     CardDescription,
     LoadingSpinner,
+    CardAssigneeInfo,
     Modal,
   },
   setup() {
@@ -88,8 +90,18 @@ export default defineComponent({
     height: calc(80vh - 52px);
     @include scrollbar-thin();
     overflow-y: auto;
-    display: grid;
-    grid-template-columns: 60% 40%;
+
+    // Desktop view
+    @media screen and (min-width: 770px) {
+      display: grid;
+      grid-template-columns: 60% 40%;
+    }
+
+    // Small view
+    @media screen and (max-width: 770px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 </style>

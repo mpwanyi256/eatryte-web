@@ -13,7 +13,7 @@
       </div>
       <div class="comment_body_actions">
         <p>Edit</p>
-        <p>Delete</p>
+        <p @click="deleteComment">Delete</p>
       </div>
     </div>
   </div>
@@ -31,11 +31,16 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const commentDate = moment(props.comment.dateAdded).fromNow();
+
+    const deleteComment = () => {
+      emit("delete", props.comment.id);
+    };
 
     return {
       commentDate,
+      deleteComment,
     };
   },
 });

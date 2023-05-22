@@ -2,7 +2,7 @@
   <div class="board-actions">
     <input
       type="text"
-      class="search"
+      class="board-actions_search"
       @input="$emit('input', $event)"
       placeholder="Search card by title"
     />
@@ -50,14 +50,17 @@ export default defineComponent({
   align-items: center;
   gap: 10px;
 
-  &_search,
-  input {
+  &_search {
     width: 100%;
     max-width: 300px;
     height: 40px;
     border: 1px solid $tertiary;
     border-radius: 4px;
     padding: 0 10px;
+  }
+
+  ::v-deep button {
+    width: 200px;
   }
 }
 </style>

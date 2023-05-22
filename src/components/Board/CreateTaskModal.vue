@@ -35,6 +35,7 @@ import { State } from "@/store";
 import { useStore } from "vuex";
 import Modal from "@/components/generics/Modal.vue";
 import TextField from "@/components/generics/TextField.vue";
+import moment from "moment";
 
 export default defineComponent({
   name: "CreateTaskModal-component",
@@ -59,9 +60,10 @@ export default defineComponent({
         description: description.value,
         total_points: points.value,
         column_id: 1,
+        dateAdded: moment(new Date().toISOString()),
         assignee: {
           id: 1,
-          name: "John Doe",
+          name: "Samuel Mpwanyi",
           avatar: "https://i.pravatar.cc/300",
         },
         tags: [],

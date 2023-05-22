@@ -84,6 +84,13 @@ export default {
       const response: AxiosResponse = await axios.delete(`${`comments`}/${id}`);
       return await response.data;
     },
+    editComment: async (context: Context, payload: Comment): Promise<void> => {
+      const response: AxiosResponse = await axios.patch(
+        `${`comments`}/${payload.id}`,
+        payload
+      );
+      return await response.data;
+    },
   },
   getters: {
     loadedCards: function (state: BoardState): Array<Card> {

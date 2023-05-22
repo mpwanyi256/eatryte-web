@@ -42,15 +42,27 @@ export default defineComponent({
   gap: 10px;
 
   &_header {
-    height: 52px;
     background-color: $white;
     padding-left: 15px;
     border-bottom: 1px solid $light-grey;
-    display: grid;
-    grid-template-columns: 60% 40%;
     text-align: left;
     align-items: center;
     color: $black;
+
+    // Desktop view
+    @media screen and (min-width: 770px) {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      height: 52px;
+    }
+
+    // Small view
+    @media screen and (max-width: 770px) {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      justify-content: center;
+    }
 
     &_title {
       font-size: 18px;
