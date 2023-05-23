@@ -49,7 +49,7 @@
       "title": "Create migration",
       "description": "We need a new migration to fix the old migration",
       "total_points": 3,
-      "column_id": 4,
+      "column_id": 2,
       "dateAdded": "2023-05-22T08:09:39.919Z",
       "assignee": {
         "id": 1,
@@ -64,7 +64,7 @@
       "title": "Create User modal",
       "description": "User modal should have; \n\n- id\n- Username\n- email\n- Contact\n- Password",
       "total_points": 3,
-      "column_id": 4,
+      "column_id": 2,
       "dateAdded": "2023-05-22T08:38:17.360Z",
       "assignee": {
         "id": 1,
@@ -74,20 +74,24 @@
       "tags": [],
       "comments": [],
       "id": 3
+    },
+    {
+      "title": "Bimbo by nina roz",
+      "description": "The best and latest hit song by nina!...",
+      "total_points": 8,
+      "column_id": 4,
+      "dateAdded": "2023-05-23T07:42:25.321Z",
+      "assignee": {
+        "id": 1,
+        "name": "Samuel Mpwanyi",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "tags": [],
+      "comments": [],
+      "id": 4
     }
   ],
   "comments": [
-    {
-      "card_id": 1,
-      "content": "They invested massively",
-      "author": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "dateAdded": "2023-05-22T08:04:29.877Z",
-      "id": 2
-    },
     {
       "card_id": 3,
       "content": "Oh okay, are pulling in any new changes going forward?",
@@ -109,6 +113,39 @@
       },
       "dateAdded": "2023-05-22T08:53:33.560Z",
       "id": 4
+    },
+    {
+      "card_id": 1,
+      "content": "niice",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-22T18:28:57.693Z",
+      "id": 5
+    },
+    {
+      "card_id": 1,
+      "content": "Yahh... makes sense",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-23T07:31:59.617Z",
+      "id": 6
+    },
+    {
+      "card_id": 2,
+      "content": "This is ready for testing",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-23T07:52:02.944Z",
+      "id": 7
     }
   ]
 }
