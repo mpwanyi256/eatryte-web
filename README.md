@@ -1,6 +1,8 @@
 # Kanban Board
 This is the Vue App setup for Kanban “monorepo” Board app and Dummy REST Api. The app uses Vue 3 with composition API and typescript. The app also uses some components from vuetify library.
 
+![Screenshot 2023-05-23 at 15 29 16](https://github.com/mpwanyi256/board/assets/20843520/76ce1f63-3638-40fd-9252-c853a1e6d882)
+
 
 ## Requirements
 
