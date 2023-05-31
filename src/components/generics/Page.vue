@@ -28,7 +28,6 @@ export default defineComponent({
   background-color: $gray-300;
   overflow: hidden;
   display: block;
-  align-items: center;
 
   @media #{$tablet} {
     margin-top: 2.5rem;

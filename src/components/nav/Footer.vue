@@ -57,6 +57,22 @@ export default defineComponent({
   border-radius: 0;
   box-shadow: 0.625rem -0.063rem 0.625rem rgba(0, 0, 0, 0.075);
   text-align: center;
+  position: absolute;
+  visibility: hidden;
+  bottom: 0;
+  width: 100%;
+
+  @media #{$tablet} {
+    visibility: visible;
+  }
+
+  @media #{$mobile} {
+    visibility: visible;
+  }
+
+  @media #{$mobile-small} {
+    visibility: visible;
+  }
 
   &_wrapper {
     display: flex;

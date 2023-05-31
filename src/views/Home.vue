@@ -1,13 +1,25 @@
 <template>
   <div class="home">
-    <h3>Home</h3>
+    <CompanyCategories />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import CompanyCategories from "@/components/home/CompanyCategories.vue";
 
 export default defineComponent({
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Home",
+  name: "Home-page",
+
+  components: {
+    CompanyCategories,
+  },
 });
 </script>
+<style lang="scss" scoped>
+.home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+</style>

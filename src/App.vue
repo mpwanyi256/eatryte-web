@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <NavBar />
-    <Page>
+    <div class="page">
       <div class="page_wrapper">
         <router-view />
-        <Footer />
       </div>
-    </Page>
+      <Footer />
+    </div>
   </v-app>
 </template>
 <script lang="ts">
@@ -27,58 +27,59 @@ export default class HomeView extends Vue {}
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
 
-.page_wrapper {
-  width: 60%;
+.page {
+  width: 100%;
   height: 100%;
-  position: relative;
+  background-color: $gray-300;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  @include scrollbar-thin();
-  overflow-x: hidden;
-  overflow-y: auto;
-  gap: 0;
-  margin: auto;
-
-  @media #{$laptop-large} {
-    width: 70%;
-  }
-
-  @media #{$laptop-medium} {
-    width: 80%;
-  }
-
-  @media #{$laptop} {
-    width: 100%;
-  }
+  justify-content: center;
 
   @media #{$tablet} {
-    padding-bottom: 3.625rem;
-    width: 100%;
+    margin-top: 2.5rem;
   }
 
   @media #{$mobile} {
-    width: 80%;
-    padding-bottom: 3.625rem;
+    margin-top: 2.5rem;
   }
 
-  @media #{$mobile-small} {
-    width: 100%;
-    padding-bottom: 3.625rem;
-  }
-
-  ::v-deep .footer {
-    visibility: hidden;
+  &_wrapper {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    width: 60%;
+    height: 100%;
+    display: block;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: 0;
+
+    @include scrollbar-thin();
+
+    @media #{$laptop-large} {
+      width: 70%;
+    }
+
+    @media #{$laptop-medium} {
+      width: 80%;
+    }
+
+    @media #{$laptop} {
+      width: 100%;
+    }
 
     @media #{$tablet} {
-      visibility: visible;
+      padding-bottom: 3.625rem;
+      width: 100%;
     }
 
     @media #{$mobile} {
-      visibility: visible;
+      width: 80%;
+      padding-bottom: 3.625rem;
+    }
+
+    @media #{$mobile-small} {
+      width: 100%;
+      padding-bottom: 3.625rem;
     }
   }
 }
