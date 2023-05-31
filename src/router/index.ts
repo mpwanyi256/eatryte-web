@@ -8,23 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "home",
     component: Home,
     meta: {
-      title: "Board",
+      title: "Home",
       icon: "mdi-home",
       authRequired: false,
     },
-    children: [
-      {
-        path: "/card/:id",
-        name: "cardDetails",
-        component: () =>
-          import("@/components/Board/cardDetails/CardDetailsModal.vue"),
-        meta: {
-          title: "Card Details",
-          icon: "mdi-card-text",
-          authRequired: false,
-        },
-      },
-    ],
+    children: [],
   },
 ];
 

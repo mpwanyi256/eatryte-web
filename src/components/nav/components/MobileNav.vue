@@ -57,7 +57,7 @@ export default defineComponent({
 .nav_mobile {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
   margin: 0;
   width: 100%;
   height: 100%;
@@ -96,7 +96,7 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     bottom: 0;
-    height: 36px;
+    height: 2.25rem;
     width: 100%;
     overflow: hidden;
     background-color: $white;

@@ -84,7 +84,7 @@ export default defineComponent({
   @include showOnHover();
 
   &_search {
-    height: 32px;
+    height: 2rem;
     background-color: $menuRed;
     padding: 1rem;
     display: flex;
@@ -99,17 +99,17 @@ export default defineComponent({
 
       &_search_icon {
         color: $black;
-        margin-left: 4px;
+        margin-left: 0.25rem;
       }
 
       &_search_input {
         width: 100%;
         max-height: 100%;
         max-width: 300px;
-        height: 40px;
+        height: 2.5rem;
         border: none;
-        border-radius: 4px;
-        padding: 0 10px;
+        border-radius: 0.25rem;
+        padding: 0 0.625rem;
 
         &:focus {
           outline: none;
@@ -162,10 +162,10 @@ export default defineComponent({
           text-align: right;
           display: flex;
           flex-direction: row-reverse;
-          min-height: 32px;
-          font-size: 13px;
-          border-bottom: 0.3px solid $nav-border;
-          padding: 8px 0 8px 8px;
+          min-height: 2rem;
+          font-size: 0.813rem;
+          border-bottom: 0.019rem solid $nav-border;
+          padding: 0.5rem 0 0.5rem 0.5rem;
           align-items: center;
           justify-content: center;
 
@@ -178,7 +178,7 @@ export default defineComponent({
             float: right;
             margin-right: 1.5em;
             margin-left: 0;
-            border: 1px solid $menuRed;
+            border: 0.063rem solid $menuRed;
 
             &:checked {
               border-color: $menuRed !important;

@@ -15,25 +15,7 @@
     </div>
   </div>
   <v-navigation-drawer v-model="drawer" :temporary="true">
-    <v-list-item
-      prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-      title="John Leider"
-    ></v-list-item>
-
-    <v-divider></v-divider>
-
-    <v-list density="compact" nav>
-      <v-list-item
-        prepend-icon="mdi-view-dashboard"
-        title="Home"
-        value="home"
-      ></v-list-item>
-      <v-list-item
-        prepend-icon="mdi-forum"
-        title="About"
-        value="about"
-      ></v-list-item>
-    </v-list>
+    <NavigationDrawer />
   </v-navigation-drawer>
 </template>
 
@@ -47,6 +29,7 @@ import Location from "./components/Location.vue";
 import SelectLocation from "./components/SelectLocation.vue";
 import NavSearch from "./components/Search.vue";
 import NavMobile from "./components/MobileNav.vue";
+import NavigationDrawer from "@/components/nav/components/NavigationDrawer.vue";
 
 export default defineComponent({
   name: "Nav-bar",
@@ -55,6 +38,7 @@ export default defineComponent({
     NavSearch,
     NavMobile,
     SelectLocation,
+    NavigationDrawer,
   },
   setup() {
     const store = useStore<State>();
@@ -126,17 +110,17 @@ export default defineComponent({
   top: 0;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 4.25rem;
   box-sizing: content-box;
   margin: 0;
   padding: 0;
   pointer-events: auto;
   letter-spacing: normal;
   font-weight: normal;
-  font-size: 17px;
+  font-size: 1.063rem;
   line-height: 1.47059;
   background-color: $white;
-  border-bottom: 0.3px solid $nav-border;
+  border-bottom: 0.019rem solid $nav-border;
   display: flex;
   flex-direction: row;
   gap: 0;
@@ -154,13 +138,13 @@ export default defineComponent({
     @media #{$tablet} {
       visibility: visible;
       display: flex;
-      height: 111.24px;
+      height: 6.953rem;
     }
 
     @media #{$mobile} {
       visibility: visible;
       display: flex;
-      height: 111.24px;
+      height: 6.953rem;
     }
   }
 
@@ -224,14 +208,4 @@ export default defineComponent({
     }
   }
 }
-
-// ::v-deep .location:hover {
-//   ::v-deep .location_select {
-//     display: block;
-//     opacity: 1;
-//     transform: translateY(0px);
-//     transition: 0.5s ease all;
-//     visibility: visible;
-//   }
-// }
 </style>

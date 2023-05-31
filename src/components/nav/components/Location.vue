@@ -62,7 +62,7 @@ export default defineComponent({
     &_text {
       margin: 0;
       padding: 0;
-      font-size: 11px;
+      font-size: 0.688rem;
       font-weight: 500;
       color: rgba(33, 37, 41, 0.75);
     }
@@ -70,10 +70,10 @@ export default defineComponent({
     &_address {
       margin: 0;
       padding: 0;
-      font-size: 13px;
+      font-size: 0.813rem;
       font-weight: 500;
       color: $black;
-      width: 120px;
+      width: 7.5rem;
     }
   }
 }
