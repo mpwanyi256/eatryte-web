@@ -1,37 +1,40 @@
 <template>
   <div class="nav">
-    <div class="wrapper">
-      <div class="nav-content">
-        <div class="title">
-          <div class="menu_icons">
-            <p>
-              {{ appName }} |
-              <small class="user_name">Samuel</small>
-            </p>
-          </div>
-        </div>
-        <div class="menu">
-          <div class="tray">
-            <div
-              :class="isActiveRoute(link.name) ? 'active' : 'item'"
-              v-for="(link, index) in navRoutes"
-              :key="index"
-              @click="gotTopage(link)"
-            >
-              <v-icon small class="icon" left>
-                {{ link.icon }}
-              </v-icon>
-              {{ link.name }}
-            </div>
-            <div class="auth" @click="performLogout">
-              <v-icon small class="icon" dark> mdi-lock </v-icon>
-              Logout
-            </div>
-          </div>
-        </div>
+    <div class="nav_wrapper">
+      <div class="nav_wrapper_logo"></div>
+      <div class="nav_wrapper_location">
+        <Location @toggle-drawer="toggleDrawer" />
+        <SelectLocation />
+      </div>
+      <div class="nav_wrapper_search">
+        <NavSearch @toggle-drawer="toggleDrawer" />
       </div>
     </div>
+    <div class="nav_wrapper_mobile">
+      <NavMobile @toggle-drawer="toggleDrawer" />
+    </div>
   </div>
+  <v-navigation-drawer v-model="drawer" :temporary="true">
+    <v-list-item
+      prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
+      title="John Leider"
+    ></v-list-item>
+
+    <v-divider></v-divider>
+
+    <v-list density="compact" nav>
+      <v-list-item
+        prepend-icon="mdi-view-dashboard"
+        title="Home"
+        value="home"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-forum"
+        title="About"
+        value="about"
+      ></v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script lang="ts">
@@ -40,9 +43,19 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { NavRoute } from "@/types/generics";
 import { State } from "@/store";
+import Location from "./components/Location.vue";
+import SelectLocation from "./components/SelectLocation.vue";
+import NavSearch from "./components/Search.vue";
+import NavMobile from "./components/MobileNav.vue";
 
 export default defineComponent({
   name: "Nav-bar",
+  components: {
+    Location,
+    NavSearch,
+    NavMobile,
+    SelectLocation,
+  },
   setup() {
     const store = useStore<State>();
     // Define your routes here
@@ -62,6 +75,10 @@ export default defineComponent({
     // Compute the active route dynamically
     const activeRoute = computed(() => route.name);
     const appName = computed(() => store.state.app.name);
+    const drawer = computed({
+      get: () => store.state.app.drawer,
+      set: (value) => store.commit("app/toggleDrawer", value),
+    });
 
     // Filter routes excluding the active route
     const navRoutes = computed(() =>
@@ -73,6 +90,10 @@ export default defineComponent({
 
     const isActiveRoute = (routeName: string) => {
       return routeName === activeRoute.value;
+    };
+
+    const toggleDrawer = () => {
+      store.commit("app/toggleDrawer");
     };
 
     const gotTopage = (route: NavRoute) => {
@@ -88,23 +109,24 @@ export default defineComponent({
       homeRoute,
       activeRoute,
       appName,
+      drawer,
       isActiveRoute,
       gotTopage,
       performLogout,
+      toggleDrawer,
     };
   },
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/styles/constants.scss";
 
 .nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 52px;
-  font-family: $font-style;
+  height: 68px;
   box-sizing: content-box;
   margin: 0;
   padding: 0;
@@ -115,193 +137,101 @@ export default defineComponent({
   line-height: 1.47059;
   background-color: $white;
   border-bottom: 0.3px solid $nav-border;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  justify-content: center;
+  z-index: 1;
 
-  .wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: inherit;
-    height: auto;
-    min-height: inherit;
-    z-index: 0;
-    font-size: 1em;
-    font-family: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    text-align: inherit;
-    box-sizing: content-box;
-    margin: 0;
-    padding: 0;
-    pointer-events: auto;
-    letter-spacing: normal;
-    color: #1d1d1f;
-    font-style: normal;
+  &_wrapper_mobile {
+    visibility: hidden;
+    display: none;
+    background: linear-gradient(45deg, #d92662 0%, #e23744 100%);
+    color: $white;
+    width: 100%;
+    height: 100%;
 
-    .nav-content {
-      padding-left: calc(max(22px, env(safe-area-inset-left)));
-      padding-right: calc(max(22px, env(safe-area-inset-right)));
-      font-size: 1em;
-      font-family: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      text-align: inherit;
+    @media #{$tablet} {
+      visibility: visible;
+      display: flex;
+      height: 111.24px;
+    }
 
-      .title {
-        color: #000;
-        transition: color 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
-        font-size: 21px;
-        line-height: 1.14286;
-        font-weight: 600;
-        letter-spacing: 0.011em;
-        font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue",
-          "Helvetica", "Arial", sans-serif;
-        cursor: default;
-        display: block;
-        justify-content: center;
-        align-items: center;
-        float: left;
-        margin: 14px 0 -14px;
-        padding: 0;
-        height: 52px;
-        white-space: nowrap;
-        text-align: inherit;
-        box-sizing: content-box;
-        pointer-events: auto;
-        width: auto;
+    @media #{$mobile} {
+      visibility: visible;
+      display: flex;
+      height: 111.24px;
+    }
+  }
 
-        .menu_icons {
-          display: flex;
-          flex-direction: row;
-          gap: 10px;
+  &_wrapper {
+    display: inherit;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 60%;
 
-          .user_name {
-            font-weight: normal;
-            font-family: inherit;
-            color: black;
-          }
+    @media #{$laptop-large} {
+      width: 70%;
+    }
+
+    @media #{$laptop-medium} {
+      width: 80%;
+    }
+
+    @media #{$laptop} {
+      width: 100%;
+    }
+
+    @media #{$tablet} {
+      width: 100%;
+      display: none;
+    }
+
+    @media #{$mobile} {
+      width: 80%;
+      display: none;
+    }
+
+    &_logo {
+      width: 10%;
+      height: 100%;
+      background-image: url("@/assets/images/logo.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      position: relative;
+    }
+
+    &_search {
+      width: 70%;
+      height: 100%;
+    }
+
+    &_location {
+      width: 20%;
+      height: 100%;
+      position: relative;
+
+      &:hover {
+        ::v-deep .location_select {
+          display: block;
+          opacity: 1;
+          transform: translateY(0px);
+          transition: 0.5s ease all;
+          visibility: visible;
         }
-      }
-
-      .menu {
-        // Desktop view
-        @media screen and (max-width: 1135px) {
-          display: none;
-        }
-
-        @media screen and (min-width: 1134px) {
-          .toggle-btn {
-            display: none !important;
-          }
-
-          height: 100%;
-          font-size: 12px;
-          line-height: 1;
-          font-weight: 400;
-          letter-spacing: -0.01em;
-          font-family: $font-style;
-          float: right;
-          margin-top: -3px;
-          text-align: inherit;
-
-          .tray {
-            float: left;
-            padding-top: 18px;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-
-            .item {
-              color: #000;
-              cursor: pointer;
-              display: inline-block;
-              text-align: center;
-              white-space: nowrap;
-              font-size: 12px;
-              line-height: 1.33337;
-              font-weight: 400;
-              letter-spacing: -0.01em;
-              font-family: $font-style;
-              min-width: 23px;
-              padding-left: 11px;
-              padding-right: 11px;
-              padding-top: 4px;
-              padding-bottom: 4px;
-              border-radius: 12px;
-
-              .icon {
-                color: #000;
-              }
-            }
-
-            .active {
-              color: #000;
-              cursor: pointer;
-              display: inline-block;
-              text-align: center;
-              white-space: nowrap;
-              font-size: 12px;
-              line-height: 1.33337;
-              font-weight: 400;
-              letter-spacing: -0.01em;
-              font-family: $font-style;
-              min-width: 23px;
-              padding-left: 11px;
-              padding-right: 11px;
-              padding-top: 4px;
-              padding-bottom: 4px;
-              border-radius: 12px;
-              color: $white;
-              opacity: 0.56;
-              cursor: pointer;
-              background: $black;
-              border-color: $black;
-
-              .icon {
-                color: $white !important;
-              }
-            }
-
-            .auth {
-              border-color: $red !important;
-              background-color: $red;
-              color: $white !important;
-              cursor: pointer;
-              display: inline-block;
-              text-align: center;
-              white-space: nowrap;
-              font-size: 12px;
-              line-height: 1.33337;
-              font-weight: 400;
-              letter-spacing: -0.01em;
-              font-family: $font-style;
-              min-width: 23px;
-              padding-left: 11px;
-              padding-right: 11px;
-              padding-top: 4px;
-              padding-bottom: 4px;
-              border-radius: 12px;
-            }
-
-            .item:hover {
-              color: $white;
-              opacity: 0.56;
-              cursor: pointer;
-              background: $black;
-              border-color: $black;
-
-              .icon {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-
-      .menu * {
-        line-height: inherit;
-        text-align: inherit;
       }
     }
   }
 }
+
+// ::v-deep .location:hover {
+//   ::v-deep .location_select {
+//     display: block;
+//     opacity: 1;
+//     transform: translateY(0px);
+//     transition: 0.5s ease all;
+//     visibility: visible;
+//   }
+// }
 </style>

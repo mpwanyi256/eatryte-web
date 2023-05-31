@@ -6,7 +6,7 @@ const appConfig: AppConfig = {
     port: process.env.VUE_APP_PORT || 3020,
   },
   app: {
-    name: process.env.VUE_APP_NAME || "Kanban",
+    name: process.env.VUE_APP_NAME || "Eatryte",
     baseUrl: "/",
     version: "1.0.0",
   },

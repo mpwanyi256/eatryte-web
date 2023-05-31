@@ -49,7 +49,7 @@
       "title": "Create migration",
       "description": "We need a new migration to fix the old migration",
       "total_points": 3,
-      "column_id": 2,
+      "column_id": 7,
       "dateAdded": "2023-05-22T08:09:39.919Z",
       "assignee": {
         "id": 1,
@@ -115,28 +115,6 @@
       "id": 4
     },
     {
-      "card_id": 1,
-      "content": "niice",
-      "author": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "dateAdded": "2023-05-22T18:28:57.693Z",
-      "id": 5
-    },
-    {
-      "card_id": 1,
-      "content": "Yahh... makes sense",
-      "author": {
-        "id": 1,
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/300"
-      },
-      "dateAdded": "2023-05-23T07:31:59.617Z",
-      "id": 6
-    },
-    {
       "card_id": 2,
       "content": "This is ready for testing",
       "author": {
@@ -146,6 +124,17 @@
       },
       "dateAdded": "2023-05-23T07:52:02.944Z",
       "id": 7
+    },
+    {
+      "card_id": 1,
+      "content": "lol",
+      "author": {
+        "id": 1,
+        "name": "John Doe",
+        "avatar": "https://i.pravatar.cc/300"
+      },
+      "dateAdded": "2023-05-29T06:54:41.832Z",
+      "id": 8
     }
   ]
 }

@@ -1,0 +1,24 @@
+@mixin showOnHover() {
+    position: absolute;
+    top: 68px;
+    overflow: hidden;
+    height: 300px;
+    width: 250px;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s ease all;
+    background-color: $white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1) !important;
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+
+  @media #{$tablet} {
+    top: 111.24px;
+  }
+
+  @media #{$mobile} {
+    top: 111.24px;
+  }
+}

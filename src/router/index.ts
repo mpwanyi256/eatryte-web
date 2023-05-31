@@ -34,7 +34,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _, next) => {
-  document.title = `Kanban | ${to.meta.title}`;
+  document.title = `${appConfig.app.name} | ${to.meta.title}`;
   next();
 });
 

@@ -1,9 +1,12 @@
 @import "./constants.scss";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 
 body {
-    font-family: $display-font;
-    background-color: $white;
-    font-size: 14px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 13px;
+    color: #000;
+    background: #f5f5f5;
     width: 100vw;
     height: 100vh;
     top: 0;
