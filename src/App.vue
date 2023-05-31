@@ -28,19 +28,41 @@ export default class HomeView extends Vue {}
 @import "@/assets/styles/constants.scss";
 
 .page_wrapper {
-  width: 100%;
+  width: 60%;
   height: 100%;
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  @include scrollbar-thin();
   overflow-x: hidden;
   overflow-y: auto;
-  @include scrollbar-thin();
+  gap: 0;
+  margin: auto;
+
+  @media #{$laptop-large} {
+    width: 70%;
+  }
+
+  @media #{$laptop-medium} {
+    width: 80%;
+  }
+
+  @media #{$laptop} {
+    width: 100%;
+  }
 
   @media #{$tablet} {
     padding-bottom: 3.625rem;
+    width: 100%;
   }
 
   @media #{$mobile} {
+    width: 80%;
+    padding-bottom: 3.625rem;
+  }
+
+  @media #{$mobile-small} {
+    width: 100%;
     padding-bottom: 3.625rem;
   }
 

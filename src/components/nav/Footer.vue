@@ -7,6 +7,7 @@
           active: isActiveRoute(path),
           footer_wrapper_link: true,
           hide_on_mobile: style === 'hide-on-mobile',
+          big_rounded: path === 'cart',
         }"
         :key="icon"
       >
@@ -45,6 +46,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/styles/constants.scss";
 
+@mixin active {
+  color: $menuRed;
+  background: #f8f9fa;
+}
+
 .footer {
   height: 3.625rem;
   background: $white;
@@ -62,6 +68,25 @@ export default defineComponent({
       @media #{$mobile} {
         visibility: hidden;
       }
+
+      @media #{$mobile-small} {
+        visibility: hidden;
+      }
+    }
+
+    .big_rounded {
+      border-radius: 50% !important;
+      opacity: 1;
+      background: $menuRed;
+      color: $white;
+      margin-top: -2.5rem;
+      border: 0.5rem solid $white;
+      width: 100px;
+      min-width: 100px;
+      max-width: 100px;
+      height: 100px;
+      min-height: 100px;
+      max-height: 100px;
     }
 
     > div {
@@ -71,6 +96,7 @@ export default defineComponent({
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      touch-action: auto;
 
       p {
         font-weight: 600;
@@ -81,8 +107,7 @@ export default defineComponent({
     }
 
     .active {
-      color: $menuRed !important;
-      background: #f8f9fa;
+      @include active();
     }
   }
 }
