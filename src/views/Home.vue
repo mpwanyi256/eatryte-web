@@ -1,25 +1,20 @@
 <template>
-  <div class="home">
+  <Page>
     <CompanyCategories />
-  </div>
+  </Page>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import CompanyCategories from "@/components/home/CompanyCategories.vue";
+import Page from "@/components/generics/Page.vue";
+import CompanyCategories from "@/components/home/categories/CompanyCategories.vue";
 
 export default defineComponent({
   name: "Home-page",
 
   components: {
+    Page,
     CompanyCategories,
   },
 });
 </script>
-<style lang="scss" scoped>
-.home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-</style>
+<style lang="scss" scoped></style>

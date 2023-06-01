@@ -8,12 +8,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Page-component",
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
   setup() {
     return {};
   },
@@ -26,15 +20,8 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   background-color: $gray-300;
-  overflow: hidden;
-  display: block;
-
-  @media #{$tablet} {
-    margin-top: 2.5rem;
-  }
-
-  @media #{$mobile} {
-    margin-top: 2.5rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 </style>

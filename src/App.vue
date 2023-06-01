@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <NavBar />
-    <div class="page">
-      <div class="page_wrapper">
+    <div class="er_home">
+      <div class="er_home_wrapper">
         <router-view />
       </div>
       <Footer />
@@ -27,13 +27,12 @@ export default class HomeView extends Vue {}
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
 
-.page {
+.er_home {
   width: 100%;
   height: 100%;
   background-color: $gray-300;
   overflow: hidden;
   display: flex;
-  justify-content: center;
 
   @media #{$tablet} {
     margin-top: 2.5rem;
@@ -45,42 +44,45 @@ export default class HomeView extends Vue {}
 
   &_wrapper {
     position: absolute;
-    width: 60%;
+    width: 100%;
     height: 100%;
     display: block;
     top: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     gap: 0;
-
-    @include scrollbar-thin();
+    margin-top: 3.8rem;
 
     @media #{$laptop-large} {
-      width: 70%;
+      margin-top: 3.8rem;
     }
 
     @media #{$laptop-medium} {
-      width: 80%;
+      margin-top: 3.8rem;
     }
 
     @media #{$laptop} {
-      width: 100%;
+      margin-top: 3.8rem;
     }
 
     @media #{$tablet} {
       padding-bottom: 3.625rem;
-      width: 100%;
+      margin-top: 6.953rem;
     }
 
     @media #{$mobile} {
-      width: 80%;
+      margin-top: 6.953rem;
       padding-bottom: 3.625rem;
     }
 
     @media #{$mobile-small} {
-      width: 100%;
+      margin-top: 6.953rem;
       padding-bottom: 3.625rem;
     }
   }
+}
+
+::v-deep .footer {
+  position: absolute;
+  bottom: 0;
 }
 </style>
