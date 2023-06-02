@@ -89,42 +89,22 @@ export default defineComponent({
     const wrapperStackList = ref<any | null>(null);
 
     const scrollToPosition = (direction: string) => {
-      const container: any = document.getElementById("wrapper_stack_list"),
-        containerDivElWidth = 150 * 2;
+      try {
+        const container: any = document.getElementById("wrapper_stack_list"),
+          containerDivElWidth = 198 * 1,
+          leftVal =
+            direction === "right"
+              ? container.scrollLeft + containerDivElWidth
+              : container.scrollLeft - containerDivElWidth;
 
-      if (direction === "right") {
         container.scrollTo({
           top: 0,
-          left: container.scrollLeft + containerDivElWidth,
+          left: leftVal,
           behavior: "smooth",
         });
-        // let scrollAmount = 0;
-        // const slideTimer = setInterval(function () {
-        //   if (container) container.scrollLeft += containerDivElWidth;
-        //   scrollAmount += containerDivElWidth;
-        //   if (scrollAmount >= containerDivElWidth) {
-        //     window.clearInterval(slideTimer);
-        //   }
-        // }, 25);
-      } else {
-        container.scrollTo({
-          top: 0,
-          left: container.scrollLeft - containerDivElWidth,
-          behavior: "smooth",
-        });
-        // let scrollAmount = 0;
-        // const slideTimer = setInterval(function () {
-        //   container.scrollLeft -= containerDivElWidth;
-        //   scrollAmount += containerDivElWidth;
-        //   if (scrollAmount >= containerDivElWidth) {
-        //     window.clearInterval(slideTimer);
-        //   }
-        // }, 25);
+      } catch (error) {
+        console.log(error);
       }
-      console.log(
-        "Has over flow",
-        container.scrollWidth > container.scrollLeft
-      );
     };
 
     return {
@@ -163,10 +143,11 @@ export default defineComponent({
     width: 100%;
 
     &_item {
-      width: 9.25rem;
-      min-width: 9.25rem;
+      width: 9.5rem;
+      min-width: 9.5rem;
       margin: 1rem 0;
-      height: 9.875;
+      min-height: 9.875;
+      max-height: 9.875;
       display: block;
       padding-bottom: 1rem !important;
       background-color: $white;

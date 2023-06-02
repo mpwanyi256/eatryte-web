@@ -7,29 +7,49 @@
       </div>
       <Footer />
     </div>
+    <v-snackbar v-model="snackbar" multi-line vertical>
+      {{ alertMessage }}
+    </v-snackbar>
   </v-app>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, computed, ref, watch } from "vue";
+import { useStore } from "vuex";
+import { State } from "@/store";
 import NavBar from "@/components/nav/NavBar.vue";
-import Page from "@/components/generics/Page.vue";
 import Footer from "@/components/nav/Footer.vue";
 
-@Options({
+export default defineComponent({
+  name: "App",
   components: {
-    Footer,
     NavBar,
-    Page,
+    Footer,
   },
-})
-export default class HomeView extends Vue {}
+  setup() {
+    const store = useStore<State>();
+    const alertMessage = computed(() => store.state.app.alertMessage);
+    const snackbar = ref(false);
+
+    watch(
+      () => store.state.app.alertMessage,
+      (val) => {
+        snackbar.value = !!val;
+      }
+    );
+
+    return {
+      snackbar,
+      alertMessage,
+    };
+  },
+});
 </script>
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
 
 .er_home {
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   background-color: $gray-300;
   overflow: hidden;
   display: flex;
@@ -84,5 +104,6 @@ export default class HomeView extends Vue {}
 ::v-deep .footer {
   position: absolute;
   bottom: 0;
+  visibility: hidden;
 }
 </style>

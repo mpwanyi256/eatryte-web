@@ -14,6 +14,7 @@ export interface AppModuleState {
   name: string;
   drawer: boolean;
   quickLinks: Array<QuickLink>;
+  alertMessage: string;
 }
 
 type Context = ActionContext<AppModuleState, State>;
@@ -56,15 +57,26 @@ export default {
         style: "",
       },
     ],
+    alertMessage: "",
   }),
   mutations: {
     toggleDrawer(state: AppModuleState) {
       state.drawer = !state.drawer;
     },
+    toggleAlert(state: AppModuleState, message: string) {
+      state.alertMessage = message;
+
+      setTimeout(() => {
+        state.alertMessage = "";
+      }, 3000);
+    },
   },
   actions: {
     toggleDrawer({ commit }: Context) {
       commit("toggleDrawer");
+    },
+    alertUser({ commit }: Context, message: string) {
+      commit("toggleAlert", message);
     },
   },
 };
