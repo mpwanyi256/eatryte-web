@@ -22,7 +22,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, VueElement } from "vue";
+import { defineComponent, ref } from "vue";
 import CategoryList from "./CategoryList.vue";
 
 export default defineComponent({

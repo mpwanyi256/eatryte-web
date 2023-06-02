@@ -170,7 +170,6 @@ export default defineComponent({
         height: auto;
         text-align: center !important;
         display: inline-block;
-        // padding: 0.5rem !important;
 
         img {
           height: auto;
@@ -185,19 +184,13 @@ export default defineComponent({
           font-size: 0.875rem;
           margin-bottom: 0.25rem !important;
           color: $black;
-          font-weight: 800;
+          font-weight: 500;
           line-height: 1.2;
-          //   margin-block-start: 2.33em;
-          //   margin-block-end: 2.33em;
-          //   margin-inline-start: 0px;
-          //   margin-inline-end: 0px;
         }
 
         p {
           --bs-success-rgb: 25, 135, 84;
           --bs-text-opacity: 1;
-          font-weight: 800;
-          // margin-bottom: 0.688;
           font-size: 0.688rem !important;
           color: rgba(25, 135, 84, 1) !important;
         }
