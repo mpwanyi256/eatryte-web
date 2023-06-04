@@ -2,7 +2,7 @@
   <div class="listing">
     <div class="listing_container">
       <div class="listing_container_header pt-4 pb-2">
-        <h5>Trending this week</h5>
+        <h5>Offers</h5>
         <a href="#"> View all >> </a>
       </div>
       <div class="listing_container_list">
@@ -174,7 +174,6 @@ export default defineComponent({
 
 .listing {
   display: block;
-  // flex-direction: column;
   min-height: 11.875rem;
   color: $black;
   width: 100%;
@@ -237,6 +236,7 @@ export default defineComponent({
         ) !important;
         height: 100%;
         box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
+        overflow: hidden;
 
         @media #{$mobile} {
           min-width: 14.25rem;

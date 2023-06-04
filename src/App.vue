@@ -50,9 +50,9 @@ export default defineComponent({
 .er_home {
   width: 100%;
   max-height: 100%;
-  background-color: $gray-300;
   overflow: hidden;
   display: flex;
+  background-color: $pageBgColor;
 
   @media #{$tablet} {
     margin-top: 2.5rem;
@@ -84,19 +84,20 @@ export default defineComponent({
       margin-top: 3.8rem;
     }
 
+    // ::TODO Add once we have fixed the bottom navBar
     @media #{$tablet} {
-      padding-bottom: 3.625rem;
+      // padding-bottom: 3.625rem;
       margin-top: 6.953rem;
     }
 
     @media #{$mobile} {
       margin-top: 6.953rem;
-      padding-bottom: 3.625rem;
+      // padding-bottom: 3.625rem;
     }
 
     @media #{$mobile-small} {
       margin-top: 6.953rem;
-      padding-bottom: 3.625rem;
+      // padding-bottom: 3.625rem;
     }
   }
 }
