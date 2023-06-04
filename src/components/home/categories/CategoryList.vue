@@ -91,7 +91,7 @@ export default defineComponent({
     const scrollToPosition = (direction: string) => {
       try {
         const container: any = document.getElementById("wrapper_stack_list"),
-          containerDivElWidth = 198 * 1,
+          containerDivElWidth = 160 * 1,
           leftVal =
             direction === "right"
               ? container.scrollLeft + containerDivElWidth

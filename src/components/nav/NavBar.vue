@@ -125,7 +125,7 @@ export default defineComponent({
   flex-direction: row;
   gap: 0;
   justify-content: center;
-  z-index: 1;
+  z-index: 999;
 
   &_wrapper_mobile {
     visibility: hidden;

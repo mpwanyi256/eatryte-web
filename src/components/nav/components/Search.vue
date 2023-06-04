@@ -10,26 +10,28 @@
         Offers
       </v-btn>
     </div>
-    <div class="search_link">
-      <v-icon left size="x-small" icon="mdi-account-outline"></v-icon>
+    <div v-if="!isLoggedIn" class="search_link">
+      <v-icon left size="x-small" icon="mdi-lock-outline"></v-icon>
       <p>Sign in</p>
     </div>
-    <div class="search_link">
-      <v-icon class="mr-1" size="x-small" icon="mdi-cart-outline"></v-icon>
-      <p>Cart</p>
-    </div>
-    <div class="search_link profile">
-      <v-avatar
-        image="https://i.pravatar.cc/300"
-        size="32"
-        class="mr-3"
-      ></v-avatar>
-      <p>Samuel</p>
-      <v-icon x-small class="location_icon_map">mdi-menu-down</v-icon>
-    </div>
-    <div class="search_link justify-center" @click="$emit('toggle-drawer')">
-      <v-icon class="mr-1" size="x-large" icon="mdi-menu"></v-icon>
-    </div>
+    <template v-else>
+      <div class="search_link">
+        <v-icon class="mr-1" size="x-small" icon="mdi-cart-outline"></v-icon>
+        <p>Cart</p>
+      </div>
+      <div class="search_link profile">
+        <v-avatar
+          image="https://i.pravatar.cc/300"
+          size="32"
+          class="mr-3"
+        ></v-avatar>
+        <p>Samuel</p>
+        <v-icon x-small class="location_icon_map">mdi-menu-down</v-icon>
+      </div>
+      <div class="search_link justify-center" @click="$emit('toggle-drawer')">
+        <v-icon class="mr-1" size="x-large" icon="mdi-menu"></v-icon>
+      </div>
+    </template>
   </div>
 </template>
 <script lang="ts">
@@ -37,6 +39,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Nav-Search",
+  setup() {
+    const isLoggedIn = true;
+    return {
+      isLoggedIn,
+    };
+  },
 });
 </script>
 <style lang="scss" scoped>
@@ -50,14 +58,15 @@ export default defineComponent({
   align-items: center;
   gap: 10px;
   font-size: 1rem;
+  justify-content: end;
 
   > div {
-    width: 100%;
+    width: auto;
   }
 
-  .profile {
-    width: 250px;
-  }
+  // .profile {
+  //   width: 250px;
+  // }
 
   &_link {
     display: flex;
