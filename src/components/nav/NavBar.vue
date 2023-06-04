@@ -159,7 +159,7 @@ export default defineComponent({
     }
 
     @media #{$laptop-medium} {
-      width: 80%;
+      width: 95%;
     }
 
     @media #{$laptop} {
@@ -167,12 +167,14 @@ export default defineComponent({
     }
 
     @media #{$tablet} {
-      width: 100%;
       display: none;
     }
 
     @media #{$mobile} {
-      width: 80%;
+      display: none;
+    }
+
+    @media #{$mobile-small} {
       display: none;
     }
 

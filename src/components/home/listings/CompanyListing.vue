@@ -145,6 +145,22 @@ export default defineComponent({
           description: "Use Coupon 50OFF ",
         },
       },
+      {
+        id: 3,
+        name: "Gators Cafe",
+        coverImage: "https://pos.prodevkampala.com/img/trending3.png",
+        cusines: ["Humbergers", "North", "Pure veg"],
+        average_delivery_time: 30,
+        averageMealForTwo: 20,
+        currency: "UGX",
+        rating: {
+          rate: 4.5,
+          outOf: 300,
+        },
+        currentOffer: {
+          description: "Use Coupon 50OFF ",
+        },
+      },
     ]);
 
     return {
@@ -157,8 +173,8 @@ export default defineComponent({
 @import "@/assets/styles/constants.scss";
 
 .listing {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  // flex-direction: column;
   min-height: 11.875rem;
   color: $black;
   width: 100%;
@@ -200,10 +216,17 @@ export default defineComponent({
       min-height: 23.544rem;
       max-height: 23.544rem;
       gap: 1rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0 1rem;
+      @include scrollbar-hidden();
 
       &_item {
+        float: left;
+        min-width: 22.75rem;
+        max-width: 22.75rem;
+        display: block;
         --bs-bg-opacity: 1;
         --bs-white-rgb: 255, 255, 255;
         --bs-body-color-rgb: 33, 37, 41;
@@ -215,11 +238,57 @@ export default defineComponent({
         height: 100%;
         box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
 
+        @media #{$mobile} {
+          min-width: 14.25rem;
+          max-width: 14.25rem;
+        }
+
+        @media #{$mobile-small} {
+          min-width: 16rem;
+          max-width: 16rem;
+        }
+
+        @media #{$tablet} {
+          min-width: 14.8rem;
+          max-width: 14.8rem;
+        }
+
+        @media #{$laptop} {
+          min-width: 18.875rem;
+          max-width: 18.875rem;
+        }
+
+        @media #{$laptop-medium} {
+          min-width: 16.6rem;
+          max-width: 16.6rem;
+        }
+
         &_image {
           width: 100%;
           height: 13.7rem;
           overflow: hidden;
           position: relative;
+          cursor: pointer;
+
+          @media #{$mobile} {
+            height: 8.976rem;
+          }
+
+          @media #{$mobile-small} {
+            height: 10.079rem;
+          }
+
+          @media #{$tablet} {
+            height: 9.369rem;
+          }
+
+          @media #{$laptop} {
+            height: 8.504rem;
+          }
+
+          @media #{$laptop-medium} {
+            height: 10.276rem;
+          }
 
           &_city {
             position: absolute;
@@ -245,6 +314,8 @@ export default defineComponent({
           &_img {
             position: absolute;
             width: 100%;
+            height: 100%;
+            padding: 0;
             z-index: 1;
           }
 
