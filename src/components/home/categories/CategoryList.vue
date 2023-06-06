@@ -146,8 +146,7 @@ export default defineComponent({
       width: 9.5rem;
       min-width: 9.5rem;
       margin: 1rem 0;
-      min-height: 9.875;
-      max-height: 9.875;
+      height: 9.875rem;
       display: block;
       padding-bottom: 1rem !important;
       background-color: $white;
