@@ -52,12 +52,13 @@ export default defineComponent({
 }
 
 .footer {
+  z-index: 999;
   height: 3.625rem;
   background: $white;
   border-radius: 0;
   box-shadow: 0.625rem -0.063rem 0.625rem rgba(0, 0, 0, 0.075);
   text-align: center;
-  position: absolute;
+  position: fixed;
   visibility: hidden;
   bottom: 0;
   width: 100%;

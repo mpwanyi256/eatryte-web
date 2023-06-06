@@ -40,7 +40,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Nav-Search",
   setup() {
-    const isLoggedIn = true;
+    const isLoggedIn = false;
     return {
       isLoggedIn,
     };

@@ -1,8 +1,8 @@
 <template>
   <div class="listing">
     <div class="listing_container">
-      <div class="listing_container_header pt-4 pb-2">
-        <h5>Offers</h5>
+      <div class="listing_container_header pt-4 pb-2 ml-1 mr-2">
+        <h5>Most popular</h5>
         <a href="#"> View all >> </a>
       </div>
       <div class="listing_container_list">
@@ -194,7 +194,7 @@ export default defineComponent({
       h5 {
         --bs-heading-color: $black;
         position: absolute;
-        left: 0;
+        left: 0.5rem;
         line-height: 1.2;
         font-size: 1.4rem;
         font-weight: 500;
@@ -203,7 +203,7 @@ export default defineComponent({
 
       a {
         position: absolute;
-        right: 0;
+        right: 0.5rem;
         outline: none !important;
         color: $red;
         text-decoration: none;

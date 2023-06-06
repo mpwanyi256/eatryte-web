@@ -2,11 +2,9 @@
   <v-app>
     <NavBar />
     <div class="er_home">
-      <div class="er_home_wrapper">
-        <router-view />
-      </div>
-      <Footer />
+      <router-view />
     </div>
+    <Footer />
     <v-snackbar v-model="snackbar" multi-line vertical>
       {{ alertMessage }}
     </v-snackbar>
@@ -48,63 +46,24 @@ export default defineComponent({
 @import "@/assets/styles/constants.scss";
 
 .er_home {
-  width: 100%;
   max-height: 100%;
-  overflow: hidden;
+  width: 100%;
+  overflow-y: auto;
   display: flex;
   background-color: $pageBgColor;
 
   @media #{$tablet} {
-    margin-top: 2.5rem;
+    margin-top: 2.6rem;
+    margin-bottom: 4rem;
   }
 
   @media #{$mobile} {
-    margin-top: 2.5rem;
+    margin-top: 2.6rem;
+    height: calc(100vh - 10.578rem);
   }
 
-  &_wrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: block;
-    top: 0;
-    overflow: hidden;
-    gap: 0;
-    margin-top: 3.8rem;
-
-    @media #{$laptop-large} {
-      margin-top: 3.8rem;
-    }
-
-    @media #{$laptop-medium} {
-      margin-top: 3.8rem;
-    }
-
-    @media #{$laptop} {
-      margin-top: 3.8rem;
-    }
-
-    // ::TODO Add once we have fixed the bottom navBar
-    @media #{$tablet} {
-      // padding-bottom: 3.625rem;
-      margin-top: 6.953rem;
-    }
-
-    @media #{$mobile} {
-      margin-top: 6.953rem;
-      // padding-bottom: 3.625rem;
-    }
-
-    @media #{$mobile-small} {
-      margin-top: 6.953rem;
-      // padding-bottom: 3.625rem;
-    }
+  @media #{$mobile-small} {
+    margin-top: 2.6rem;
   }
-}
-
-::v-deep .footer {
-  position: absolute;
-  bottom: 0;
-  visibility: hidden;
 }
 </style>

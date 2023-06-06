@@ -105,7 +105,7 @@ export default defineComponent({
       &_search_input {
         width: 100%;
         max-height: 100%;
-        max-width: 300px;
+        max-width: 18.75rem;
         height: 2.5rem;
         border: none;
         border-radius: 0.25rem;
@@ -129,27 +129,27 @@ export default defineComponent({
         display: flex;
         flex-direction: row;
         align-items: center;
-        border-bottom: 0.3px solid $nav-border;
-        height: 32px;
-        padding: 8px;
+        border-bottom: 0.019rem solid $nav-border;
+        height: 2rem;
+        padding: 0.5rem;
         color: $menuRed;
         font-weight: 700;
-        letter-spacing: 0.2px;
-        font-size: 13px;
+        letter-spacing: 0.013rem;
+        font-size: 0.813rem;
 
         &:hover {
           cursor: pointer;
         }
 
         i {
-          height: 6px;
-          width: 6px;
-          margin: 8px;
+          height: 0.375rem;
+          width: 0.375rem;
+          margin: 0.5rem;
         }
       }
 
       &_countries_list {
-        height: 195px;
+        height: 12.375rem;
         display: flex;
         flex-direction: column;
         gap: 0;
