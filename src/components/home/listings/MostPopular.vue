@@ -1,13 +1,13 @@
 <template>
-  <div class="listing">
-    <div class="listing_container">
-      <div class="listing_container_header pt-4 pb-2 ml-1 mr-2">
-        <h5>Trending</h5>
+  <div class="popular">
+    <div class="popular_container">
+      <div class="popular_container_header pt-4 pb-2 ml-1 mr-2">
+        <h5>Most popular</h5>
         <a href="#"> View all >> </a>
       </div>
-      <div class="listing_container_list">
+      <div class="popular_container_list">
         <div
-          class="listing_container_list_item"
+          class="popular_container_list_item"
           v-for="{
             id,
             name,
@@ -21,35 +21,35 @@
           } in restaurants"
           :key="id"
         >
-          <div class="listing_container_list_item_image">
-            <div class="listing_container_list_item_image_city">
-              <span class="listing_container_list_item_image_city_badge">
+          <div class="popular_container_list_item_image">
+            <div class="popular_container_list_item_image_city">
+              <span class="popular_container_list_item_image_city_badge">
                 Kampala
               </span>
             </div>
-            <div class="listing_container_list_item_image_favorite">
+            <div class="popular_container_list_item_image_favorite">
               <v-icon>mdi-heart-outline</v-icon>
             </div>
             <v-img
-              class="listing_container_list_item_image_img"
+              class="popular_container_list_item_image_image"
               aspect-ratio="16/9"
               cover
               :src="coverImage"
             />
-            <div class="listing_container_list_item_image_rating">
-              <span class="listing_container_list_item_image_rating_badge">
+            <div class="popular_container_list_item_image_rating">
+              <span class="popular_container_list_item_image_rating_badge">
                 <v-icon icon="mdi-star-outline" size="small"></v-icon>
                 {{ rating.rate }} ({{ rating.outOf }})
               </span>
             </div>
           </div>
-          <div class="listing_container_list_item_info">
-            <div class="listing_container_list_item_info_title">
-              <h6 class="mb-1 listing_container_list_item_info_title_name">
+          <div class="popular_container_list_item_info">
+            <div class="popular_container_list_item_info_title">
+              <h6 class="mb-1 popular_container_list_item_info_title_name">
                 {{ name }}
               </h6>
               <p class="mb-3">{{ cusines.join(", ") }}</p>
-              <p class="mb-3 listing_container_list_item_info_title_time">
+              <p class="mb-3 popular_container_list_item_info_title_time">
                 <span class="average">
                   <v-icon icon="mdi-clock-outline" size="small"></v-icon>
                   {{ average_delivery_time }} min
@@ -60,8 +60,8 @@
                 </span>
               </p>
             </div>
-            <div class="listing_container_list_item_info_offer">
-              <span class="listing_container_list_item_info_offer_badge mr-1">
+            <div class="popular_container_list_item_info_offer">
+              <span class="popular_container_list_item_info_offer_badge mr-1">
                 OFFER
               </span>
               <small>
@@ -78,13 +78,13 @@
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "Company-listing",
+  name: "MostPopular",
   setup() {
     const restaurants = ref([
       {
         id: 1,
         name: "Thai Famous Cuisine",
-        coverImage: "https://pos.prodevkampala.com/img/trending1.png",
+        coverImage: "https://pos.prodevkampala.com/img/popular1.png",
         cusines: ["American", "BBQ", "Burgers"],
         average_delivery_time: 30,
         averageMealForTwo: 30,
@@ -100,7 +100,7 @@ export default defineComponent({
       {
         id: 2,
         name: "Inkoko rotisserie",
-        coverImage: "https://pos.prodevkampala.com/img/trending2.png",
+        coverImage: "https://pos.prodevkampala.com/img/popular2.png",
         cusines: ["Vegeterian", "Indian", "Thai"],
         average_delivery_time: 30,
         averageMealForTwo: 50,
@@ -116,7 +116,7 @@ export default defineComponent({
       {
         id: 3,
         name: "Gators Cafe",
-        coverImage: "https://pos.prodevkampala.com/img/trending3.png",
+        coverImage: "https://pos.prodevkampala.com/img/popular6.png",
         cusines: ["Humbergers", "North", "Pure veg"],
         average_delivery_time: 30,
         averageMealForTwo: 20,
@@ -132,7 +132,7 @@ export default defineComponent({
       {
         id: 3,
         name: "Gators Cafe",
-        coverImage: "https://pos.prodevkampala.com/img/trending3.png",
+        coverImage: "https://pos.prodevkampala.com/img/popular4.png",
         cusines: ["Humbergers", "North", "Pure veg"],
         average_delivery_time: 30,
         averageMealForTwo: 20,
@@ -148,7 +148,7 @@ export default defineComponent({
       {
         id: 3,
         name: "Gators Cafe",
-        coverImage: "https://pos.prodevkampala.com/img/trending3.png",
+        coverImage: "https://pos.prodevkampala.com/img/popular8.png",
         cusines: ["Humbergers", "North", "Pure veg"],
         average_delivery_time: 30,
         averageMealForTwo: 20,
@@ -172,18 +172,20 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/assets/styles/constants.scss";
 
-.listing {
-  display: block;
-  height: auto;
-  // min-height: 11.875rem;
+.popular {
+  display: flex;
   color: $black;
   width: 100%;
+  @include scrollbar-hidden();
+  padding-bottom: 1rem;
 
   &_container {
     @include page-flex();
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 
     &_header {
       display: block;
@@ -213,20 +215,41 @@ export default defineComponent({
     }
 
     &_list {
-      // min-height: 23.544rem;
-      // max-height: 23.544rem;
+      min-height: 23.544rem;
+      max-height: 23.544rem;
+      height: auto;
       gap: 1rem;
       display: flex;
-      flex-direction: row;
-      overflow-x: auto;
+      flex-wrap: wrap;
       padding: 0 1rem;
+      margin-bottom: 1rem;
       @include scrollbar-hidden();
 
+      @media #{$mobile-small} {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-0.5 * var(--bs-gutter-x));
+        margin-left: calc(-0.5 * var(--bs-gutter-x));
+        justify-content: center;
+      }
+
+      @media #{$mobile} {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-0.5 * var(--bs-gutter-x));
+        margin-left: calc(-0.5 * var(--bs-gutter-x));
+        justify-content: center;
+      }
+
       &_item {
-        float: left;
-        min-width: 22.75rem;
-        max-width: 22.75rem;
-        display: block;
+        display: inline-block;
+        width: 16.7rem;
         --bs-bg-opacity: 1;
         --bs-white-rgb: 255, 255, 255;
         --bs-body-color-rgb: 33, 37, 41;
@@ -235,60 +258,68 @@ export default defineComponent({
           var(--bs-white-rgb),
           var(--bs-bg-opacity)
         ) !important;
-        height: 100%;
         box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
         overflow: hidden;
 
-        @media #{$mobile} {
-          min-width: 14.25rem;
-          max-width: 14.25rem;
-        }
-
-        @media #{$mobile-small} {
-          min-width: 16rem;
-          max-width: 16rem;
-        }
-
-        @media #{$tablet} {
-          min-width: 14.8rem;
-          max-width: 14.8rem;
+        @media #{$laptop-large} {
+          min-width: 15.6rem;
+          max-width: 15.6rem;
         }
 
         @media #{$laptop} {
-          min-width: 18.875rem;
-          max-width: 18.875rem;
+          min-width: 14.7rem;
+          max-width: 14.7rem;
         }
 
-        @media #{$laptop-medium} {
-          min-width: 16.6rem;
-          max-width: 16.6rem;
+        @media #{$tablet} {
+          min-width: 10.5rem;
+          max-width: 10.5rem;
+        }
+
+        @media #{$mobile} {
+          min-width: 34.5rem;
+          max-width: 34.5rem;
+        }
+
+        @media #{$mobile-medium} {
+          min-width: 22rem;
+          max-width: 22rem;
+        }
+
+        @media #{$mobile-small} {
+          min-width: 21rem;
+          max-width: 21rem;
         }
 
         &_image {
           width: 100%;
-          height: 13.7rem;
+          height: 9.882rem;
           overflow: hidden;
           position: relative;
           cursor: pointer;
 
-          @media #{$mobile} {
-            height: 8.976rem;
-          }
-
-          @media #{$mobile-small} {
-            height: 10.079rem;
-          }
-
-          @media #{$tablet} {
-            height: 9.369rem;
+          @media #{$laptop-large} {
+            height: 9.882rem;
           }
 
           @media #{$laptop} {
             height: 8.504rem;
           }
 
-          @media #{$laptop-medium} {
-            height: 10.276rem;
+          @media #{$tablet} {
+            height: 6.613rem;
+          }
+
+          @media #{$mobile-small} {
+            height: 13.228rem;
+          }
+
+          @media #{$mobile-medium} {
+            height: 20rem;
+          }
+
+          @media #{$mobile} {
+            height: 21.732rem;
           }
 
           &_city {
@@ -312,7 +343,7 @@ export default defineComponent({
             }
           }
 
-          &_img {
+          &_image {
             position: absolute;
             width: 100%;
             height: 100%;
