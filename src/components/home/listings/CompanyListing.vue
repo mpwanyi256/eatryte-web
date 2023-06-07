@@ -3,7 +3,16 @@
     <div class="listing_container">
       <div class="listing_container_header pt-4 pb-2 ml-1 mr-2">
         <h5>Trending</h5>
-        <a href="#"> View all >> </a>
+        <router-link
+          :to="{
+            name: 'listing',
+            query: {
+              filter: 'trending',
+            },
+          }"
+        >
+          View all >>
+        </router-link>
       </div>
       <div class="listing_container_list">
         <div

@@ -3,11 +3,18 @@
     <CompanyCategories />
     <Promos />
     <CompanyListing />
-    <MostPopular />
+    <MostPopular :route-info="mostPopularInfo">
+      <template #route>
+        <router-link :to="{ name: mostPopularInfo.path.name }"
+          >View all >></router-link
+        >
+      </template>
+    </MostPopular>
   </Page>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { routeInfo } from "@/types/generics";
 import Page from "@/components/generics/Page.vue";
 import CompanyCategories from "@/components/home/categories/CompanyCategories.vue";
 import CompanyListing from "@/components/home/listings/CompanyListing.vue";
@@ -23,6 +30,21 @@ export default defineComponent({
     CompanyListing,
     CompanyCategories,
     MostPopular,
+  },
+  setup() {
+    const mostPopularInfo = ref<routeInfo>({
+      title: "Most popular",
+      path: {
+        name: "listing",
+        query: {
+          filter: "most-popular",
+        },
+      },
+    });
+
+    return {
+      mostPopularInfo,
+    };
   },
 });
 </script>

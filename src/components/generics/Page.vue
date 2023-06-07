@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <section class="page">
     <slot></slot>
-  </div>
+  </section>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -18,7 +18,7 @@ export default defineComponent({
 
 .page {
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: $pageBgColor;
   display: flex;
   flex-direction: column;

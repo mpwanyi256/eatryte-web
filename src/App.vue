@@ -2,9 +2,10 @@
   <v-app>
     <NavBar />
     <div class="er_home">
-      <router-view />
+      <router-view transition="fade-transition" />
     </div>
-    <Footer />
+    <MobileNav />
+    <!-- <PageFooter /> -->
     <v-snackbar v-model="snackbar" multi-line vertical>
       {{ alertMessage }}
     </v-snackbar>
@@ -15,13 +16,15 @@ import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store";
 import NavBar from "@/components/nav/NavBar.vue";
-import Footer from "@/components/nav/Footer.vue";
+import MobileNav from "@/components/nav/MobileNav.vue";
+// import PageFooter from "@/components/nav/PageFooter.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     NavBar,
-    Footer,
+    MobileNav,
+    // PageFooter,
   },
   setup() {
     const store = useStore<State>();
@@ -46,11 +49,13 @@ export default defineComponent({
 @import "@/assets/styles/constants.scss";
 
 .er_home {
-  max-height: 100%;
+  height: 100%;
   width: 100%;
+  // padding-bottom: 1rem;
   overflow-y: auto;
   display: flex;
   background-color: $pageBgColor;
+  @include scrollbar-hidden();
 
   @media #{$tablet} {
     margin-top: 2.6rem;

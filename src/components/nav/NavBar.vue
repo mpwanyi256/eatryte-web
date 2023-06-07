@@ -111,6 +111,7 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 4.25rem;
+  position: sticky;
   box-sizing: content-box;
   margin: 0;
   padding: 0;

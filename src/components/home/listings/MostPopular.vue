@@ -2,8 +2,10 @@
   <div class="popular">
     <div class="popular_container">
       <div class="popular_container_header pt-4 pb-2 ml-1 mr-2">
-        <h5>Most popular</h5>
-        <a href="#"> View all >> </a>
+        <h5>{{ routeInfo.title }}</h5>
+        <p>
+          <slot name="route"></slot>
+        </p>
       </div>
       <div class="popular_container_list">
         <div
@@ -75,11 +77,18 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, PropType } from "vue";
+import { routeInfo } from "@/types/generics";
 
 export default defineComponent({
   name: "MostPopular",
-  setup() {
+  props: {
+    routeInfo: {
+      type: Object as PropType<routeInfo>,
+      default: () => ({}),
+    },
+  },
+  setup(props) {
     const restaurants = ref([
       {
         id: 1,
@@ -162,9 +171,13 @@ export default defineComponent({
         },
       },
     ]);
+    const goTo = (route: string) => {
+      console.log("go to", props.routeInfo.path.name);
+    };
 
     return {
       restaurants,
+      goTo,
     };
   },
 });
@@ -204,13 +217,17 @@ export default defineComponent({
         color: var(--bs-heading-color, inherit);
       }
 
-      a {
+      p {
         position: absolute;
         right: 0.5rem;
-        outline: none !important;
-        color: $red;
-        text-decoration: none;
-        font-weight: 500 !important;
+        font-weight: 500;
+        cursor: pointer;
+
+        ::v-deep a {
+          outline: none;
+          color: $red;
+          text-decoration: none;
+        }
       }
     }
 
