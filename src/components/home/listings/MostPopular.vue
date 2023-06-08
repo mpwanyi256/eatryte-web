@@ -186,7 +186,8 @@ export default defineComponent({
 @import "@/assets/styles/constants.scss";
 
 .popular {
-  display: flex;
+  display: block;
+  height: auto;
   color: $black;
   width: 100%;
   @include scrollbar-hidden();
@@ -195,8 +196,8 @@ export default defineComponent({
   &_container {
     @include page-flex();
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    // margin-left: auto;
+    // margin-right: auto;
     display: flex;
     flex-direction: column;
 
@@ -233,34 +234,24 @@ export default defineComponent({
 
     &_list {
       min-height: 23.544rem;
-      max-height: 23.544rem;
+      background: inherit;
       height: auto;
       gap: 1rem;
       display: flex;
       flex-wrap: wrap;
-      padding: 0 1rem;
+      padding: 1rem;
       margin-bottom: 1rem;
       @include scrollbar-hidden();
 
       @media #{$mobile-small} {
-        --bs-gutter-x: 1.5rem;
-        --bs-gutter-y: 0;
         display: flex;
         flex-wrap: wrap;
-        margin-top: calc(-1 * var(--bs-gutter-y));
-        margin-right: calc(-0.5 * var(--bs-gutter-x));
-        margin-left: calc(-0.5 * var(--bs-gutter-x));
         justify-content: center;
       }
 
       @media #{$mobile} {
-        --bs-gutter-x: 1.5rem;
-        --bs-gutter-y: 0;
         display: flex;
         flex-wrap: wrap;
-        margin-top: calc(-1 * var(--bs-gutter-y));
-        margin-right: calc(-0.5 * var(--bs-gutter-x));
-        margin-left: calc(-0.5 * var(--bs-gutter-x));
         justify-content: center;
       }
 
@@ -293,15 +284,15 @@ export default defineComponent({
           max-width: 10.5rem;
         }
 
-        @media #{$mobile} {
-          min-width: 34.5rem;
-          max-width: 34.5rem;
+        @media #{$allSmallScreens} {
+          min-width: 24rem;
+          max-width: 24rem;
         }
 
-        @media #{$mobile-medium} {
-          min-width: 22rem;
-          max-width: 22rem;
-        }
+        // @media #{$mobile-medium} {
+        //   min-width: 22rem;
+        //   max-width: 22rem;
+        // }
 
         @media #{$mobile-small} {
           min-width: 21rem;
@@ -327,17 +318,17 @@ export default defineComponent({
             height: 6.613rem;
           }
 
-          @media #{$mobile-small} {
+          @media #{$allSmallScreens} {
             height: 13.228rem;
           }
 
-          @media #{$mobile-medium} {
-            height: 20rem;
-          }
+          // @media #{$mobile-medium} {
+          //   height: 20rem;
+          // }
 
-          @media #{$mobile} {
-            height: 21.732rem;
-          }
+          // @media #{$mobile-small} {
+          //   height: 21.732rem;
+          // }
 
           &_city {
             position: absolute;

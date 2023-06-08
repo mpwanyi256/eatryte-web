@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="overflow-x: hidden">
     <NavBar />
     <div class="er_home">
       <router-view transition="fade-transition" />
