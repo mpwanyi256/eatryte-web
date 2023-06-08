@@ -1,15 +1,15 @@
 import { createStore } from "vuex";
-// import BoardModule, { BoardState } from "./modules/BoardModule";
 import AppModule, { AppModuleState } from "./modules/appModule";
+import AuthModule, { AuthModuleState } from "./modules/authModule";
 
 export interface State {
-  // board: BoardState;
   app: AppModuleState;
+  auth: AuthModuleState;
 }
 
 export default createStore<State>({
   modules: {
-    // board: BoardModule,
     app: AppModule,
+    auth: AuthModule,
   },
 });

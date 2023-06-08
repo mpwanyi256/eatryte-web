@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
 
 import authRoute from "./auth";
+import machertRoutes from "./merchant";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,6 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   ...authRoute,
+  ...machertRoutes,
 ];
 
 const router = createRouter({

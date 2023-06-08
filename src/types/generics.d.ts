@@ -27,4 +27,14 @@ export interface AppConfig {
     baseUrl: string;
     version: string;
   };
+  fb: {
+    apiKey: string;
+    authDomain: string;
+    databaseURL: string;
+    projectId: string;
+    storageBucket: string;
+    messagingSenderId: string;
+    appId: string;
+    measurementId: string;
+  };
 }
