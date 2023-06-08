@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="nav_wrapper">
-      <div class="nav_wrapper_logo"></div>
+      <div class="nav_wrapper_logo" @click="gotTopage('home')"></div>
       <div class="nav_wrapper_location">
         <Location @toggle-drawer="toggleDrawer" />
         <SelectLocation />
@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { NavRoute } from "@/types/generics";
 import { State } from "@/store";
 import Location from "./components/Location.vue";
@@ -42,6 +42,8 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<State>();
+    const route = useRoute();
+    const router = useRouter();
     // Define your routes here
     const routes: NavRoute[] = [
       {
@@ -53,8 +55,6 @@ export default defineComponent({
         name: "assigned",
       },
     ];
-
-    const route = useRoute();
 
     // Compute the active route dynamically
     const activeRoute = computed(() => route.name);
@@ -80,8 +80,8 @@ export default defineComponent({
       store.commit("app/toggleDrawer");
     };
 
-    const gotTopage = (route: NavRoute) => {
-      console.log(route);
+    const gotTopage = (route: string) => {
+      router.push({ name: route });
     };
 
     const performLogout = () => {
@@ -111,7 +111,6 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 4.25rem;
-  position: sticky;
   box-sizing: content-box;
   margin: 0;
   padding: 0;
@@ -187,6 +186,7 @@ export default defineComponent({
       background-size: contain;
       background-position: center;
       position: relative;
+      cursor: pointer;
     }
 
     &_search {

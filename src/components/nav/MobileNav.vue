@@ -46,11 +46,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/styles/constants.scss";
 
-@mixin active {
-  color: $menuRed;
-  background: #f8f9fa;
-}
-
 .footer {
   z-index: 999;
   height: 3.625rem;

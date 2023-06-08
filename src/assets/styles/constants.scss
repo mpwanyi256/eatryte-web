@@ -31,6 +31,7 @@ $tablet: "screen and (max-width: 768px)";
 $laptop: "screen and (max-width: 1024px)";
 $laptop-medium: "screen and (max-width: 1200px)";
 $laptop-large: "screen and (max-width: 1440px)";
+$allSmallScreens: "screen and (max-width: 390px), screen and (max-width: 393px), screen and (max-width: 360px), screen and (max-width: 576px)";
 
 /////////////////////////////////
 //        SPACING VALUES       //
@@ -186,6 +187,11 @@ $corner-radius: 4px;
     @media #{$mobile-small} {
       width: 100%;
     }
+}
+
+@mixin active() {
+  color: $menuRed;
+  background: #f8f9fa;
 }
 
 // End Mixins

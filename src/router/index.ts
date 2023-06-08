@@ -3,6 +3,8 @@ import appConfig from "@/config/appConfig";
 import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
 
+import authRoute from "./auth";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -25,6 +27,7 @@ const routes: Array<RouteRecordRaw> = [
       authRequired: false,
     },
   },
+  ...authRoute,
 ];
 
 const router = createRouter({

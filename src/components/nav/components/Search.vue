@@ -10,7 +10,12 @@
         Offers
       </v-btn>
     </div>
-    <div v-if="!isLoggedIn" class="search_link">
+    <div
+      v-if="!isLoggedIn"
+      class="search_link"
+      :class="{ active: isActiveRoute('login') }"
+      @click="goToLoginPage"
+    >
       <v-icon left size="x-small" icon="mdi-lock-outline"></v-icon>
       <p>Sign in</p>
     </div>
@@ -36,19 +41,37 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Nav-Search",
   setup() {
     const isLoggedIn = false;
+    const router = useRouter();
+
+    const goToLoginPage = () => {
+      console.log("go to login page");
+      router.push({ name: "login" });
+    };
+
+    const isActiveRoute = (routeName: string) => {
+      return router.currentRoute.value.name === routeName;
+    };
+
     return {
       isLoggedIn,
+      goToLoginPage,
+      isActiveRoute,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
 @import "@/assets/styles/constants.scss";
+
+.active {
+  @include active();
+}
 
 .search {
   width: 100%;
@@ -63,10 +86,6 @@ export default defineComponent({
   > div {
     width: auto;
   }
-
-  // .profile {
-  //   width: 250px;
-  // }
 
   &_link {
     display: flex;

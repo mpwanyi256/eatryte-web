@@ -52,10 +52,10 @@ export default defineComponent({
   height: 100%;
   width: 100%;
   // padding-bottom: 1rem;
-  overflow-y: auto;
+  // overflow-y: auto;
   display: flex;
   background-color: $pageBgColor;
-  @include scrollbar-hidden();
+  // @include scrollbar-hidden();
 
   @media #{$tablet} {
     margin-top: 2.6rem;
