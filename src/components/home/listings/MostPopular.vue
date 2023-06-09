@@ -190,14 +190,12 @@ export default defineComponent({
   height: auto;
   color: $black;
   width: 100%;
+  height: 100%;
   @include scrollbar-hidden();
   padding-bottom: 1rem;
 
   &_container {
     @include page-flex();
-    width: 60%;
-    // margin-left: auto;
-    // margin-right: auto;
     display: flex;
     flex-direction: column;
 

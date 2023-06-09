@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import AppModule, { AppModuleState } from "./modules/appModule";
-import AuthModule, { AuthModuleState } from "./modules/authModule";
+import AuthModule, { AuthModuleState } from "./modules/auth/authModule";
 
 export interface State {
   app: AppModuleState;

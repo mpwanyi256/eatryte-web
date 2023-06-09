@@ -3,17 +3,18 @@
     <div class="login_form_wrapper">
       <h1>Welcome</h1>
       <p>Signin to continue</p>
-      <form>
+      <form @submit.prevent="loginUser()">
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="email" placeholder="Username" />
+          <label for="username">Email</label>
+          <input type="email" v-model="email" placeholder="Email" />
         </div>
         <div class="form-group">
           <label for="username">Password</label>
-          <input type="password" placeholder="Password" />
+          <input type="password" v-model="password" placeholder="Password" />
         </div>
         <div class="form-group">
-          <btn class="btn">SIGN IN</btn>
+          <p v-if="error" class="error text-center mb-3">{{ error }}</p>
+          <btn class="btn" type="submit" @click="loginUser()">SIGN IN</btn>
         </div>
       </form>
       <router-link to=""><p>Forgot your password?</p></router-link>
@@ -24,11 +25,36 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useStore } from "vuex";
+import { EmailAuthPayload } from "@/store/modules/auth/actions";
+import { State } from "@/store/index";
 
 export default defineComponent({
   name: "LoginForm",
   components: {},
+  setup() {
+    const store = useStore<State>();
+    const email = ref<string>("");
+    const password = ref<string>("");
+    const error = computed(() => store.state.auth.alertMessage);
+
+    const loginUser = async () => {
+      const payload: EmailAuthPayload = {
+        email: email.value,
+        password: password.value,
+      };
+      await store.dispatch("auth/emailAuthentication", payload);
+      console.log("payload", payload);
+    };
+
+    return {
+      email,
+      password,
+      error,
+      loginUser,
+    };
+  },
 });
 </script>
 <style lang="scss" scoped>
@@ -118,6 +144,12 @@ export default defineComponent({
           text-align: center;
           color: $white;
           border-radius: 4px;
+        }
+
+        .error {
+          font-size: 1rem;
+          color: #d92662;
+          font-weight: 500;
         }
       }
     }

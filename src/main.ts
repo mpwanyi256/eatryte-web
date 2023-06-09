@@ -9,6 +9,9 @@ import { initializeFirebase } from "@/config/db";
 
 axios.defaults.baseURL = `${appConfig.api.baseURL}:${appConfig.api.port}`;
 
+// Initialize firebase
+initializeFirebase();
+
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
@@ -28,18 +31,8 @@ const vuetify = createVuetify({
   directives,
 });
 
-// Initialize firebase
-initializeFirebase();
-
 const app = createApp(App);
 app.use(router);
 app.use(store);
 app.use(vuetify);
-// app.mixin({
-//   setup() {
-//     return {
-//       appConfig,
-//     };
-//   },
-// });
 app.mount("#app");

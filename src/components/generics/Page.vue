@@ -18,7 +18,7 @@ export default defineComponent({
 
 .page {
   width: 100%;
-  height: auto;
+  height: 100%;
   background-color: $pageBgColor;
   display: flex;
   flex-direction: column;

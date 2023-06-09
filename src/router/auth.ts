@@ -2,6 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 import LoginPage from "@/views/Auth/Login.vue";
 import LoginForm from "@/components/auth/LoginForm.vue";
 import CreateAccount from "@/components/auth/CreateAccount.vue";
+import UserProfile from "@/views/Auth/UserProfile.vue";
 
 const authRoute: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,16 @@ const authRoute: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: UserProfile,
+    meta: {
+      title: "User Profile",
+      icon: "mdi-account",
+      authRequired: true,
+    },
   },
 ];
 

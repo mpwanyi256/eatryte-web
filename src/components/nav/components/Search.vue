@@ -32,6 +32,7 @@
         ></v-avatar>
         <p>Samuel</p>
         <v-icon x-small class="location_icon_map">mdi-menu-down</v-icon>
+        <NavProfile />
       </div>
       <div class="search_link justify-center" @click="$emit('toggle-drawer')">
         <v-icon class="mr-1" size="x-large" icon="mdi-menu"></v-icon>
@@ -40,15 +41,21 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import NavProfile from "./NavProfile.vue";
 
 export default defineComponent({
   name: "Nav-Search",
+  components: {
+    NavProfile,
+  },
   setup() {
-    const isLoggedIn = false;
     const router = useRouter();
+    const store = useStore();
 
+    const isLoggedIn = computed(() => store.state.auth.user);
     const goToLoginPage = () => {
       console.log("go to login page");
       router.push({ name: "login" });
@@ -85,6 +92,21 @@ export default defineComponent({
 
   > div {
     width: auto;
+  }
+
+  .profile {
+    position: relative;
+    height: 100%;
+
+    &:hover {
+      ::v-deep .nav_profile {
+        display: block;
+        opacity: 1;
+        transform: translateY(0px);
+        transition: 0.5s ease all;
+        visibility: visible;
+      }
+    }
   }
 
   &_link {
