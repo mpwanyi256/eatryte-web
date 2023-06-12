@@ -19,3 +19,10 @@ export interface UpdateProfilePayload {
   lastName: string;
   mobileNumber: string;
 }
+
+export interface createAccountPayload {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}

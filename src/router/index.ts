@@ -47,8 +47,8 @@ router.beforeEach((to, _, next) => {
   document.title = `${appConfig.app.name} | ${to.meta.title}`;
   const { authRequired } = to.meta;
   const authData = store.state.auth.user;
-  if (authRequired && authData && !authData.id) {
-    next({ name: "login" });
+  if (authRequired && (!authData || !authData.id)) {
+    router.replace({ name: "home" });
     return;
   }
   next();

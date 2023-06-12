@@ -8,13 +8,26 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import Page from "@/components/generics/Page.vue";
 
 export default defineComponent({
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Login",
+  name: "Login-page",
   components: {
     Page,
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+
+    const user = store.state.auth.user;
+
+    if (user) {
+      router.replace({ name: "home" });
+    }
+
+    return {};
   },
 });
 </script>

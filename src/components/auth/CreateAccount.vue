@@ -3,17 +3,43 @@
     <div class="login_form_wrapper">
       <h1>Hello!</h1>
       <p>Create account to continue</p>
-      <form>
+      <form @submit.prevent="createAccount">
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="email" placeholder="Username" />
+          <label for="email">First Name</label>
+          <input
+            type="text"
+            placeholder="First Name"
+            v-model="accountInfo.firstName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Last Name</label>
+          <input
+            type="text"
+            placeholder="Last Name"
+            v-model="accountInfo.lastName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="username">Email address</label>
+          <input
+            type="email"
+            placeholder="Email address"
+            v-model="accountInfo.email"
+          />
         </div>
         <div class="form-group">
           <label for="username">Password</label>
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="accountInfo.password"
+          />
         </div>
         <div class="form-group">
-          <btn class="btn">SIGN IN</btn>
+          <button :disabled="!isValidForm" class="btn" type="submit">
+            CREATE ACCOUNT
+          </button>
         </div>
       </form>
       <router-link :to="{ name: 'login' }"
@@ -23,11 +49,46 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { createAccountPayload } from "@/store/types";
+import { useStore } from "vuex";
+import validator from "validator";
 
 export default defineComponent({
   name: "CreateAccount",
   components: {},
+  setup() {
+    const Store = useStore();
+    const accountInfo = ref<createAccountPayload>({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
+
+    const isValidForm = computed(() => {
+      if (
+        validator.isEmpty(accountInfo.value.firstName) ||
+        validator.isEmpty(accountInfo.value.lastName) ||
+        validator.isEmpty(accountInfo.value.email) ||
+        validator.isEmpty(accountInfo.value.password) ||
+        validator.isEmail(accountInfo.value.email) === false
+      ) {
+        return false;
+      }
+      return true;
+    });
+
+    const createAccount = async () => {
+      Store.dispatch("auth/signUpUserWithEmailAndPassword", accountInfo.value);
+    };
+
+    return {
+      accountInfo,
+      isValidForm,
+      createAccount,
+    };
+  },
 });
 </script>
 <style lang="scss" scoped>
@@ -60,64 +121,6 @@ export default defineComponent({
       margin: 0;
       margin-bottom: 1rem;
       display: block;
-    }
-
-    form {
-      margin-bottom: 1.5rem !important;
-      margin-top: 3rem !important;
-      display: block;
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.875rem;
-
-        label {
-          cursor: default;
-          display: inline-block;
-          padding-bottom: 0.25rem !important;
-          color: rgb(33, 37, 41);
-        }
-
-        input,
-        input:focus,
-        input:active,
-        input:hover {
-          display: block;
-          width: 100%;
-          padding: 0.375rem 0.75rem;
-          font-size: 1rem;
-          font-weight: 400;
-          line-height: 1.5;
-          background-clip: padding-box;
-          transition: border-color 0.15s ease-in-out,
-            box-shadow 0.15s ease-in-out;
-          border-bottom: 1px solid rgb(160, 160, 160/32%);
-          border-radius: 0;
-          box-shadow: none !important;
-          writing-mode: horizontal-tb !important;
-        }
-
-        input:focus {
-          border-color: rgb(33, 37, 41);
-          outline: 0;
-          box-shadow: none !important;
-        }
-
-        .btn {
-          font-size: 16px;
-          padding: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          background: linear-gradient(45deg, #d92662 0%, #e23744 100%);
-          border-color: #d92662;
-          width: 100%;
-          display: inline-block;
-          text-align: center;
-          color: $white;
-          border-radius: 4px;
-        }
-      }
     }
 
     a {

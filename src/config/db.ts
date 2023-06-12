@@ -37,6 +37,9 @@ export const initializeFirebase = () => {
   const auth = getAuth();
   onAuthStateChanged(auth, async (userAccount) => {
     if (userAccount && db) {
+      // Get current url path
+      const currentPath = router.currentRoute.value.name as string;
+
       // If user is logged in
       const { email, uid, emailVerified, photoURL } = userAccount;
       const user: User = {
@@ -63,17 +66,13 @@ export const initializeFirebase = () => {
           mobileNumber: "",
           photoURL,
         };
-        setDoc(doc(db, "profiles", uid), newProfile)
-          .then(() => {
+        if (currentPath !== "signup") {
+          setDoc(doc(db, "profiles", uid), newProfile).then(() => {
             user.profile = newProfile;
-          })
-          .catch((error) => {
-            console.error("Error adding document: ", error);
           });
+        }
       }
-      // Get current url path
-      const currentPath = router.currentRoute.value.name as string;
-      if (currentPath === "login" || currentPath === "register") {
+      if (currentPath === "login" || currentPath === "signup") {
         redirectToPage = "home";
       } else {
         redirectToPage = currentPath || "home";

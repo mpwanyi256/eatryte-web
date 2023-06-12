@@ -6,18 +6,29 @@
       <form @submit.prevent="loginUser()">
         <div class="form-group">
           <label for="username">Email</label>
-          <input type="email" v-model="email" placeholder="Email" />
+          <input type="email" v-model.trim="email" placeholder="Email" />
         </div>
         <div class="form-group">
           <label for="username">Password</label>
-          <input type="password" v-model="password" placeholder="Password" />
+          <input
+            type="password"
+            v-model.trim="password"
+            placeholder="Password"
+          />
         </div>
         <div class="form-group">
           <p v-if="error" class="error text-center mb-3">{{ error }}</p>
           <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
-          <btn class="btn" loading="white" type="submit" @click="loginUser()"
-            >SIGN IN</btn
+          <button
+            class="btn"
+            loading="white"
+            type="submit"
+            :disabled="!isValidForm"
+            @click="loginUser()"
           >
+            SIGN IN
+          </button>
+          <AuthProviderUI />
         </div>
       </form>
       <router-link to=""><p>Forgot your password?</p></router-link>
@@ -32,10 +43,14 @@ import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { EmailAuthPayload } from "@/store/modules/auth/actions";
 import { State } from "@/store/index";
+import AuthProviderUI from "@/components/auth/AuthProviderUI.vue";
+import validator from "validator";
 
 export default defineComponent({
   name: "LoginForm",
-  components: {},
+  components: {
+    AuthProviderUI,
+  },
   setup() {
     const store = useStore<State>();
     const email = ref<string>("");
@@ -52,11 +67,16 @@ export default defineComponent({
       await store.dispatch("auth/emailAuthentication", payload);
     };
 
+    const isValidForm = computed(() => {
+      return validator.isEmail(email.value) && password.value.length > 5;
+    });
+
     return {
       email,
       password,
       error,
       loading,
+      isValidForm,
       loginUser,
     };
   },
