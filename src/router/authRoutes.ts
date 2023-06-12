@@ -3,6 +3,7 @@ import LoginPage from "@/views/Auth/Login.vue";
 import LoginForm from "@/components/auth/LoginForm.vue";
 import CreateAccount from "@/components/auth/CreateAccount.vue";
 import UserProfile from "@/views/Auth/UserProfile.vue";
+import ProfileInfo from "@/components/profile/user/UserInfo.vue";
 
 const authRoute: Array<RouteRecordRaw> = [
   {
@@ -46,6 +47,18 @@ const authRoute: Array<RouteRecordRaw> = [
       icon: "mdi-account",
       authRequired: true,
     },
+    children: [
+      {
+        path: "",
+        name: "profile-info",
+        component: ProfileInfo,
+        meta: {
+          title: "User Profile",
+          icon: "mdi-account",
+          authRequired: true,
+        },
+      },
+    ],
   },
 ];
 

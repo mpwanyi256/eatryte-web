@@ -14,7 +14,10 @@
         </div>
         <div class="form-group">
           <p v-if="error" class="error text-center mb-3">{{ error }}</p>
-          <btn class="btn" type="submit" @click="loginUser()">SIGN IN</btn>
+          <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+          <btn class="btn" loading="white" type="submit" @click="loginUser()"
+            >SIGN IN</btn
+          >
         </div>
       </form>
       <router-link to=""><p>Forgot your password?</p></router-link>
@@ -37,7 +40,9 @@ export default defineComponent({
     const store = useStore<State>();
     const email = ref<string>("");
     const password = ref<string>("");
-    const error = computed(() => store.state.auth.alertMessage);
+    const error = computed(() => store.state.app.alertMessage);
+
+    const loading = computed(() => store.state.auth.loading);
 
     const loginUser = async () => {
       const payload: EmailAuthPayload = {
@@ -45,13 +50,13 @@ export default defineComponent({
         password: password.value,
       };
       await store.dispatch("auth/emailAuthentication", payload);
-      console.log("payload", payload);
     };
 
     return {
       email,
       password,
       error,
+      loading,
       loginUser,
     };
   },
@@ -94,64 +99,6 @@ export default defineComponent({
       margin-bottom: 1.5rem !important;
       margin-top: 3rem !important;
       display: block;
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.875rem;
-
-        label {
-          cursor: default;
-          display: inline-block;
-          padding-bottom: 0.25rem !important;
-          color: rgb(33, 37, 41);
-        }
-
-        input,
-        input:focus,
-        input:active,
-        input:hover {
-          display: block;
-          width: 100%;
-          padding: 0.375rem 0.75rem;
-          font-size: 1rem;
-          font-weight: 400;
-          line-height: 1.5;
-          background-clip: padding-box;
-          transition: border-color 0.15s ease-in-out,
-            box-shadow 0.15s ease-in-out;
-          border-bottom: 1px solid rgb(160, 160, 160/32%);
-          border-radius: 0;
-          box-shadow: none !important;
-          writing-mode: horizontal-tb !important;
-        }
-
-        input:focus {
-          border-color: rgb(33, 37, 41);
-          outline: 0;
-          box-shadow: none !important;
-        }
-
-        .btn {
-          font-size: 16px;
-          padding: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          background: linear-gradient(45deg, #d92662 0%, #e23744 100%);
-          border-color: #d92662;
-          width: 100%;
-          display: inline-block;
-          text-align: center;
-          color: $white;
-          border-radius: 4px;
-        }
-
-        .error {
-          font-size: 1rem;
-          color: #d92662;
-          font-weight: 500;
-        }
-      }
     }
 
     a {

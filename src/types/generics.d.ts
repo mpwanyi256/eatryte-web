@@ -1,8 +1,8 @@
-import { RouteRecordRaw } from "vue-router";
-
 export interface NavRoute {
   icon: string;
   name: string;
+  title?: string;
+  description?: string;
 }
 
 // Listing

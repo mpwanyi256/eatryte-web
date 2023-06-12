@@ -30,7 +30,7 @@
           size="32"
           class="mr-3"
         ></v-avatar>
-        <p>Samuel</p>
+        <p>{{ userLastName }}</p>
         <v-icon x-small class="location_icon_map">mdi-menu-down</v-icon>
         <NavProfile />
       </div>
@@ -45,6 +45,7 @@ import { defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import NavProfile from "./NavProfile.vue";
+import { User } from "@/store/types";
 
 export default defineComponent({
   name: "Nav-Search",
@@ -55,11 +56,18 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
 
-    const isLoggedIn = computed(() => store.state.auth.user);
+    const isLoggedIn = computed<User>(() => store.state.auth.user);
     const goToLoginPage = () => {
-      console.log("go to login page");
       router.push({ name: "login" });
     };
+
+    const userLastName = computed<string>(() => {
+      const user = store.state.auth.user;
+      if (user) {
+        return user.profile.lastName;
+      }
+      return "Account";
+    });
 
     const isActiveRoute = (routeName: string) => {
       return router.currentRoute.value.name === routeName;
@@ -67,6 +75,7 @@ export default defineComponent({
 
     return {
       isLoggedIn,
+      userLastName,
       goToLoginPage,
       isActiveRoute,
     };

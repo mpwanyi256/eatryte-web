@@ -8,6 +8,7 @@ import {
   collection,
   getDoc,
   setDoc,
+  Firestore,
 } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
@@ -16,10 +17,13 @@ import appConfig from "@/config/appConfig";
 import store from "@/store";
 import router from "@/router";
 import { User } from "@/store/types";
+import { UserTypes } from "@/store/enum";
+
+let db: Firestore | null = null;
 
 export const initializeFirebase = () => {
   const firebaseApp = initializeApp(appConfig.fb);
-  const analytics = getAnalytics(firebaseApp);
+  getAnalytics(firebaseApp);
 
   //  Setup offline persistence
   initializeFirestore(firebaseApp, {
@@ -27,18 +31,20 @@ export const initializeFirebase = () => {
       /*settings*/ { tabManager: persistentMultipleTabManager() }
     ),
   });
-  const db = getFirestore(firebaseApp);
+  db = getFirestore(firebaseApp);
 
   // Listen to auth state changes
   const auth = getAuth();
   onAuthStateChanged(auth, async (userAccount) => {
-    if (userAccount) {
+    if (userAccount && db) {
       // If user is logged in
       const { email, uid, emailVerified, photoURL } = userAccount;
       const user: User = {
         email,
         id: uid,
         emailVerified,
+        type: UserTypes.USER,
+        profile: {},
       };
       // Get user profile
       const colRef = collection(db, "profiles");
@@ -65,7 +71,13 @@ export const initializeFirebase = () => {
             console.error("Error adding document: ", error);
           });
       }
-
+      // Get current url path
+      const currentPath = router.currentRoute.value.name as string;
+      if (currentPath === "login" || currentPath === "register") {
+        redirectToPage = "home";
+      } else {
+        redirectToPage = currentPath || "home";
+      }
       store.commit("auth/setUser", user);
       router.replace({ name: redirectToPage });
     } else {
@@ -73,9 +85,5 @@ export const initializeFirebase = () => {
     }
   });
 
-  return {
-    firebaseApp,
-    analytics,
-    db,
-  };
+  return db;
 };

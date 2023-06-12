@@ -6,7 +6,7 @@
     </div>
     <MobileNav />
     <!-- <PageFooter /> -->
-    <v-snackbar v-model="snackbar" multi-line vertical>
+    <v-snackbar location="top" v-model="snackbar" multi-line vertical>
       {{ alertMessage }}
     </v-snackbar>
   </v-app>
@@ -51,11 +51,8 @@ export default defineComponent({
 .er_home {
   height: 100%;
   width: 100%;
-  // padding-bottom: 1rem;
-  // overflow-y: auto;
   display: flex;
   background-color: $pageBgColor;
-  // @include scrollbar-hidden();
 
   @media #{$tablet} {
     margin-top: 2.6rem;

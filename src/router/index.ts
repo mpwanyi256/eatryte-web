@@ -4,7 +4,7 @@ import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
 import store from "@/store";
 
-import authRoute from "./auth";
+import authRoute from "./authRoutes";
 import machertRoutes from "./merchant";
 
 const routes: Array<RouteRecordRaw> = [
@@ -47,8 +47,7 @@ router.beforeEach((to, _, next) => {
   document.title = `${appConfig.app.name} | ${to.meta.title}`;
   const { authRequired } = to.meta;
   const authData = store.state.auth.user;
-  console.log("authData", authData);
-  if (authRequired && !authData.id) {
+  if (authRequired && authData && !authData.id) {
     next({ name: "login" });
     return;
   }

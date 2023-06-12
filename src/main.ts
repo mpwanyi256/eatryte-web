@@ -10,7 +10,8 @@ import { initializeFirebase } from "@/config/db";
 axios.defaults.baseURL = `${appConfig.api.baseURL}:${appConfig.api.port}`;
 
 // Initialize firebase
-initializeFirebase();
+const DB = initializeFirebase();
+export const db = DB;
 
 // Vuetify
 import "vuetify/styles";
