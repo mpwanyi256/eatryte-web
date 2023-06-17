@@ -40,6 +40,7 @@
           <button :disabled="!isValidForm" class="btn" type="submit">
             CREATE ACCOUNT
           </button>
+          <!-- <AuthProviderUI :authType="'signup'" /> -->
         </div>
       </form>
       <router-link :to="{ name: 'login' }"
@@ -50,13 +51,16 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import { createAccountPayload } from "@/store/types";
 import { useStore } from "vuex";
 import validator from "validator";
+import { createAccountPayload } from "@/store/types";
+// import AuthProviderUI from "@/components/auth/AuthProviderUI.vue";
 
 export default defineComponent({
   name: "CreateAccount",
-  components: {},
+  components: {
+    // AuthProviderUI,
+  },
   setup() {
     const Store = useStore();
     const accountInfo = ref<createAccountPayload>({

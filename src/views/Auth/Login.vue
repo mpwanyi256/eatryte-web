@@ -39,7 +39,7 @@ export default defineComponent({
   min-height: 100%;
   width: 100%;
   grid-template-columns: 50% 50%;
-  overflow: hidden !important;
+  overflow: hidden;
   background-color: $white !important;
 
   @media #{$mobile-small} {
@@ -52,6 +52,7 @@ export default defineComponent({
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
+    overflow: hidden;
   }
 
   &_wrapper {
@@ -63,6 +64,7 @@ export default defineComponent({
     right: 0;
     width: 50%;
     top: 4.25rem;
+    overflow-y: auto;
     @media #{$allSmallScreens} {
       width: 100%;
       top: 3.625rem;

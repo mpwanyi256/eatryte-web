@@ -65,6 +65,7 @@ export const initializeFirebase = () => {
           lastName: "",
           mobileNumber: "",
           photoURL,
+          type: UserTypes.USER,
         };
         if (currentPath !== "signup") {
           setDoc(doc(db, "profiles", uid), newProfile).then(() => {
