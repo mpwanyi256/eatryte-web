@@ -4,8 +4,10 @@ import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
 import store from "@/store";
 
+import { getAuth } from "firebase/auth";
+
 import authRoute from "./authRoutes";
-import machertRoutes from "./merchant";
+import machertRoutes from "./merchantRoutes";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,16 +44,19 @@ const scrollTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-router.beforeEach((to, _, next) => {
+router.beforeEach(async (to, _, next) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const { authRequired } = to.meta;
   scrollTop();
   document.title = `${appConfig.app.name} | ${to.meta.title}`;
-  const { authRequired } = to.meta;
-  const authData = store.state.auth.user;
-  if (authRequired && (!authData || !authData.id)) {
+  if (user && authRequired) {
+    next();
+  } else if (!authRequired) {
     router.replace({ name: "home" });
-    return;
+  } else {
+    next();
   }
-  next();
 });
 
 export default router;

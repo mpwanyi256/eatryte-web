@@ -10,7 +10,18 @@ const machertRoutes: Array<RouteRecordRaw> = [
       icon: "mdi-account",
       authRequired: true,
     },
-    children: [],
+    children: [
+      {
+        path: "merchant-dashboard",
+        name: "merchant-dashboard",
+        component: () => import("@/components/merchant/MerchantDashboard.vue"),
+        meta: {
+          title: "Merchant Dashboard",
+          icon: "mdi-dashboard",
+          authRequired: true,
+        },
+      },
+    ],
   },
 ];
 

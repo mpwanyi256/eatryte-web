@@ -2,7 +2,7 @@
   <div class="profile">
     <UserProfileCard :user="userAccount" />
     <div class="profile_ordersCount">
-      <p class="profile_ordersCount_title">Orders This Month</p>
+      <p class="profile_ordersCount_title">Notifications</p>
       <h2 class="profile_ordersCount_count">{{ ordersCount }}</h2>
     </div>
     <ProfileLink :links="links" />
@@ -17,7 +17,7 @@ import UserProfileCard from "@/components/profile/UserProvileCard.vue";
 import ProfileLink from "@/components/profile/ProfileLink.vue";
 
 export default defineComponent({
-  name: "ProfileNav",
+  name: "MerchantNavLinks",
   components: {
     UserProfileCard,
     ProfileLink,
@@ -40,41 +40,41 @@ export default defineComponent({
         icon: "mdi-account-outline",
       },
       {
-        title: "Merchant Dashboard",
+        title: "Dashboard",
         name: "merchant-dashboard",
         description: "Manage & Register a Business on Eatryte.",
         icon: "mdi-cart-outline",
       },
-      {
-        title: "Payment Cards",
-        name: "",
-        description: "Manage your payment cards",
-        icon: "mdi-credit-card-outline",
-      },
-      {
-        title: "Addresses",
-        name: "",
-        description: "Manage your addresses",
-        icon: "mdi-map-marker-outline",
-      },
-      {
-        title: "Orders",
-        name: "",
-        description: "Manage your orders",
-        icon: "mdi-truck-outline",
-      },
-      {
-        title: "Settings",
-        name: "",
-        description: "Manage your settings",
-        icon: "mdi-cog-outline",
-      },
-      {
-        title: "Logout",
-        name: "logout",
-        description: "Logout from your account",
-        icon: "mdi-logout",
-      },
+      //   {
+      //     title: "Payment Cards",
+      //     name: "",
+      //     description: "Manage your payment cards",
+      //     icon: "mdi-credit-card-outline",
+      //   },
+      //   {
+      //     title: "Addresses",
+      //     name: "",
+      //     description: "Manage your addresses",
+      //     icon: "mdi-map-marker-outline",
+      //   },
+      //   {
+      //     title: "Orders",
+      //     name: "",
+      //     description: "Manage your orders",
+      //     icon: "mdi-truck-outline",
+      //   },
+      //   {
+      //     title: "Settings",
+      //     name: "",
+      //     description: "Manage your settings",
+      //     icon: "mdi-cog-outline",
+      //   },
+      //   {
+      //     title: "Logout",
+      //     name: "logout",
+      //     description: "Logout from your account",
+      //     icon: "mdi-logout",
+      //   },
     ]);
 
     return {
