@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import appConfig from "@/config/appConfig";
 import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
-import store from "@/store";
 
 import { getAuth } from "firebase/auth";
 
@@ -50,11 +49,14 @@ router.beforeEach(async (to, _, next) => {
   const { authRequired } = to.meta;
   scrollTop();
   document.title = `${appConfig.app.name} | ${to.meta.title}`;
-  if (user && authRequired) {
+  if (user) {
     next();
-  } else if (!authRequired) {
-    router.replace({ name: "home" });
-  } else {
+  } else if (!user) {
+    if (authRequired) {
+      router.replace({ name: "home" });
+      return;
+    }
+    //router.replace({ name: "home" });
     next();
   }
 });

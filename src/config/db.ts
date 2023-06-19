@@ -53,12 +53,10 @@ export const initializeFirebase = () => {
       const colRef = collection(db, "profiles");
       const profileCollectionRef = doc(colRef, uid);
       const docSnap = await getDoc(profileCollectionRef);
-      let redirectToPage = "home";
 
       if (docSnap.exists()) {
         user.profile = docSnap.data();
       } else {
-        redirectToPage = "profile";
         const newProfile = {
           email,
           firstName: "",
@@ -74,12 +72,9 @@ export const initializeFirebase = () => {
         }
       }
       if (currentPath === "login" || currentPath === "signup") {
-        redirectToPage = "home";
-      } else {
-        redirectToPage = currentPath || "home";
+        router.replace({ name: "home" });
       }
       store.commit("auth/setUser", user);
-      router.replace({ name: redirectToPage });
     } else {
       store.commit("auth/setUser", null);
     }
