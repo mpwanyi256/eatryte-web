@@ -1,7 +1,12 @@
 <template>
   <div class="merchant_registration">
     <h3>Merchant Registration</h3>
-    <form class="merchant_registration_form" @submit.prevent="registerMerchant">
+    <LoadingSpinner v-if="loading" />
+    <form
+      v-else
+      class="merchant_registration_form"
+      @submit.prevent="registerMerchant"
+    >
       <div class="form-group">
         <label for="businessname">Business Name</label>
         <input
@@ -9,6 +14,15 @@
           name="businessname"
           v-model.trim="businessName"
           placeholder="Business Name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Brief description</label>
+        <input
+          type="text"
+          name="description"
+          v-model.trim="description"
+          placeholder="eg. We are a software solutions company"
         />
       </div>
       <div class="form-group">
@@ -36,6 +50,15 @@
           name="contact"
           v-model.trim="contact"
           placeholder="Contact number"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Business email</label>
+        <input
+          type="email"
+          name="email"
+          v-model.trim="email"
+          placeholder="An email we will use for all business communication"
         />
       </div>
       <div class="form-group">
@@ -69,21 +92,27 @@ import validator from "validator";
 import { State } from "@/store";
 import { CreateMerchantAccountPayload } from "@/store/types";
 import { BusinessType } from "@/store/enum";
+import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
 
 export default defineComponent({
   name: "MerchantRegisteration",
+  components: {
+    LoadingSpinner,
+  },
   setup() {
     const store = useStore<State>();
     const BusinessTypes = computed<BusinessType[]>(
       () => store.state.merchant.businessTypes
     );
     const userAccount = computed(() => store.state.auth.user);
+    const loading = computed(() => store.state.merchant.loading);
 
     const businessName = ref<string>("");
+    const description = ref<string>("");
     const tinNumber = ref<string>("");
     const address = ref<string>("");
     const contact = ref<string>("");
-    // const email = ref<string>("");
+    const email = ref<string>("");
     const businessType = ref<BusinessType>(BusinessType.SOLE_PROPRIETORSHIP);
 
     const isValidForm = computed(() => {
@@ -93,6 +122,7 @@ export default defineComponent({
         validator.isLength(tinNumber.value, { min: 3 }) &&
         validator.isLength(address.value, { min: 3 }) &&
         validator.isLength(contact.value, { min: 3 }) &&
+        validator.isEmail(email.value) &&
         validator.isLength(businessType.value, { min: 3 })
       );
     });
@@ -101,7 +131,9 @@ export default defineComponent({
       if (isValidForm.value === false) return;
       const payload: CreateMerchantAccountPayload = {
         userId: userAccount.value!.id,
+        email: email.value,
         businessName: businessName.value,
+        description: description.value,
         tinNumber: tinNumber.value,
         address: address.value,
         contact: contact.value,
@@ -115,6 +147,8 @@ export default defineComponent({
 
     return {
       businessName,
+      email,
+      description,
       tinNumber,
       address,
       contact,
@@ -122,6 +156,7 @@ export default defineComponent({
       BusinessTypes,
       isValidForm,
       userAccount,
+      loading,
       registerMerchant,
     };
   },

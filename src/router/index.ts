@@ -3,8 +3,6 @@ import appConfig from "@/config/appConfig";
 import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
 
-import { getAuth } from "firebase/auth";
-
 import authRoute from "./authRoutes";
 import machertRoutes from "./merchantRoutes";
 
@@ -44,14 +42,13 @@ const scrollTop = () => {
 };
 
 router.beforeEach(async (to, _, next) => {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const isLoggedin = localStorage.getItem("isLoggedin");
   const { authRequired } = to.meta;
   scrollTop();
   document.title = `${appConfig.app.name} | ${to.meta.title}`;
-  if (user) {
+  if (isLoggedin) {
     next();
-  } else if (!user) {
+  } else if (!isLoggedin) {
     if (authRequired) {
       router.replace({ name: "home" });
       return;

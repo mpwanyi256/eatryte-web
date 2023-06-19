@@ -37,6 +37,7 @@ export const initializeFirebase = () => {
   const auth = getAuth();
   onAuthStateChanged(auth, async (userAccount) => {
     if (userAccount && db) {
+      localStorage.setItem("isLoggedin", "true");
       // Get current url path
       const currentPath = router.currentRoute.value.name as string;
 

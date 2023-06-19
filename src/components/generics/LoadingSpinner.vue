@@ -7,7 +7,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "LoadingSpinner-component",
+  name: "LoadingSpinner",
 });
 </script>
 <style scoped lang="scss">
