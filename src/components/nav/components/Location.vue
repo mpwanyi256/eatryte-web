@@ -5,14 +5,23 @@
         size="x-small"
         icon="mdi-map-marker"
         class="location_icon_map mr-2"
-      ></v-icon>
+      />
     </div>
     <div class="location_set">
-      <p class="location_set_text">Select location</p>
-      <p class="location_set_address">Kampala (Uganda)</p>
+      <p class="location_set_text">
+        Select location
+      </p>
+      <p class="location_set_address">
+        Kampala (Uganda)
+      </p>
     </div>
     <div class="location_icon_down">
-      <v-icon size="x-small" class="location_icon_map">mdi-menu-down</v-icon>
+      <v-icon
+        size="x-small"
+        class="location_icon_map"
+      >
+        mdi-menu-down
+      </v-icon>
     </div>
   </div>
 </template>

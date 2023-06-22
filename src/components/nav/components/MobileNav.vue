@@ -3,14 +3,16 @@
     <div class="nav_mobile_actions">
       <div class="nav_mobile_actions_humberg">
         <v-icon
-          @click="$emit('toggle-drawer')"
           class="mr-1"
           size="x-large"
           icon="mdi-menu"
-        ></v-icon>
+          @click="$emit('toggle-drawer')"
+        />
         <h1>Browse</h1>
       </div>
-      <h3 class="nav_mobile_actions_filter">Filter</h3>
+      <h3 class="nav_mobile_actions_filter">
+        Filter
+      </h3>
     </div>
     <div class="nav_mobile_search">
       <v-icon
@@ -19,11 +21,11 @@
         size="small"
       />
       <input
+        v-model="search"
         class="nav_mobile_search_input"
         type="text"
         placeholder="Enter your location"
-        v-model="search"
-      />
+      >
       <SelectLocation :search-filter="search" />
     </div>
   </div>
@@ -34,7 +36,7 @@ import { useStore } from "vuex";
 import SelectLocation from "@/components/nav/components/SelectLocation.vue";
 
 export default defineComponent({
-  name: "Nav-Mobile",
+  name: "NavMobile",
   components: {
     SelectLocation,
   },
@@ -120,7 +122,7 @@ export default defineComponent({
     }
 
     &:hover {
-      ::v-deep .location_select {
+      :deep(.location_select) {
         display: block;
         opacity: 1;
         transform: translateY(0px);

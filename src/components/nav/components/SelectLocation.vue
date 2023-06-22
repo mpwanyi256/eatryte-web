@@ -6,28 +6,35 @@
           size="x-small"
           class="location_select_search_wrapper_search_icon"
           icon="mdi-magnify"
-        ></v-icon>
+        />
         <input
-          type="text"
           v-model.trim="search"
+          type="text"
           class="location_select_search_wrapper_search_input"
           placeholder="Search location"
-        />
+        >
       </div>
     </div>
     <div class="location_select_search_wrapper_active_country">
-      <v-icon x-small class="location_select_search_wrapper_cancel_icon"
-        >mdi-navigation-variant-outline</v-icon
+      <v-icon
+        x-small
+        class="location_select_search_wrapper_cancel_icon"
       >
+        mdi-navigation-variant-outline
+      </v-icon>
       <p>Kampala, (Uganda)</p>
     </div>
     <div class="location_select_search_wrapper_countries_list">
       <div
-        class="location_select_search_wrapper_countries_list_country"
         v-for="{ id, name } in filterCountries"
         :key="id"
+        class="location_select_search_wrapper_countries_list_country"
       >
-        <input type="radio" id="customRadio1" name="location" />
+        <input
+          id="customRadio1"
+          type="radio"
+          name="location"
+        >
         <label for="customRadio1">{{ name }}</label>
       </div>
     </div>

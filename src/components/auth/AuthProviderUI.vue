@@ -6,7 +6,9 @@
       type="submit"
       @click="signInWithGoogle()"
     >
-      <v-icon class="mr-1">mdi-google</v-icon>
+      <v-icon class="mr-1">
+        mdi-google
+      </v-icon>
       <span>Sign in with Google</span>
     </button>
     <!-- <button
@@ -30,6 +32,7 @@ import {
 } from "firebase/auth";
 
 export default defineComponent({
+  name: "AuthProviderUI",
   components: {},
   props: {
     authType: {
@@ -37,7 +40,6 @@ export default defineComponent({
       default: "signin",
     },
   },
-  name: "AuthProviderUI",
   setup() {
     const openPopUpWindow = async (provider: FacebookAuthProvider) => {
       await signInWithPopup(getAuth(), provider)
@@ -82,7 +84,7 @@ export default defineComponent({
   gap: 1rem;
   margin-top: 0.5rem;
 
-  ::v-deep .btn {
+  :deep(.btn) {
     background-color: white;
     color: $red;
     font-weight: 600;

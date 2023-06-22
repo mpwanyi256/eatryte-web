@@ -10,56 +10,56 @@
       <div class="form-group">
         <label for="businessname">Business Name</label>
         <input
+          v-model.trim="businessName"
           type="text"
           name="businessname"
-          v-model.trim="businessName"
           placeholder="Business Name"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="description">Brief description</label>
         <input
+          v-model.trim="description"
           type="text"
           name="description"
-          v-model.trim="description"
           placeholder="eg. We are a software solutions company"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="tin">Tin Number</label>
         <input
+          v-model.trim="tinNumber"
           type="text"
           name="tin"
-          v-model.trim="tinNumber"
           placeholder="Tin Number"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="address">Address</label>
         <input
+          v-model.trim="address"
           type="text"
           name="address"
-          v-model.trim="address"
           placeholder="Business address"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="contact">Contact Number</label>
         <input
+          v-model.trim="contact"
           type="text"
           name="contact"
-          v-model.trim="contact"
           placeholder="Contact number"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="email">Business email</label>
         <input
+          v-model.trim="email"
           type="email"
           name="email"
-          v-model.trim="email"
           placeholder="An email we will use for all business communication"
-        />
+        >
       </div>
       <div class="form-group">
         <label for="type">Business type</label>
@@ -89,9 +89,7 @@
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 import validator from "validator";
-import { State } from "@/store";
-import { CreateMerchantAccountPayload } from "@/store/types";
-import { BusinessType } from "@/store/enum";
+
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
 
 export default defineComponent({
@@ -100,8 +98,8 @@ export default defineComponent({
     LoadingSpinner,
   },
   setup() {
-    const store = useStore<State>();
-    const BusinessTypes = computed<BusinessType[]>(
+    const store = useStore();
+    const BusinessTypes = computed<string[]>(
       () => store.state.merchant.businessTypes
     );
     const userAccount = computed(() => store.state.auth.user);
@@ -113,7 +111,7 @@ export default defineComponent({
     const address = ref<string>("");
     const contact = ref<string>("");
     const email = ref<string>("");
-    const businessType = ref<BusinessType>(BusinessType.SOLE_PROPRIETORSHIP);
+    const businessType = ref<string>("");
 
     const isValidForm = computed(() => {
       return (
@@ -128,9 +126,9 @@ export default defineComponent({
     });
 
     const registerMerchant = async () => {
-      if (isValidForm.value === false) return;
-      const payload: CreateMerchantAccountPayload = {
-        userId: userAccount.value!.id,
+      if (isValidForm.value === false || !userAccount.value) return;
+      const payload = {
+        userId: userAccount.value.id,
         email: email.value,
         businessName: businessName.value,
         description: description.value,
@@ -166,11 +164,12 @@ export default defineComponent({
 .merchant_registration {
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
 
   &_form {
     margin-top: 1.5rem;
 
-    ::v-deep .form-group {
+    :deep(.form-group) {
       margin-bottom: 0.8rem;
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <div class="logo">
     <div
-      class="logo_upload"
       ref="AppLogoUploaddropFileDiv"
+      class="logo_upload"
       :data-active="active"
       @drop.prevent="onFileDropped"
       @click="triggerFileInput"
@@ -14,13 +14,15 @@
         </h4>
       </template>
     </div>
-    <p class="logo_appName">{{ projectName }}</p>
+    <p class="logo_appName">
+      {{ projectName }}
+    </p>
     <input
       ref="imageInput"
       type="file"
       accept="image/*"
       @change="onFileChange"
-    />
+    >
   </div>
 </template>
 <script>

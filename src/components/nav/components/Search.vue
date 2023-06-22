@@ -1,12 +1,23 @@
 <template>
   <div class="search">
     <div class="search_link">
-      <v-icon left size="x-small" icon="mdi-magnify"></v-icon>
+      <v-icon
+        left
+        size="x-small"
+        icon="mdi-magnify"
+      />
       <p>Search</p>
     </div>
     <div class="search_offers">
-      <v-btn small class="search_offers_btn">
-        <v-icon left size="small" icon="mdi-disc"></v-icon>
+      <v-btn
+        small
+        class="search_offers_btn"
+      >
+        <v-icon
+          left
+          size="small"
+          icon="mdi-disc"
+        />
         Offers
       </v-btn>
     </div>
@@ -16,12 +27,20 @@
       :class="{ active: isActiveRoute('login') }"
       @click="goToLoginPage"
     >
-      <v-icon left size="x-small" icon="mdi-lock-outline"></v-icon>
+      <v-icon
+        left
+        size="x-small"
+        icon="mdi-lock-outline"
+      />
       <p>Sign in</p>
     </div>
     <template v-else>
       <div class="search_link">
-        <v-icon class="mr-1" size="x-small" icon="mdi-cart-outline"></v-icon>
+        <v-icon
+          class="mr-1"
+          size="x-small"
+          icon="mdi-cart-outline"
+        />
         <p>Cart</p>
       </div>
       <div class="search_link profile">
@@ -29,13 +48,25 @@
           image="https://i.pravatar.cc/300"
           size="32"
           class="mr-3"
-        ></v-avatar>
+        />
         <p>{{ userLastName }}</p>
-        <v-icon x-small class="location_icon_map">mdi-menu-down</v-icon>
+        <v-icon
+          x-small
+          class="location_icon_map"
+        >
+          mdi-menu-down
+        </v-icon>
         <NavProfile />
       </div>
-      <div class="search_link justify-center" @click="$emit('toggle-drawer')">
-        <v-icon class="mr-1" size="x-large" icon="mdi-menu"></v-icon>
+      <div
+        class="search_link justify-center"
+        @click="$emit('toggle-drawer')"
+      >
+        <v-icon
+          class="mr-1"
+          size="x-large"
+          icon="mdi-menu"
+        />
       </div>
     </template>
   </div>
@@ -48,7 +79,7 @@ import NavProfile from "./NavProfile.vue";
 import { User } from "@/store/types";
 
 export default defineComponent({
-  name: "Nav-Search",
+  name: "NavSearch",
   components: {
     NavProfile,
   },
@@ -108,7 +139,7 @@ export default defineComponent({
     height: 100%;
 
     &:hover {
-      ::v-deep .nav_profile {
+      :deep(.nav_profile) {
         display: block;
         opacity: 1;
         transform: translateY(0px);

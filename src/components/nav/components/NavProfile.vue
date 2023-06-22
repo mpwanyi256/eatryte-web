@@ -6,8 +6,9 @@
       class="nav_profile_item"
       :to="link.name"
       @click.prevent="goTo(link.name)"
-      >{{ link.title }}</router-link
     >
+      {{ link.title }}
+    </router-link>
   </div>
 </template>
 <script lang="ts">

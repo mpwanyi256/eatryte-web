@@ -2,8 +2,12 @@
   <div class="profile">
     <UserProfileCard :user="userAccount" />
     <div class="profile_ordersCount">
-      <p class="profile_ordersCount_title">Orders This Month</p>
-      <h2 class="profile_ordersCount_count">{{ ordersCount }}</h2>
+      <p class="profile_ordersCount_title">
+        Orders This Month
+      </p>
+      <h2 class="profile_ordersCount_count">
+        {{ ordersCount }}
+      </h2>
     </div>
     <ProfileLink :links="links" />
   </div>

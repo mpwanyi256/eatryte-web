@@ -6,20 +6,30 @@
     :fullscreen="fullscreen"
   >
     <v-card class="modal_content">
-      <template v-if="title" v-slot:title>
+      <template
+        v-if="title"
+        #title
+      >
         <div class="d-flex align-center">
-          <v-icon class="close" @click="$emit('close')">mdi-close</v-icon>
-          <p class="ml-2 t-subtitle">{{ title }}</p>
+          <v-icon
+            class="close"
+            @click="$emit('close')"
+          >
+            mdi-close
+          </v-icon>
+          <p class="ml-2 t-subtitle">
+            {{ title }}
+          </p>
         </div>
       </template>
-      <slot></slot>
+      <slot />
     </v-card>
   </v-dialog>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 export default defineComponent({
-  name: "Modal-component",
+  name: "ModalComponent",
   props: {
     title: {
       type: String,

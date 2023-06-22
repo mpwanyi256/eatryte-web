@@ -1,13 +1,13 @@
 <template>
   <section class="page">
-    <slot></slot>
+    <slot />
   </section>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Page-component",
+  name: "PageComponent",
   setup() {
     return {};
   },

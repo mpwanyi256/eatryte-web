@@ -1,7 +1,10 @@
 <template>
   <div class="nav">
     <div class="nav_wrapper">
-      <div class="nav_wrapper_logo" @click="gotTopage('home')"></div>
+      <div
+        class="nav_wrapper_logo"
+        @click="gotTopage('home')"
+      />
       <div class="nav_wrapper_location">
         <Location @toggle-drawer="toggleDrawer" />
         <SelectLocation />
@@ -14,7 +17,10 @@
       <NavMobile @toggle-drawer="toggleDrawer" />
     </div>
   </div>
-  <v-navigation-drawer v-model="drawer" :temporary="true">
+  <v-navigation-drawer
+    v-model="drawer"
+    :temporary="true"
+  >
     <NavigationDrawer />
   </v-navigation-drawer>
 </template>
@@ -32,7 +38,7 @@ import NavMobile from "./components/MobileNav.vue";
 import NavigationDrawer from "@/components/nav/components/NavigationDrawer.vue";
 
 export default defineComponent({
-  name: "Nav-bar",
+  name: "NavBar",
   components: {
     Location,
     NavSearch,
@@ -200,7 +206,7 @@ export default defineComponent({
       position: relative;
 
       &:hover {
-        ::v-deep .location_select {
+        :deep(.location_select) {
           display: block;
           opacity: 1;
           transform: translateY(0px);

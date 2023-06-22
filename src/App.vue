@@ -6,7 +6,12 @@
     </div>
     <MobileNav />
     <!-- <PageFooter /> -->
-    <v-snackbar location="top" v-model="snackbar" multi-line vertical>
+    <v-snackbar
+      v-model="snackbar"
+      location="top"
+      multi-line
+      vertical
+    >
       {{ alertMessage }}
     </v-snackbar>
   </v-app>
@@ -14,7 +19,6 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
-import { State } from "@/store";
 import NavBar from "@/components/nav/NavBar.vue";
 import MobileNav from "@/components/nav/MobileNav.vue";
 // import PageFooter from "@/components/nav/PageFooter.vue";
@@ -27,7 +31,7 @@ export default defineComponent({
     // PageFooter,
   },
   setup() {
-    const store = useStore<State>();
+    const store = useStore();
     const alertMessage = computed(() => store.state.app.alertMessage);
     const snackbar = ref(false);
 

@@ -1,9 +1,12 @@
 <template>
-  <div class="wrapper" id="active_promos_stack_list">
+  <div
+    id="active_promos_stack_list"
+    class="wrapper"
+  >
     <div
-      class="wrapper_stack_list"
       v-for="category in categories"
       :key="category.id"
+      class="wrapper_stack_list"
     >
       <div class="wrapper_stack_list_item">
         <div class="wrapper_stack_list_item_text">
@@ -11,7 +14,10 @@
           <p>valid until {{ category.items_count }}</p>
         </div>
         <div class="wrapper_stack_list_item_img">
-          <img :src="category.image_url" alt="img" />
+          <img
+            :src="category.image_url"
+            alt="img"
+          >
         </div>
       </div>
     </div>

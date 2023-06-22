@@ -1,29 +1,47 @@
 <template>
   <div class="info">
-    <h5 class="info_header">My Profile</h5>
+    <h5 class="info_header">
+      My Profile
+    </h5>
 
     <LoadingSpinner v-if="loading" />
-    <div v-show="!loading" class="info_details">
+    <div
+      v-show="!loading"
+      class="info_details"
+    >
+      <AvatorUpload @selected="uploadAvator" />
       <div class="form-group">
         <label for="username">First name</label>
-        <input type="email" placeholder="First Name" v-model="firstName" />
+        <input
+          v-model="firstName"
+          type="email"
+          placeholder="First Name"
+        >
       </div>
       <div class="form-group">
         <label for="username">Last name</label>
-        <input type="email" placeholder="Last Name" v-model="lastName" />
+        <input
+          v-model="lastName"
+          type="email"
+          placeholder="Last Name"
+        >
       </div>
       <div class="form-group">
         <label for="username">Mobile Number</label>
         <input
+          v-model="mobileNumber"
           type="email"
           placeholder="Mobile Number"
-          v-model="mobileNumber"
-        />
+        >
       </div>
       <div class="form-group">
-        <btn class="btn" type="submit" @click="updateProfile"
-          >Update Profile</btn
+        <btn
+          class="btn"
+          type="submit"
+          @click="updateProfile"
         >
+          Update Profile
+        </btn>
       </div>
     </div>
   </div>
@@ -33,10 +51,12 @@ import { defineComponent, computed, ref, watch, onMounted } from "vue";
 import { useStore } from "vuex";
 import { User, UpdateProfilePayload } from "@/store/types";
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
+import AvatorUpload from "@/components/generics/AvatorUpload.vue";
 
 export default defineComponent({
   name: "UserInfo",
   components: {
+    AvatorUpload,
     LoadingSpinner,
   },
   setup() {
@@ -74,6 +94,11 @@ export default defineComponent({
       await store.dispatch("auth/updateProfile", userProfile);
     };
 
+    // ::TODO:: Implement firebase file upload
+    const uploadAvator = (file: File) => {
+      console.log("Upload avator", file);
+    };
+
     onMounted(() => {
       if (!userAccount.value || !userAccount.value.profile) return;
       setProfile(userAccount.value);
@@ -85,6 +110,7 @@ export default defineComponent({
       mobileNumber,
       loading,
       updateProfile,
+      uploadAvator,
     };
   },
 });

@@ -7,45 +7,49 @@
         <div class="form-group">
           <label for="email">First Name</label>
           <input
+            v-model="accountInfo.firstName"
             type="text"
             placeholder="First Name"
-            v-model="accountInfo.firstName"
-          />
+          >
         </div>
         <div class="form-group">
           <label for="email">Last Name</label>
           <input
+            v-model="accountInfo.lastName"
             type="text"
             placeholder="Last Name"
-            v-model="accountInfo.lastName"
-          />
+          >
         </div>
         <div class="form-group">
           <label for="username">Email address</label>
           <input
+            v-model="accountInfo.email"
             type="email"
             placeholder="Email address"
-            v-model="accountInfo.email"
-          />
+          >
         </div>
         <div class="form-group">
           <label for="username">Password</label>
           <input
+            v-model="accountInfo.password"
             type="password"
             placeholder="Password"
-            v-model="accountInfo.password"
-          />
+          >
         </div>
         <div class="form-group">
-          <button :disabled="!isValidForm" class="btn" type="submit">
+          <button
+            :disabled="!isValidForm"
+            class="btn"
+            type="submit"
+          >
             CREATE ACCOUNT
           </button>
           <!-- <AuthProviderUI :authType="'signup'" /> -->
         </div>
       </form>
-      <router-link :to="{ name: 'login' }"
-        ><p>Already have an account? Signin</p></router-link
-      >
+      <router-link :to="{ name: 'login' }">
+        <p>Already have an account? Signin</p>
+      </router-link>
     </div>
   </div>
 </template>

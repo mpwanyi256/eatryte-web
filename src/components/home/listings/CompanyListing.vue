@@ -16,7 +16,6 @@
       </div>
       <div class="listing_container_list">
         <div
-          class="listing_container_list_item"
           v-for="{
             id,
             name,
@@ -29,6 +28,7 @@
             currentOffer,
           } in restaurants"
           :key="id"
+          class="listing_container_list_item"
         >
           <div class="listing_container_list_item_image">
             <div class="listing_container_list_item_image_city">
@@ -47,7 +47,10 @@
             />
             <div class="listing_container_list_item_image_rating">
               <span class="listing_container_list_item_image_rating_badge">
-                <v-icon icon="mdi-star-outline" size="small"></v-icon>
+                <v-icon
+                  icon="mdi-star-outline"
+                  size="small"
+                />
                 {{ rating.rate }} ({{ rating.outOf }})
               </span>
             </div>
@@ -57,14 +60,22 @@
               <h6 class="mb-1 listing_container_list_item_info_title_name">
                 {{ name }}
               </h6>
-              <p class="mb-3">{{ cusines.join(", ") }}</p>
+              <p class="mb-3">
+                {{ cusines.join(", ") }}
+              </p>
               <p class="mb-3 listing_container_list_item_info_title_time">
                 <span class="average">
-                  <v-icon icon="mdi-clock-outline" size="small"></v-icon>
+                  <v-icon
+                    icon="mdi-clock-outline"
+                    size="small"
+                  />
                   {{ average_delivery_time }} min
                 </span>
                 <span class="average_price_for_two">
-                  <v-icon icon="mdi-cash" size="small"></v-icon>
+                  <v-icon
+                    icon="mdi-cash"
+                    size="small"
+                  />
                   {{ averageMealForTwo }} {{ currency }} FOR TWO
                 </span>
               </p>
@@ -87,7 +98,7 @@
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "Company-listing",
+  name: "CompanyListing",
   setup() {
     const restaurants = ref([
       {

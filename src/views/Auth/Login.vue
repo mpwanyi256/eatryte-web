@@ -1,8 +1,8 @@
 <template>
   <Page class="login">
-    <div class="login_cover"></div>
+    <div class="login_cover" />
     <div class="login_wrapper">
-      <router-view></router-view>
+      <router-view />
     </div>
   </Page>
 </template>
@@ -13,7 +13,7 @@ import { useRouter } from "vue-router";
 import Page from "@/components/generics/Page.vue";
 
 export default defineComponent({
-  name: "Login-page",
+  name: "LoginPage",
   components: {
     Page,
   },

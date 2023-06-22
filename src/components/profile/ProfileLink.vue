@@ -8,7 +8,11 @@
       :to="link.name"
       @click.prevent="moveTo(link.name)"
     >
-      <v-btn icon size="x-small" class="profile_links_link_iconBtn">
+      <v-btn
+        icon
+        size="x-small"
+        class="profile_links_link_iconBtn"
+      >
         <v-icon>{{ link.icon }}</v-icon>
       </v-btn>
       <div class="profile_links_link_title">
@@ -16,7 +20,7 @@
         <p>{{ link.description }}</p>
       </div>
       <div class="profile_links_link_icon">
-        <i class="mdi mdi-chevron-right"></i>
+        <i class="mdi mdi-chevron-right" />
       </div>
     </router-link>
   </div>

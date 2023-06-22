@@ -2,8 +2,12 @@
   <div class="profile">
     <UserProfileCard :user="userAccount" />
     <div class="profile_ordersCount">
-      <p class="profile_ordersCount_title">Notifications</p>
-      <h2 class="profile_ordersCount_count">{{ ordersCount }}</h2>
+      <p class="profile_ordersCount_title">
+        Notifications
+      </p>
+      <h2 class="profile_ordersCount_count">
+        {{ ordersCount }}
+      </h2>
     </div>
     <ProfileLink :links="links" />
   </div>
@@ -45,36 +49,36 @@ export default defineComponent({
         description: "Manage & Register a Business on Eatryte.",
         icon: "mdi-cart-outline",
       },
-      //   {
-      //     title: "Payment Cards",
-      //     name: "",
-      //     description: "Manage your payment cards",
-      //     icon: "mdi-credit-card-outline",
-      //   },
-      //   {
-      //     title: "Addresses",
-      //     name: "",
-      //     description: "Manage your addresses",
-      //     icon: "mdi-map-marker-outline",
-      //   },
-      //   {
-      //     title: "Orders",
-      //     name: "",
-      //     description: "Manage your orders",
-      //     icon: "mdi-truck-outline",
-      //   },
-      //   {
-      //     title: "Settings",
-      //     name: "",
-      //     description: "Manage your settings",
-      //     icon: "mdi-cog-outline",
-      //   },
-      //   {
-      //     title: "Logout",
-      //     name: "logout",
-      //     description: "Logout from your account",
-      //     icon: "mdi-logout",
-      //   },
+      {
+        title: "Orders",
+        name: "",
+        description: "Track all orders",
+        icon: "mdi-shopping-outline",
+      },
+      {
+        title: "Menus",
+        name: "",
+        description: "Manage your outlet menus",
+        icon: "mdi-menu",
+      },
+      {
+        title: "Customers",
+        name: "",
+        description: "All customers information",
+        icon: "mdi-account-group-outline",
+      },
+      {
+        title: "Analytics",
+        name: "",
+        description: "Manage your settings",
+        icon: "mdi-google-analytics",
+      },
+      {
+        title: "Outlets",
+        name: "",
+        description: "Manage all your outlets",
+        icon: "mdi-store-marker",
+      },
     ]);
 
     return {

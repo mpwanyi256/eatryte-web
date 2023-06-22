@@ -13,7 +13,6 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
-import { State } from "@/store";
 import Page from "@/components/generics/Page.vue";
 import MerchantNavLinks from "@/components/merchant/MerchantNavLinks.vue";
 
@@ -24,7 +23,7 @@ export default defineComponent({
     MerchantNavLinks,
   },
   setup() {
-    const Store = useStore<State>();
+    const Store = useStore();
     const userAccount = computed(() => Store.state.auth.user);
     const merchantAccount = computed(() => Store.getters.merchantAccount);
 
@@ -54,7 +53,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/styles/constants.scss";
 
-::v-deep .page {
+:deep(.page) {
   display: block;
   width: 100%;
   height: 100%;
@@ -94,10 +93,6 @@ export default defineComponent({
 
     &_nav {
       position: sticky;
-    }
-
-    &_content {
-      padding: 1.5rem;
     }
   }
 }

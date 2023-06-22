@@ -4,16 +4,22 @@
     :disabled="disabled"
     :class="{ 'text-center': !icon }"
   >
-    <i v-if="icon" :class="'icon mdi mdi-' + icon"></i>
+    <i
+      v-if="icon"
+      :class="'icon mdi mdi-' + icon"
+    />
     <slot />
-    <i v-if="iconRight" :class="'icon right mdi mdi-' + iconRight"></i>
+    <i
+      v-if="iconRight"
+      :class="'icon right mdi mdi-' + iconRight"
+    />
   </button>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Button-component",
+  name: "ButtonComponent",
   props: {
     icon: {
       type: String,

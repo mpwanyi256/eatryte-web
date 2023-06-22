@@ -2,18 +2,18 @@
   <div class="categories">
     <div class="categories_container">
       <v-btn
-        @click="scrollToLeft"
         size="small"
         icon="true"
         class="categories_container_btn left"
+        @click="scrollToLeft"
       >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
       <v-btn
-        @click="scrollRight"
         size="small"
         icon="true"
         class="categories_container_btn right"
+        @click="scrollRight"
       >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>

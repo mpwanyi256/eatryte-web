@@ -5,9 +5,9 @@
     <CompanyListing />
     <MostPopular :route-info="mostPopularInfo">
       <template #route>
-        <router-link :to="{ name: mostPopularInfo.path.name }"
-          >View all >></router-link
-        >
+        <router-link :to="{ name: mostPopularInfo.path.name }">
+          View all >>
+        </router-link>
       </template>
     </MostPopular>
   </Page>
@@ -22,7 +22,7 @@ import MostPopular from "@/components/home/listings/MostPopular.vue";
 import Promos from "@/components/home/categories/Promos.vue";
 
 export default defineComponent({
-  name: "Home-page",
+  name: "HomePage",
 
   components: {
     Page,

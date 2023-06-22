@@ -4,12 +4,11 @@
       <div class="popular_container_header pt-4 pb-2 ml-1 mr-2">
         <h5>{{ routeInfo.title }}</h5>
         <p>
-          <slot name="route"></slot>
+          <slot name="route" />
         </p>
       </div>
       <div class="popular_container_list">
         <div
-          class="popular_container_list_item"
           v-for="{
             id,
             name,
@@ -22,6 +21,7 @@
             currentOffer,
           } in restaurants"
           :key="id"
+          class="popular_container_list_item"
         >
           <div class="popular_container_list_item_image">
             <div class="popular_container_list_item_image_city">
@@ -40,7 +40,10 @@
             />
             <div class="popular_container_list_item_image_rating">
               <span class="popular_container_list_item_image_rating_badge">
-                <v-icon icon="mdi-star-outline" size="small"></v-icon>
+                <v-icon
+                  icon="mdi-star-outline"
+                  size="small"
+                />
                 {{ rating.rate }} ({{ rating.outOf }})
               </span>
             </div>
@@ -50,14 +53,22 @@
               <h6 class="mb-1 popular_container_list_item_info_title_name">
                 {{ name }}
               </h6>
-              <p class="mb-3">{{ cusines.join(", ") }}</p>
+              <p class="mb-3">
+                {{ cusines.join(", ") }}
+              </p>
               <p class="mb-3 popular_container_list_item_info_title_time">
                 <span class="average">
-                  <v-icon icon="mdi-clock-outline" size="small"></v-icon>
+                  <v-icon
+                    icon="mdi-clock-outline"
+                    size="small"
+                  />
                   {{ average_delivery_time }} min
                 </span>
                 <span class="average_price_for_two">
-                  <v-icon icon="mdi-cash" size="small"></v-icon>
+                  <v-icon
+                    icon="mdi-cash"
+                    size="small"
+                  />
                   {{ averageMealForTwo }} {{ currency }} FOR TWO
                 </span>
               </p>
@@ -222,7 +233,7 @@ export default defineComponent({
         font-weight: 500;
         cursor: pointer;
 
-        ::v-deep a {
+        :deep(a) {
           outline: none;
           color: $red;
           text-decoration: none;

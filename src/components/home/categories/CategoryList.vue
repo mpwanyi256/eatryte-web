@@ -1,13 +1,20 @@
 <template>
-  <div class="wrapper" id="wrapper_stack_list" ref="wrapperStackList">
+  <div
+    id="wrapper_stack_list"
+    ref="wrapperStackList"
+    class="wrapper"
+  >
     <div
-      class="wrapper_stack_list"
       v-for="category in categories"
       :key="category.id"
+      class="wrapper_stack_list"
     >
       <div class="wrapper_stack_list_item">
         <div class="wrapper_stack_list_item_img">
-          <img :src="category.image_url" alt="img" />
+          <img
+            :src="category.image_url"
+            alt="img"
+          >
         </div>
         <div class="wrapper_stack_list_item_text">
           <h3>{{ category.name }}</h3>

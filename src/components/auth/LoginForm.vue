@@ -6,19 +6,31 @@
       <form @submit.prevent="loginUser()">
         <div class="form-group">
           <label for="username">Email</label>
-          <input type="email" v-model.trim="email" placeholder="Email" />
+          <input
+            v-model.trim="email"
+            type="email"
+            placeholder="Email"
+          >
         </div>
         <div class="form-group">
           <label for="username">Password</label>
           <input
-            type="password"
             v-model.trim="password"
+            type="password"
             placeholder="Password"
-          />
+          >
         </div>
         <div class="form-group">
-          <p v-if="error" class="error text-center mb-3">{{ error }}</p>
-          <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+          <p
+            v-if="error"
+            class="error text-center mb-3"
+          >
+            {{ error }}
+          </p>
+          <v-progress-linear
+            v-if="loading"
+            indeterminate
+          />
           <button
             class="btn"
             loading="white"
@@ -31,10 +43,12 @@
           <AuthProviderUI />
         </div>
       </form>
-      <router-link to=""><p>Forgot your password?</p></router-link>
-      <router-link :to="{ name: 'signup' }"
-        ><p>Don't have an account? Signup</p></router-link
-      >
+      <router-link to="">
+        <p>Forgot your password?</p>
+      </router-link>
+      <router-link :to="{ name: 'signup' }">
+        <p>Don't have an account? Signup</p>
+      </router-link>
     </div>
   </div>
 </template>

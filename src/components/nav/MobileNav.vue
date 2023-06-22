@@ -3,15 +3,18 @@
     <div class="footer_wrapper">
       <div
         v-for="{ title, icon, path, style } in quickLinks"
+        :key="icon"
         :class="{
           active: isActiveRoute(path),
           footer_wrapper_link: true,
           hide_on_mobile: style === 'hide-on-mobile',
           big_rounded: path === 'cart',
         }"
-        :key="icon"
       >
-        <v-icon size="large" :icon="icon" />
+        <v-icon
+          size="large"
+          :icon="icon"
+        />
         <p>{{ title }}</p>
       </div>
     </div>

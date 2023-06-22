@@ -12,7 +12,7 @@ const machertRoutes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: "merchant-dashboard",
+        path: "dashboard",
         name: "merchant-dashboard",
         component: () => import("@/components/merchant/MerchantDashboard.vue"),
         meta: {

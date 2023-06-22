@@ -1,17 +1,17 @@
 <template>
   <input
-    :type="type"
     v-bind="$attrs"
     v-model="input"
+    :type="type"
     :disabled="disabled"
     :placeholder="placeholder"
-  />
+  >
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "TextField-component",
+  name: "TextFieldComponent",
   props: {
     disabled: {
       type: Boolean,

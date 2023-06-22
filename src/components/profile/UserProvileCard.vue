@@ -1,7 +1,13 @@
 <template>
-  <div class="info_card" v-if="user">
+  <div
+    v-if="user"
+    class="info_card"
+  >
     <div class="info_card_avator">
-      <v-avatar image="https://i.pravatar.cc/300" size="60"></v-avatar>
+      <v-avatar
+        image="https://i.pravatar.cc/300"
+        size="60"
+      />
     </div>
     <div class="info_card_details">
       <h6>

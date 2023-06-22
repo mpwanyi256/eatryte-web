@@ -2,18 +2,18 @@
   <div class="promos">
     <div class="promos_container">
       <v-btn
-        @click="scrollToLeft"
         size="small"
         icon="true"
         class="promos_container_btn left"
+        @click="scrollToLeft"
       >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
       <v-btn
-        @click="scrollRight"
         size="small"
         icon="true"
         class="promos_container_btn right"
+        @click="scrollRight"
       >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
@@ -26,7 +26,7 @@ import { defineComponent, computed, ref } from "vue";
 import ActivePromotions from "./ActivePromotions.vue";
 
 export default defineComponent({
-  name: "Promos-section",
+  name: "PromosSection",
   components: {
     ActivePromotions,
   },

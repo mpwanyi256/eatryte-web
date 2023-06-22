@@ -2,10 +2,17 @@
   <Page>
     <MostPopular :route-info="routeInfo">
       <template #route>
-        <router-link :to="{ name: routeInfo.path.name }">{{
-          routeInfo.path.linkTitle
-        }}</router-link>
-        <v-btn size="small" class="ml-2 btn_filter">Filter</v-btn>
+        <router-link :to="{ name: routeInfo.path.name }">
+          {{
+            routeInfo.path.linkTitle
+          }}
+        </router-link>
+        <v-btn
+          size="small"
+          class="ml-2 btn_filter"
+        >
+          Filter
+        </v-btn>
       </template>
     </MostPopular>
   </Page>

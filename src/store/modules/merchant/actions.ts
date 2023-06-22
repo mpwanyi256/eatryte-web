@@ -11,6 +11,7 @@ type Context = ActionContext<MerchantModuleState, State>;
 
 const getMerchantAccount = async (context: Context, userId: string) => {
   try {
+    context.commit("toggleLoading", true);
     // get UserMerchant Account
     const colRef = collection(db, MERCHANT);
     const accountDocRef = doc(colRef, userId);
@@ -29,7 +30,7 @@ const registerMerchantAccount = async (
   payload: CreateMerchantAccountPayload
 ) => {
   try {
-    console.log("register merchant", payload);
+    context.commit("toggleLoading", true);
     // get UserMerchant Account
     const colRef = collection(db, MERCHANT);
     const accountDocRef = doc(colRef, payload.userId);
