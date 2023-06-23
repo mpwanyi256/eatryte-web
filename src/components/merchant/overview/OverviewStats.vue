@@ -64,6 +64,14 @@ export default defineComponent({
     gap: 1rem;
     margin: 1rem 0;
 
+    @media #{$tablet} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media #{$mobile-small} {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
     &_card {
         @include card();
         display: flex;

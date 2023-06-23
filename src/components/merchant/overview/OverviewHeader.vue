@@ -49,11 +49,21 @@ export default defineComponent({
     margin-bottom: 1rem;
     min-height: 3rem;
 
+    @media #{$tablet} {
+      flex-direction: column;
+      position: unset;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
     > div {
         position: absolute;
         display: flex;
         flex-direction: column;
         gap: 0;
+        @media #{$tablet} {
+          position: unset;
+        }
     }
 
     &_title {
