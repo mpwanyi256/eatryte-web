@@ -59,7 +59,7 @@ export default defineComponent({
         title: "Menus",
         name: "",
         description: "Manage your outlet menus",
-        icon: "mdi-menu",
+        icon: "mdi-coffee-outline",
       },
       {
         title: "Customers",

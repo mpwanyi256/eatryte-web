@@ -5,7 +5,7 @@
         <MerchantNavLinks />
       </div>
       <div class="page_wrapper_content">
-        <router-view :merchant="merchantAccount" />
+        <router-view :merchant="merchant" />
       </div>
     </div>
   </Page>
@@ -25,7 +25,7 @@ export default defineComponent({
   setup() {
     const Store = useStore();
     const userAccount = computed(() => Store.state.auth.user);
-    const merchantAccount = computed(() => Store.getters.merchantAccount);
+        const merchant = computed(() => Store.state.merchant.account);
 
     watch(userAccount, () => {
       getMerchantAccount();
@@ -45,7 +45,7 @@ export default defineComponent({
 
     return {
       userAccount,
-      merchantAccount,
+      merchant,
     };
   },
 });
@@ -84,10 +84,8 @@ export default defineComponent({
       --bs-body-color-rgb: 33, 37, 41;
       border: 0.2px solid $pageBgColor;
       border-radius: 0.375rem;
-      box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
       margin: 1rem;
       overflow: hidden;
-      background-color: $white !important;
       height: fit-content;
     }
 

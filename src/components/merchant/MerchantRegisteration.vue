@@ -161,10 +161,16 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/constants.scss";
+
 .merchant_registration {
+  --bs-body-color-rgb: 33, 37, 41;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
+  background-color: $white;
+  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075);
+  border-radius: 0.375rem;
 
   &_form {
     margin-top: 1.5rem;
