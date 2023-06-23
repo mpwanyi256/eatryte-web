@@ -49,28 +49,29 @@ export default defineComponent({
     grid-template-columns: 33.3% 33.3% 33.3%;
     gap: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
     margin: 0.5rem;
 
     &_card {
       @include card();
+      width: 100%;
 
         &_count {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: $black;
+          font-size: 1.5rem;
+          font-weight: 500;
+          color: $black;
         }
 
         &_label {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: $black;
+          font-size: 0.8rem;
+          font-weight: 400;
+          color: $gray-500;
         }
     }
 
     @media #{$tablet} {
-        grid-template-columns: 100%;
+      grid-template-columns: 100%;
     }
 }
 </style>

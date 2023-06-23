@@ -12,10 +12,12 @@
   "dependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
+    "@types/echarts": "^4.9.18",
     "@types/firebase": "^3.2.1",
     "@types/validator": "^13.7.17",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "echarts": "^5.4.2",
     "firebase": "^9.22.2",
     "firebaseui": "^6.0.2",
     "moment": "^2.29.4",

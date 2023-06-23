@@ -109,6 +109,7 @@ export default defineComponent({
             &_label {
                 font-size: 0.7rem;
                 font-weight: 400;
+                color: $gray-600;
             }
         }
     }

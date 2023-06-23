@@ -1,21 +1,21 @@
 <template>
   <div class="overview">
     <OverviewHeader />
-    <DashboardStats />
+    <OverviewStats />
     <OrdersSummary />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import OverviewHeader from "@/components/merchant/overview/OverviewHeader.vue";
-import DashboardStats from "@/components/merchant/overview/OverviewStats.vue";
+import OverviewStats from "@/components/merchant/overview/OverviewStats.vue";
 import OrdersSummary from "@/components/merchant/overview/OrdersSummary.vue";
 
 export default defineComponent({
   name: "MerchantOverview",
   components: {
     OverviewHeader,
-    DashboardStats,
+    OverviewStats,
     OrdersSummary,
   },
 });
