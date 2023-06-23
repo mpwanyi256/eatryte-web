@@ -50,6 +50,12 @@ export default defineComponent({
         icon: "mdi-cart-outline",
       },
       {
+        title: "Outlets",
+        name: "",
+        description: "Manage all your outlets",
+        icon: "mdi-store-marker",
+      },
+      {
         title: "Orders",
         name: "",
         description: "Track all orders",
@@ -72,12 +78,6 @@ export default defineComponent({
         name: "",
         description: "Manage your settings",
         icon: "mdi-google-analytics",
-      },
-      {
-        title: "Outlets",
-        name: "",
-        description: "Manage all your outlets",
-        icon: "mdi-store-marker",
       },
     ]);
 

@@ -65,7 +65,7 @@ export default defineComponent({
   &_wrapper {
     @include page-flex();
     display: grid;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 30% 70%;
     height: auto;
     color: $black;
     padding-top: 2rem;
