@@ -1,6 +1,6 @@
 <template>
   <div class="merchant_dashboard">
-    <template v-if="loading">
+    <template v-if="loading || !userAccount">
       <LoadingSpinner />
     </template>
     <template v-else>
@@ -24,12 +24,14 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<State>();
+    const userAccount = computed(() => store.state.auth.user);
     const merchant = computed(() => store.state.merchant.account);
     const loading = computed(() => store.state.merchant.loading);
 
     return {
       merchant,
       loading,
+      userAccount,
     };
   },
 });

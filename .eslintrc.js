@@ -11,5 +11,7 @@ module.exports = {
     "vue/no-multiple-template-root": "off",
     "vue/require-explicit-emits": "off",
     "vue/multi-word-component-names": "off",
+    "vue/require-default-prop": "off",
+    "vue/require-prop-types": "error",
   }
 }

@@ -4,6 +4,7 @@ export enum UserTypes {
   MERCHANT = "merchant",
   DELIVERY = "delivery",
   SURPPORT = "support",
+  ORDER_MANAGER = "orderManager",
 }
 
 export enum BusinessCategory {
@@ -22,4 +23,7 @@ export enum BusinessType {
   PARTNERSHIP = "partnership",
   CORPORATION = "corporation",
   COOPERATIVE = "cooperative",
+  LIMITED_LIABILITY_COMPANY = "limited liability company",
+  NON_PROFIT_ORGANIZATION = "non-profit organization",
+  OTHERS = "others",
 }

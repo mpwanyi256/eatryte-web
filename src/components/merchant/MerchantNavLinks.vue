@@ -51,7 +51,7 @@ export default defineComponent({
       },
       {
         title: "Outlets",
-        name: "",
+        name: "merchant-outlets",
         description: "Manage all your outlets",
         icon: "mdi-store-marker",
       },

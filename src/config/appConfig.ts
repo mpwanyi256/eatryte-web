@@ -2,8 +2,9 @@ import { AppConfig } from "@/types/generics";
 
 const appConfig: AppConfig = {
   api: {
-    baseURL: process.env.VUE_APP_API_URL || "http://localhost",
-    port: process.env.VUE_APP_PORT || 3020,
+    baseURL: process.env.VUE_APP_API_BASE_URL || "http://localhost",
+    port: process.env.VUE_APP_PORT || 3000,
+    apiKey: process.env.VUE_APP_API_KEY || "",
   },
   app: {
     name: process.env.VUE_APP_NAME || "Eatryte",

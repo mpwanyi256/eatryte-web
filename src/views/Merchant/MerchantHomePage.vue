@@ -5,7 +5,7 @@
         <MerchantNavLinks />
       </div>
       <div class="page_wrapper_content">
-        <router-view :merchant="merchant" />
+        <router-view />
       </div>
     </div>
   </Page>
@@ -25,10 +25,9 @@ export default defineComponent({
   setup() {
     const Store = useStore();
     const userAccount = computed(() => Store.state.auth.user);
-        const merchant = computed(() => Store.state.merchant.account);
 
-    watch(userAccount, () => {
-      getMerchantAccount();
+    watch(userAccount, (val) => {
+      if(val) getMerchantAccount();
     });
 
     const getMerchantAccount = async () => {
@@ -45,7 +44,6 @@ export default defineComponent({
 
     return {
       userAccount,
-      merchant,
     };
   },
 });
@@ -68,7 +66,7 @@ export default defineComponent({
     grid-template-columns: 30% 70%;
     height: auto;
     color: $black;
-    padding-top: 2rem;
+    // padding-top: 2rem;
     padding-bottom: 2rem;
 
     @media #{$allSmallScreens} {

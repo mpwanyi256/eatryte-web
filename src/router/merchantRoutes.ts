@@ -21,6 +21,16 @@ const machertRoutes: Array<RouteRecordRaw> = [
           authRequired: true,
         },
       },
+      {
+        path: "outlets",
+        name: "merchant-outlets",
+        component: () => import("@/components/merchant/MerchantOutlets.vue"),
+        meta: {
+          title: "Merchant Outlets",
+          icon: "mdi-dashboard",
+          authRequired: true,
+        },
+      },
     ],
   },
 ];

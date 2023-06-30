@@ -22,16 +22,16 @@ export default defineComponent({
     setup() {
         const items = ref([
             {
-                label: "On Delivery",
-                count: 3
+              label: "On Delivery",
+              count: 3
             },
             {
-                label: "Delivered",
-                count: 8
+              label: "Delivered",
+              count: 8
             },
             {
-                label: "Cancelled",
-                count: 0
+              label: "Cancelled",
+              count: 0
             },
         ])
 

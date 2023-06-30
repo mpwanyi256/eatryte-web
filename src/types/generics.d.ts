@@ -21,6 +21,7 @@ export interface AppConfig {
   api: {
     baseURL: string;
     port: number;
+    apiKey: string;
   };
   app: {
     name: string;
