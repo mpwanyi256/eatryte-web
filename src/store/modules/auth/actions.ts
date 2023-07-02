@@ -49,10 +49,7 @@ const emailAuthentication = async (context: Context, payload: EmailAuthPayload) 
       localStorage.setItem('token', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
       context.commit("setUser", user);
-
-      if (currentPath === "login" || currentPath === "signup") {
-        router.replace({ name: "home" });
-      }
+      router.replace({ name: "profile-info" });
     }
   } catch(e: any) {
     showAlert(context, e.message);
@@ -137,45 +134,17 @@ const signUpUserWithEmailAndPassword = async (
     const auth = getAuth();
     const { email, password, firstName, lastName } = payload;
 
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const { email, uid, emailVerified, photoURL } = userCredential.user;
-    //     const userProfile = {
-    //       email,
-    //       firstName,
-    //       lastName,
-    //       photoURL,
-    //       mobileNumber: "",
-    //       type: UserTypes.USER,
-    //     };
-    //     setDoc(doc(db, "profiles", uid), userProfile)
-    //       .then(() => {
-    //         const user: User = {
-    //           email,
-    //           id: uid,
-    //           emailVerified,
-    //           type: UserTypes.USER,
-    //           profile: {
-    //             firstName,
-    //             lastName,
-    //             mobileNumber: "",
-    //             photoURL,
-    //           },
-    //         };
-    //         toggleUserState(context, user);
-    //       })
-    //       .catch((error) => {
-    //         showAlert(context, error.message);
-    //       });
-    //   })
-    //   .catch(() => {
-    //     // const errorCode = error.code;
-    //     // const errorMessage = error.message;
-    //     showAlert(context, "Something went wrong");
-    //   });
-
-    showAlert(context, "Account created successfully");
+    const response = (await axios.post("/signup/basic", {
+      email,
+      password,
+      firstName,
+      lastName,
+    })) as AxiosResponse<any>;
+    const { user, tokens } = response.data.data;
+    localStorage.setItem('token', tokens.accessToken)
+    localStorage.setItem('refreshToken', tokens.refreshToken)
+    context.commit("setUser", user);
+    router.replace({ name: "profile-info" });
   } catch (e) {
     console.log(e);
   } finally {
@@ -186,7 +155,6 @@ const signUpUserWithEmailAndPassword = async (
 const signoutUser = async(context: Context) => {
   try {
     const response = (await axios.delete("/logout")) as AxiosResponse<any>;
-    console.log("logout response", response.data);
     if (response.status === 200) {
       context.commit("setUser", null);
       if (Router.currentRoute.value.name === "login") return;
