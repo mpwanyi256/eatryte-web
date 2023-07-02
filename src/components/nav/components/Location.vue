@@ -12,7 +12,7 @@
         Select location
       </p>
       <p class="location_set_address">
-        Kampala (Uganda)
+        {{ selectedCountry?.name }} ({{ selectedCountry?.code }})
       </p>
     </div>
     <div class="location_icon_down">
@@ -26,10 +26,20 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { State } from "@/store";
 
 export default defineComponent({
   name: "SelectLocation",
+  setup() {
+    const Store = useStore<State>();
+    const selectedCountry = computed(() => Store.state.app.selectedCountry);
+
+    return {
+      selectedCountry,
+    };
+  },
 });
 </script>
 <style scoped lang="scss">

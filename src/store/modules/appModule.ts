@@ -1,6 +1,9 @@
+import axios from "axios";
 import { ActionContext } from "vuex";
+
 import config from "@/config/appConfig";
 import { State } from "../";
+import { Country } from "../types"
 
 export interface QuickLink {
   title: string;
@@ -15,6 +18,8 @@ export interface AppModuleState {
   drawer: boolean;
   quickLinks: Array<QuickLink>;
   alertMessage: string;
+  countries: Array<Country>;
+  selectedCountry: Country | null;
 }
 
 type Context = ActionContext<AppModuleState, State>;
@@ -58,6 +63,8 @@ export default {
       },
     ],
     alertMessage: "",
+    countries: [],
+    selectedCountry: null,
   }),
   mutations: {
     toggleDrawer(state: AppModuleState) {
@@ -70,6 +77,26 @@ export default {
         state.alertMessage = "";
       }, 3000);
     },
+    setCountries(state: AppModuleState, countries: Array<Country>) {
+      state.countries = countries;
+      const country = countries[0];
+      const storedCountry = localStorage.getItem("country");
+      if(!state.selectedCountry && storedCountry) {
+        state.selectedCountry = JSON.parse(storedCountry);
+      } else {
+        state.selectedCountry = country;
+        localStorage.setItem("country", JSON.stringify(country));
+      }
+    },
+    setCountry(state: AppModuleState, country: Country) {
+      const storedCountry = localStorage.getItem("country");
+      if(!state.selectedCountry && storedCountry) {
+        state.selectedCountry = JSON.parse(storedCountry);
+      } else {
+        state.selectedCountry = country;
+        localStorage.setItem("country", JSON.stringify(country));
+      }
+    },
   },
   actions: {
     toggleDrawer({ commit }: Context) {
@@ -77,6 +104,17 @@ export default {
     },
     alertUser({ commit }: Context, message: string) {
       commit("toggleAlert", message);
+    },
+    getCountries({ commit }: Context) {
+      axios.get('/countries')
+        .then((response) => {
+          commit("setCountries", response.data.data);
+        });
+    }
+  },
+  getters: {
+    countrySet: (state: AppModuleState) => {
+      return state.selectedCountry !== null;
     },
   },
 };

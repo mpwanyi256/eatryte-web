@@ -15,33 +15,35 @@
         >
       </div>
     </div>
-    <div class="location_select_search_wrapper_active_country">
+    <div
+      v-if="selectedCountry"
+      class="location_select_search_wrapper_active_country"
+    >
       <v-icon
         x-small
         class="location_select_search_wrapper_cancel_icon"
       >
         mdi-navigation-variant-outline
       </v-icon>
-      <p>Kampala, (Uganda)</p>
+      <p>{{ selectedCountry.name }} ({{ selectedCountry.code }})</p>
     </div>
     <div class="location_select_search_wrapper_countries_list">
       <div
-        v-for="{ id, name } in filterCountries"
-        :key="id"
+        v-for="country in filterCountries"
+        :key="country._id"
         class="location_select_search_wrapper_countries_list_country"
+        :class="isSelectedCountry(country) ? 'active' : ''"
+        @click="setCountry(country)"
       >
-        <input
-          id="customRadio1"
-          type="radio"
-          name="location"
-        >
-        <label for="customRadio1">{{ name }}</label>
+        <label :for="country._id">{{ country.name }} ({{ country.code }})</label>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { State } from "@/store";
 
 export default defineComponent({
   name: "SelectLocation",
@@ -54,15 +56,9 @@ export default defineComponent({
   },
 
   setup(props) {
-    const countriesList = ref([
-      {
-        id: 1,
-        name: "Uganda",
-      },
-      { id: 3, name: "Rwanda" },
-      { id: 2, name: "Kenya" },
-      { id: 4, name: "Burundi" },
-    ]);
+    const Store = useStore<State>();
+    const countriesList = computed(() => Store.state.app.countries);
+    const selectedCountry = computed(() => Store.state.app.selectedCountry);
     const search = ref("");
 
     const filterCountries = computed(() => {
@@ -75,10 +71,21 @@ export default defineComponent({
       });
     });
 
+    const setCountry = (country: any) => {
+      Store.commit("app/setCountry", country);
+    };
+
+    const isSelectedCountry = (country: any): boolean => {
+      return !!(selectedCountry.value && country._id === selectedCountry.value._id);
+    };
+
     return {
       countriesList,
       search,
       filterCountries,
+      selectedCountry,
+      setCountry,
+      isSelectedCountry,
     };
   },
 });
@@ -163,6 +170,14 @@ export default defineComponent({
         overflow-y: auto;
         @include scrollbar-thin();
 
+        .active {
+          background-color: $menuRed;
+           label {
+            color: $white;
+            font-weight: 700;
+           }
+        }
+
         &_country {
           padding-right: 1.5em;
           padding-left: 0;
@@ -178,19 +193,6 @@ export default defineComponent({
 
           &:hover {
             cursor: pointer;
-          }
-
-          input[type="radio"] {
-            border-radius: 50%;
-            float: right;
-            margin-right: 1.5em;
-            margin-left: 0;
-            border: 0.063rem solid $menuRed;
-
-            &:checked {
-              border-color: $menuRed !important;
-              background-color: $menuRed !important;
-            }
           }
 
           label {

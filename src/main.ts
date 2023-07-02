@@ -4,7 +4,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import appConfig from "@/config/appConfig";
 import { initializeFirebase } from "@/config/db";
 
 // Initialize axios
@@ -14,8 +13,8 @@ import "@/plugins/axiosConfig";
 const DB = initializeFirebase();
 export const db = DB;
 
-// Get logged in user Data
-store.dispatch("auth/getUser");
+// Set all App data
+import "@/config/appData";
 
 // material design icons
 import "@mdi/font/css/materialdesignicons.css";

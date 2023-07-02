@@ -68,3 +68,15 @@ export interface CreateMerchantAccountPayload {
   isVerified: boolean;
 }
 /* Merchant Account */
+
+export interface Country {
+  _id: string;
+  name: string;
+  code: string;
+  currency: string;
+  currencySymbol: string;
+  vatPercentageRate: number;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
