@@ -11,8 +11,7 @@
   </Page>
 </template>
 <script lang="ts">
-import { defineComponent, computed, onMounted, watch } from "vue";
-import { useStore } from "vuex";
+import { defineComponent } from "vue";
 import Page from "@/components/generics/Page.vue";
 import MerchantNavLinks from "@/components/merchant/MerchantNavLinks.vue";
 
@@ -21,30 +20,6 @@ export default defineComponent({
   components: {
     Page,
     MerchantNavLinks,
-  },
-  setup() {
-    const Store = useStore();
-    const userAccount = computed(() => Store.state.auth.user);
-
-    watch(userAccount, (val) => {
-      if(val) getMerchantAccount();
-    });
-
-    const getMerchantAccount = async () => {
-      if (userAccount.value?.id)
-        await Store.dispatch(
-          "merchant/getMerchantAccount",
-          userAccount.value.id
-        );
-    };
-
-    onMounted(async () => {
-      getMerchantAccount();
-    });
-
-    return {
-      userAccount,
-    };
   },
 });
 </script>
@@ -66,7 +41,6 @@ export default defineComponent({
     grid-template-columns: 30% 70%;
     height: auto;
     color: $black;
-    // padding-top: 2rem;
     padding-bottom: 2rem;
 
     @media #{$allSmallScreens} {

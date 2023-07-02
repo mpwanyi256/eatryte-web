@@ -65,8 +65,10 @@
         <label for="type">Business type</label>
         <v-select
           v-model="businessType"
-          :items="BusinessTypes"
+          :items="BuzTypes"
           name="type"
+          item-value="_id"
+          item-title="name"
           density="compact"
           variant="outlined"
           placeholder="Select business type"
@@ -88,6 +90,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
+import { State } from "@/store";
 import validator from "validator";
 
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
@@ -98,24 +101,23 @@ export default defineComponent({
     LoadingSpinner,
   },
   setup() {
-    const store = useStore();
-    const BusinessTypes = computed<string[]>(
-      () => store.state.merchant.businessTypes
+    const store = useStore<State>();
+    const BuzTypes = computed(
+      () => store.state.app.businessTypes
     );
     const userAccount = computed(() => store.state.auth.user);
     const loading = computed(() => store.state.merchant.loading);
 
     const businessName = ref<string>("");
+    const address = ref<string>("");
     const description = ref<string>("");
     const tinNumber = ref<string>("");
-    const address = ref<string>("");
     const contact = ref<string>("");
     const email = ref<string>("");
     const businessType = ref<string>("");
 
     const isValidForm = computed(() => {
       return (
-        // validator.isEmail(email.value) &&
         validator.isLength(businessName.value, { min: 3 }) &&
         validator.isLength(tinNumber.value, { min: 3 }) &&
         validator.isLength(address.value, { min: 3 }) &&
@@ -128,17 +130,14 @@ export default defineComponent({
     const registerMerchant = async () => {
       if (isValidForm.value === false || !userAccount.value) return;
       const payload = {
-        userId: userAccount.value.id,
         email: email.value,
         businessName: businessName.value,
+        businessType: businessType.value,
+        address: address.value,
+        certificateOfRegistration: "",
+        contactNumber: contact.value,
         description: description.value,
         tinNumber: tinNumber.value,
-        address: address.value,
-        contact: contact.value,
-        businessType: businessType.value,
-        isVerified: false,
-        certificateOfRegistration: "",
-        identification: "",
       };
       await store.dispatch("merchant/registerMerchantAccount", payload);
     };
@@ -151,7 +150,7 @@ export default defineComponent({
       address,
       contact,
       businessType,
-      BusinessTypes,
+      BuzTypes,
       isValidForm,
       userAccount,
       loading,

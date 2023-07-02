@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store";
 import MerchantRegisteration from "@/components/merchant/MerchantRegisteration.vue";
@@ -27,6 +27,10 @@ export default defineComponent({
     const userAccount = computed(() => store.state.auth.user);
     const merchant = computed(() => store.state.merchant.account);
     const loading = computed(() => store.state.merchant.loading);
+
+    onMounted(async () => {
+      await store.dispatch("merchant/getMerchantAccount");
+    });
 
     return {
       merchant,

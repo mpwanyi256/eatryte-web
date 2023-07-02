@@ -46,7 +46,7 @@ export default defineComponent({
       {
         title: "Dashboard",
         name: "merchant-dashboard",
-        description: "Manage & Register a Business on Eatryte.",
+        description: "Manage your Merchant account.",
         icon: "mdi-cart-outline",
       },
       {

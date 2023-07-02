@@ -1,26 +1,22 @@
 import { ActionContext } from "vuex";
+import axios from "axios";
 import { State } from "../../index";
-import { doc, collection, getDoc, setDoc } from "firebase/firestore";
 
 import { MerchantModuleState } from "./merchantModule";
-import { db } from "@/main";
 import { CreateMerchantAccountPayload } from "@/store/types";
 
-const MERCHANT = "merchants";
+const MERCHANT = "merchant";
 type Context = ActionContext<MerchantModuleState, State>;
 
-const getMerchantAccount = async (context: Context, userId: string) => {
+const getMerchantAccount = async (context: Context) => {
   try {
     context.commit("toggleLoading", true);
     // get UserMerchant Account
-    const colRef = collection(db, MERCHANT);
-    const accountDocRef = doc(colRef, userId);
-    const docSnap = await getDoc(accountDocRef);
-
-    if (docSnap.exists()) {
-      context.commit("setMerchantAccount", docSnap.data());
+    const response = await axios.get('/merchant/account');
+    if (response.status === 200) {
+      context.commit("setMerchantAccount", response.data.data);
     }
-  } finally {
+  } catch {} finally {
     context.commit("toggleLoading", false);
   }
 };
@@ -31,12 +27,14 @@ const registerMerchantAccount = async (
 ) => {
   try {
     context.commit("toggleLoading", true);
-    // get UserMerchant Account
-    const colRef = collection(db, MERCHANT);
-    const accountDocRef = doc(colRef, payload.userId);
-    await setDoc(accountDocRef, payload);
 
-    context.commit("setMerchantAccount", payload);
+    const response = await axios.post('/merchant/register', payload);
+
+    context.commit("setMerchantAccount", response.data.data);
+  } catch(e: any) {
+    context.commit("app/toggleAlert", 'Sorry, you can only have one merchant Account.', {
+      root: true,
+    });
   } finally {
     context.commit("toggleLoading", false);
   }

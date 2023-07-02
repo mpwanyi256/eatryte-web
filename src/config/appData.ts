@@ -5,5 +5,6 @@ import store from "@/store";
    await Promise.all([
     store.dispatch("auth/getUser"),
     store.dispatch("app/getCountries"),
+    store.dispatch("app/getBusinessTypes"),
    ])
 })();

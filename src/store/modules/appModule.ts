@@ -3,7 +3,7 @@ import { ActionContext } from "vuex";
 
 import config from "@/config/appConfig";
 import { State } from "../";
-import { Country } from "../types"
+import { Country, BusinessType } from "../types"
 
 export interface QuickLink {
   title: string;
@@ -20,6 +20,7 @@ export interface AppModuleState {
   alertMessage: string;
   countries: Array<Country>;
   selectedCountry: Country | null;
+  businessTypes: Array<BusinessType>;
 }
 
 type Context = ActionContext<AppModuleState, State>;
@@ -65,6 +66,7 @@ export default {
     alertMessage: "",
     countries: [],
     selectedCountry: null,
+    businessTypes: [],
   }),
   mutations: {
     toggleDrawer(state: AppModuleState) {
@@ -97,6 +99,9 @@ export default {
         localStorage.setItem("country", JSON.stringify(country));
       }
     },
+    setBusinessTypes(state: AppModuleState, businessTypes: Array<BusinessType>) {
+      state.businessTypes = businessTypes;
+    }
   },
   actions: {
     toggleDrawer({ commit }: Context) {
@@ -109,6 +114,12 @@ export default {
       axios.get('/countries')
         .then((response) => {
           commit("setCountries", response.data.data);
+        });
+    },
+    getBusinessTypes({ commit }: Context) {
+      axios.get('/business-types')
+        .then((response) => {
+          commit("setBusinessTypes", response.data.data);
         });
     }
   },

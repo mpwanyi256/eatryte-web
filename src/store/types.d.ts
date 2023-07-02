@@ -55,7 +55,6 @@ export interface MerchantAccount {
 }
 
 export interface CreateMerchantAccountPayload {
-  userId: string;
   businessName: string;
   tinNumber: string | null;
   address: string;
@@ -63,9 +62,7 @@ export interface CreateMerchantAccountPayload {
   email: string;
   description: string;
   businessType: BusinessType;
-  certificateOfRegistration?: string | null;
-  identification?: string | null;
-  isVerified: boolean;
+  certificateOfRegistration: string | null;
 }
 /* Merchant Account */
 
@@ -79,4 +76,11 @@ export interface Country {
   status: boolean;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface BusinessType {
+  _id: Types.ObjectId;
+  name: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
