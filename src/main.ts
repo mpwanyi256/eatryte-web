@@ -4,17 +4,18 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import axios from "axios";
 import appConfig from "@/config/appConfig";
 import { initializeFirebase } from "@/config/db";
 
-axios.defaults.baseURL = `${appConfig.api.baseURL}:${appConfig.api.port}`;
-axios.defaults.headers.common["Content-Type"] = "application/json";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+// Initialize axios
+import "@/plugins/axiosConfig";
 
 // Initialize firebase
 const DB = initializeFirebase();
 export const db = DB;
+
+// Get logged in user Data
+store.dispatch("auth/getUser");
 
 // material design icons
 import "@mdi/font/css/materialdesignicons.css";

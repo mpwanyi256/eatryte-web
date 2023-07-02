@@ -86,7 +86,6 @@ export default defineComponent({
       if (!userAccount.value || !userAccount.value.profile) return;
       if (!firstName.value || !lastName.value || !mobileNumber.value) return;
       const userProfile: UpdateProfilePayload = {
-        id: userAccount.value.id,
         firstName: firstName.value,
         lastName: lastName.value,
         mobileNumber: mobileNumber.value,

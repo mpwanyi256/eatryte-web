@@ -13,12 +13,10 @@ const toggleAlert = (state: AuthModuleState, message: string) => {
   }, 3000);
 };
 
-const updateProfile = (state: AuthModuleState, profile: UserProfile) => {
+const setUpdatedProfile = (state: AuthModuleState, profile: UserProfile) => {
   const { firstName, lastName, mobileNumber } = profile;
   if (!state.user) return;
-  state.user.profile.firstName = firstName;
-  state.user.profile.lastName = lastName;
-  state.user.profile.mobileNumber = mobileNumber;
+  state.user.profile = profile;
 };
 
 const setUser = (state: AuthModuleState, user: User | null) => {
@@ -28,6 +26,6 @@ const setUser = (state: AuthModuleState, user: User | null) => {
 export default {
   toggleAlert,
   setUser,
-  updateProfile,
+  setUpdatedProfile,
   toggleLoading,
 };

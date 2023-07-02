@@ -1,4 +1,9 @@
-import { UserTypes, BusinessCategory, BusinessType } from "@/store/enum";
+import { RoleCode, BusinessCategory, BusinessType } from "@/store/enum";
+
+export default interface Role {
+  _id: string;
+  code: string;
+}
 
 export interface UserProfile {
   firstName?: string;
@@ -8,18 +13,22 @@ export interface UserProfile {
 }
 
 export interface User {
-  id: string;
-  email: string | null;
+  _id: string;
+  email: string;
   emailVerified: boolean;
   profile: UserProfile;
-  type: UserTypes;
+  password: string;
+  roles: Role[];
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface UpdateProfilePayload {
-  id: string;
   firstName: string;
   lastName: string;
   mobileNumber: string;
+  profilePictureURL?: string;
 }
 
 export interface createAccountPayload {

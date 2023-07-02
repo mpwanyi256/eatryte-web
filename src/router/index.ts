@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import store from "@/store";
+
 import appConfig from "@/config/appConfig";
 import Home from "@/views/Home.vue";
 import Listing from "@/views/Listing.vue";
@@ -42,20 +44,33 @@ const scrollTop = () => {
 };
 
 router.beforeEach(async (to, _, next) => {
-  const isLoggedin = localStorage.getItem("isLoggedin");
+  const isLoggedin = localStorage.getItem("token");
   const { authRequired } = to.meta;
-  scrollTop();
-  document.title = `${appConfig.app.name} | ${to.meta.title}`;
-  if (isLoggedin) {
-    next();
-  } else if (!isLoggedin) {
-    if (authRequired) {
-      router.replace({ name: "home" });
-      return;
+
+  const setNavTitle = () => {
+    scrollTop();
+    document.title = `${appConfig.app.name} | ${to.meta.title}`;
+  }
+
+  if (authRequired) {
+    if(isLoggedin) {
+      next();
+      setNavTitle();
+    } else {
+      router.replace({ name: "login" })
+        .then(() => {
+          store.commit("app/toggleAlert", "Please login to continue");
+          setNavTitle(); 
+        }); 
     }
-    //router.replace({ name: "home" });
+  } else {
     next();
+    setNavTitle();
+    return;
   }
 });
+
+// Disable error logging
+router.onError(() => {})
 
 export default router;

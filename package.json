@@ -10,7 +10,6 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
     "@types/echarts": "^4.9.18",
     "@types/firebase": "^3.2.1",
@@ -31,6 +30,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
+    "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",

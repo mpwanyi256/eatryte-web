@@ -1,11 +1,9 @@
 import { ActionContext } from "vuex";
+import axios, { AxiosResponse } from "axios";
 import {
   getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
-import { doc, updateDoc, setDoc } from "firebase/firestore";
+import router from "@/router";
 
 import { AuthModuleState } from "./authModule";
 import { State } from "../../index";
@@ -14,7 +12,6 @@ import {
   createAccountPayload,
   User,
 } from "@/store/types";
-import { UserTypes } from "@/store/enum";
 import Router from "@/router";
 import { db } from "@/main";
 
@@ -37,14 +34,57 @@ const showAlert = (context: Context, message: string) => {
   });
 };
 
-const emailAuthentication = (context: Context, payload: EmailAuthPayload) => {
+const emailAuthentication = async (context: Context, payload: EmailAuthPayload) => {
   try {
     context.commit("toggleLoading", true);
-    const auth = getAuth();
     const { email, password } = payload;
-    signInWithEmailAndPassword(auth, email, password).catch(() => {
-      showAlert(context, "Invalid email or password");
-    });
+    const response = (await axios.post("/login/basic", {
+      email,
+      password,
+      })) as AxiosResponse<any>;
+
+    if (response.status === 200) {
+      const currentPath = router.currentRoute.value.name as string;
+      const { user, tokens } = response.data.data;
+      localStorage.setItem('token', tokens.accessToken)
+      localStorage.setItem('refreshToken', tokens.refreshToken)
+      context.commit("setUser", user);
+
+      if (currentPath === "login" || currentPath === "signup") {
+        router.replace({ name: "home" });
+      }
+    }
+  } catch(e: any) {
+    showAlert(context, e.message);
+  } finally {
+    context.commit("toggleLoading", false);
+  }
+};
+
+const getUser = async (context: Context) => {
+  try {
+    context.commit("toggleLoading", true);
+    if (localStorage.getItem('token') === null) {
+      if (!['login', 'signup'].includes(router.currentRoute.value.name as string)) {
+        router.replace({ name: "home" });
+      }
+      return;
+    }
+    const response = (await axios.get("/profile/me")) as AxiosResponse<any>;
+
+    if (response.status === 200) {
+      const currentPath = router.currentRoute.value.name as string;
+      const { user } = response.data.data;
+      context.commit("setUser", user);
+
+      if (currentPath === "login" || currentPath === "signup") {
+        router.replace({ name: "home" });
+      }
+    } else {
+      router.replace({ name: "home" });
+    }
+  } catch(e: any) {
+    showAlert(context, e.message);
   } finally {
     context.commit("toggleLoading", false);
   }
@@ -59,7 +99,7 @@ const updateProfile = async (
   payload: UpdateProfilePayload
 ) => {
   try {
-    const { id, firstName, lastName, mobileNumber } = payload;
+    const { firstName, lastName, mobileNumber } = payload;
     context.commit("toggleLoading", true);
 
     const loggedInUser = context.state.user;
@@ -68,26 +108,21 @@ const updateProfile = async (
       return;
     }
 
-    // Update user profile
-    const profileDocRef = doc(db, COLLECTION_NAME, id);
-    updateDoc(profileDocRef, {
-      firstName: firstName,
-      lastName: lastName,
-      mobileNumber: mobileNumber,
-    })
-      .then(() => {
-        context.commit("updateProfile", {
-          firstName,
-          lastName,
-          mobileNumber,
-        });
-        showAlert(context, "Profile updated successfully");
-      })
-      .catch(() => {
-        showAlert(context, "Failed to update profile");
-      });
+    const response = (await axios.put("/profile", {
+      firstName,
+      lastName,
+      mobileNumber,
+    })) as AxiosResponse<any>;
+
+    if(response.status === 200) {
+      const updatedProfile = response.data.data;
+      context.commit("setUpdatedProfile", updatedProfile);
+      showAlert(context, "Profile updated successfully");
+    } else {
+      showAlert(context, "Failed to update profile");
+    }
   } catch (e) {
-    console.log(e);
+    showAlert(context, "Failed to update profile");
   } finally {
     context.commit("toggleLoading", false);
   }
@@ -102,43 +137,43 @@ const signUpUserWithEmailAndPassword = async (
     const auth = getAuth();
     const { email, password, firstName, lastName } = payload;
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const { email, uid, emailVerified, photoURL } = userCredential.user;
-        const userProfile = {
-          email,
-          firstName,
-          lastName,
-          photoURL,
-          mobileNumber: "",
-          type: UserTypes.USER,
-        };
-        setDoc(doc(db, "profiles", uid), userProfile)
-          .then(() => {
-            const user: User = {
-              email,
-              id: uid,
-              emailVerified,
-              type: UserTypes.USER,
-              profile: {
-                firstName,
-                lastName,
-                mobileNumber: "",
-                photoURL,
-              },
-            };
-            toggleUserState(context, user);
-          })
-          .catch((error) => {
-            showAlert(context, error.message);
-          });
-      })
-      .catch(() => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        showAlert(context, "Something went wrong");
-      });
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     const { email, uid, emailVerified, photoURL } = userCredential.user;
+    //     const userProfile = {
+    //       email,
+    //       firstName,
+    //       lastName,
+    //       photoURL,
+    //       mobileNumber: "",
+    //       type: UserTypes.USER,
+    //     };
+    //     setDoc(doc(db, "profiles", uid), userProfile)
+    //       .then(() => {
+    //         const user: User = {
+    //           email,
+    //           id: uid,
+    //           emailVerified,
+    //           type: UserTypes.USER,
+    //           profile: {
+    //             firstName,
+    //             lastName,
+    //             mobileNumber: "",
+    //             photoURL,
+    //           },
+    //         };
+    //         toggleUserState(context, user);
+    //       })
+    //       .catch((error) => {
+    //         showAlert(context, error.message);
+    //       });
+    //   })
+    //   .catch(() => {
+    //     // const errorCode = error.code;
+    //     // const errorMessage = error.message;
+    //     showAlert(context, "Something went wrong");
+    //   });
 
     showAlert(context, "Account created successfully");
   } catch (e) {
@@ -148,12 +183,20 @@ const signUpUserWithEmailAndPassword = async (
   }
 };
 
-const signoutUser = (context: Context) => {
-  const auth = getAuth();
-  signOut(auth).then(() => {
-    context.commit("setUser", null);
-    Router.replace({ name: "home" });
-  });
+const signoutUser = async(context: Context) => {
+  try {
+    const response = (await axios.delete("/logout")) as AxiosResponse<any>;
+    console.log("logout response", response.data);
+    if (response.status === 200) {
+      context.commit("setUser", null);
+      if (Router.currentRoute.value.name === "login") return;
+      Router.replace({ name: "home" });
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+    }
+  } catch(e: any) {
+    showAlert(context, e.message);
+  }
 };
 
 export default {
@@ -162,4 +205,5 @@ export default {
   updateProfile,
   signoutUser,
   signUpUserWithEmailAndPassword,
+  getUser,
 };
