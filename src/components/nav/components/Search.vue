@@ -45,7 +45,7 @@
       </div>
       <div class="search_link profile">
         <v-avatar
-          image="https://i.pravatar.cc/300"
+          :image="userProfile.profile?.profilePictureURL || `@/assets/images/avator.png`"
           size="32"
           class="mr-3"
         />
@@ -86,6 +86,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useStore();
+    const userProfile = computed<User>(() => store.state.auth.user);
 
     const isLoggedIn = computed<User>(() => store.state.auth.user);
     const goToLoginPage = () => {
@@ -107,6 +108,7 @@ export default defineComponent({
     return {
       isLoggedIn,
       userLastName,
+      userProfile,
       goToLoginPage,
       isActiveRoute,
     };

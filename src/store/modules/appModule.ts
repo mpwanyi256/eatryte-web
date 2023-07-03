@@ -1,9 +1,10 @@
 import axios from "axios";
 import { ActionContext } from "vuex";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import config from "@/config/appConfig";
 import { State } from "../";
-import { Country, BusinessType } from "../types"
+import { Country, BusinessType, FirebaseFileUploafPayload } from "../types";
 
 export interface QuickLink {
   title: string;
@@ -21,6 +22,8 @@ export interface AppModuleState {
   countries: Array<Country>;
   selectedCountry: Country | null;
   businessTypes: Array<BusinessType>;
+  uploading: boolean;
+  uploadProgress: number;
 }
 
 type Context = ActionContext<AppModuleState, State>;
@@ -67,6 +70,8 @@ export default {
     countries: [],
     selectedCountry: null,
     businessTypes: [],
+    uploading: false,
+    uploadProgress: 0,
   }),
   mutations: {
     toggleDrawer(state: AppModuleState) {
@@ -101,6 +106,12 @@ export default {
     },
     setBusinessTypes(state: AppModuleState, businessTypes: Array<BusinessType>) {
       state.businessTypes = businessTypes;
+    },
+    setUploading(state: AppModuleState, uploading: boolean) {
+      state.uploading = uploading;
+    },
+    setUploadProgress(state: AppModuleState, uploadProgress: number) {
+      state.uploadProgress = uploadProgress;
     }
   },
   actions: {
@@ -121,7 +132,61 @@ export default {
         .then((response) => {
           commit("setBusinessTypes", response.data.data);
         });
-    }
+    },
+    uploadFile({ commit }: Context, payload: FirebaseFileUploafPayload) {
+      try {
+        commit("setUploading", true);
+        const { file, uniquePath, bucketName, cb } = payload;
+        const storage = getStorage();
+        const storageRef = ref(storage, `${bucketName}/${uniquePath}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        const setError = (error: string) => {
+          commit("toggleAlert", error);
+          commit("setUploading", false);
+        }
+
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            commit("setUploadProgress", Math.round(progress));
+            switch (snapshot.state) {
+              case 'paused':
+                setError('Upload is paused');
+                break;
+              case 'running':
+                setError('Upload is running');
+                break;
+            }
+          }, 
+          (error) => {
+            switch (error.code) {
+              case 'storage/unauthorized':
+                setError('User does not have permission to access the object');
+                break;
+              case 'storage/canceled':
+                setError('User canceled the upload');
+                break;
+              case 'storage/unknown':
+                setError('Unknown error occurred, upload failed');
+                break;
+            }
+          }, 
+          () => {
+            // Upload completed successfully, now we can get the download URL
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              cb(downloadURL);
+            });
+          }
+        );
+      } catch(e) {
+        console.log(e);
+      } finally {
+        commit("setUploading", false);
+      }
+    },
   },
   getters: {
     countrySet: (state: AppModuleState) => {

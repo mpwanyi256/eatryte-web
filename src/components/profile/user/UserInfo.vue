@@ -9,7 +9,7 @@
       v-show="!loading"
       class="info_details"
     >
-      <AvatorUpload @selected="uploadAvator" />
+      <AvatorUpload :url="userProfileAvator" @selected="uploadAvator" />
       <div class="form-group">
         <label for="username">First name</label>
         <input
@@ -49,7 +49,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch, onMounted } from "vue";
 import { useStore } from "vuex";
-import { User, UpdateProfilePayload } from "@/store/types";
+import { User, UpdateProfilePayload, FirebaseFileUploafPayload } from "@/store/types";
 import LoadingSpinner from "@/components/generics/LoadingSpinner.vue";
 import AvatorUpload from "@/components/generics/AvatorUpload.vue";
 
@@ -62,6 +62,9 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const userAccount = computed<User>(() => store.state.auth.user);
+    const userProfileAvator = computed<string>(
+      () => store.state.auth.user?.profile?.profilePictureURL || ""
+    );
     const loading = computed(() => store.state.auth.loading);
 
     const setProfile = (user: User) => {
@@ -93,9 +96,23 @@ export default defineComponent({
       await store.dispatch("auth/updateProfile", userProfile);
     };
 
-    // ::TODO:: Implement firebase file upload
-    const uploadAvator = (file: File) => {
-      console.log("Upload avator", file);
+    const updateProfilePicture = async (downloadUrl: string) => {
+      console.log("updating profile picture::", downloadUrl)
+      if (!userAccount.value || !userAccount.value.profile) return;
+      const userProfile: UpdateProfilePayload = {
+        profilePictureURL: downloadUrl,
+      };
+      await store.dispatch("auth/updateProfile", userProfile);
+    };
+
+    const uploadAvator = async (file: File) => {
+      const uploadPayload: FirebaseFileUploafPayload = {
+        file,
+        bucketName: "profilePictures",
+        uniquePath: userAccount.value._id,
+        cb: updateProfilePicture,
+      };
+      await store.dispatch("app/uploadFile", uploadPayload);
     };
 
     onMounted(() => {
@@ -108,6 +125,7 @@ export default defineComponent({
       lastName,
       mobileNumber,
       loading,
+      userProfileAvator,
       updateProfile,
       uploadAvator,
     };

@@ -7,7 +7,7 @@
       @drop.prevent="onFileDropped"
       @click="triggerFileInput"
     >
-      <template v-if="!file">
+      <template v-if="!file || !url.length">
         <span class="logo_upload_label">
           {{
             `Drag and drop or click to upload. Minimum size: ${minimumFileWidth}X${minimumFileWidth} pixels file not more than ${maxFileSize}.`
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, onDeactivated } from "vue";
+import { defineComponent, ref, onMounted, onDeactivated, watch } from "vue";
 
 export default defineComponent({
   name: "AvatorUpload",
@@ -64,13 +64,23 @@ export default defineComponent({
       "drop",
     ]);
     const active = ref<boolean>(false);
-    const file = ref<File | null>(null);
+    const file = ref<File | null | boolean>(null);
 
     // Methods
     const setAppBackgroundImage = (file: string) => {
       if (!AppLogoUploaddropFileDiv.value) return;
       AppLogoUploaddropFileDiv.value.style.backgroundImage = `url(${file})`;
     };
+
+    // Set a watcher to url prop
+    watch(
+      () => props.url,
+      (url) => {
+        if (!url) return;
+        setAppBackgroundImage(url);
+        file.value = true;
+      }
+    );
 
     const onFileChange = (e: any) => {
       const fileSelected = e.target.files[0];

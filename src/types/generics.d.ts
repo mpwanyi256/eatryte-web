@@ -20,7 +20,7 @@ export interface routeInfo {
 export interface AppConfig {
   api: {
     baseURL: string;
-    port: number;
+    port: number | string;
     apiKey: string;
   };
   app: {

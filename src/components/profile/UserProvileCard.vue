@@ -5,7 +5,7 @@
   >
     <div class="info_card_avator">
       <v-avatar
-        image="https://i.pravatar.cc/300"
+        :image="user.profile?.profilePictureURL || `@/assets/images/avator.png`"
         size="60"
       />
     </div>

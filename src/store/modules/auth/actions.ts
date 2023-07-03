@@ -96,7 +96,7 @@ const updateProfile = async (
   payload: UpdateProfilePayload
 ) => {
   try {
-    const { firstName, lastName, mobileNumber } = payload;
+    const { firstName, lastName, mobileNumber, profilePictureURL } = payload;
     context.commit("toggleLoading", true);
 
     const loggedInUser = context.state.user;
@@ -109,6 +109,7 @@ const updateProfile = async (
       firstName,
       lastName,
       mobileNumber,
+      profilePictureURL,
     })) as AxiosResponse<any>;
 
     if(response.status === 200) {

@@ -9,7 +9,7 @@ export interface UserProfile {
   firstName?: string;
   lastName?: string;
   mobileNumber?: string;
-  photoURL?: string | null;
+  profilePictureURL?: string | null;
 }
 
 export interface User {
@@ -25,9 +25,9 @@ export interface User {
 }
 
 export interface UpdateProfilePayload {
-  firstName: string;
-  lastName: string;
-  mobileNumber: string;
+  firstName?: string;
+  lastName?: string;
+  mobileNumber?: string;
   profilePictureURL?: string;
 }
 
@@ -83,4 +83,11 @@ export interface BusinessType {
   name: string;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface FirebaseFileUploafPayload {
+  file: File;
+  uniquePath: string;
+  bucketName: string;
+  cb: (url: string) => void;
 }
