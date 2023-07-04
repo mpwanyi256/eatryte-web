@@ -53,15 +53,17 @@
         >
       </div>
       <div class="form-group">
-        <label for="email">Business email</label>
-        <input
-          v-model.trim="email"
-          type="email"
-          name="email"
-          placeholder="An email we will use for all business communication"
-        >
-      </div>
-      <div class="form-group">
+        <label for="type">Country</label>
+        <v-select
+          v-model="country"
+          :items="countries"
+          name="country"
+          item-value="_id"
+          item-title="name"
+          density="compact"
+          variant="outlined"
+          placeholder="Select country"
+        />
         <label for="type">Business type</label>
         <v-select
           v-model="businessType"
@@ -88,7 +90,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store";
 import validator from "validator";
@@ -107,14 +109,16 @@ export default defineComponent({
     );
     const userAccount = computed(() => store.state.auth.user);
     const loading = computed(() => store.state.merchant.loading);
+    const countries = computed(() => store.state.app.countries);
 
     const businessName = ref<string>("");
     const address = ref<string>("");
     const description = ref<string>("");
     const tinNumber = ref<string>("");
     const contact = ref<string>("");
-    const email = ref<string>("");
+    // const email = ref<string>("");
     const businessType = ref<string>("");
+    const country = ref<string>("");
 
     const isValidForm = computed(() => {
       return (
@@ -122,15 +126,14 @@ export default defineComponent({
         validator.isLength(tinNumber.value, { min: 3 }) &&
         validator.isLength(address.value, { min: 3 }) &&
         validator.isLength(contact.value, { min: 3 }) &&
-        validator.isEmail(email.value) &&
-        validator.isLength(businessType.value, { min: 3 })
+        validator.isLength(businessType.value, { min: 3 }) &&
+        validator.isLength(country.value, { min: 3 })
       );
     });
 
     const registerMerchant = async () => {
       if (isValidForm.value === false || !userAccount.value) return;
       const payload = {
-        email: email.value,
         businessName: businessName.value,
         businessType: businessType.value,
         address: address.value,
@@ -138,13 +141,21 @@ export default defineComponent({
         contactNumber: contact.value,
         description: description.value,
         tinNumber: tinNumber.value,
+        country: country.value,
       };
       await store.dispatch("merchant/registerMerchantAccount", payload);
     };
 
+    onMounted(() => {
+      // set default country
+      const defaultCountry = JSON.parse(localStorage.getItem("country") || "{}");
+      if (defaultCountry && defaultCountry._id) {
+        country.value = defaultCountry._id;
+      }
+    });
+
     return {
       businessName,
-      email,
       description,
       tinNumber,
       address,
@@ -154,6 +165,8 @@ export default defineComponent({
       isValidForm,
       userAccount,
       loading,
+      countries,
+      country,
       registerMerchant,
     };
   },

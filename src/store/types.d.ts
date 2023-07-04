@@ -48,6 +48,7 @@ export interface MerchantAccount {
   address: string;
   contact: string;
   email: string;
+  country: string;
   description: string;
   category: BusinessCategory;
   certificateOfRegistration: string | null;

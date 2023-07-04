@@ -177,6 +177,11 @@ export default {
           () => {
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              // check if url is valid
+              if(!downloadURL) {
+                setError('Upload failed, please try again');
+                return;
+              }
               cb(downloadURL);
             });
           }
