@@ -9,7 +9,10 @@
       v-show="!loading"
       class="info_details"
     >
-      <AvatorUpload :url="userProfileAvator" @selected="uploadAvator" />
+      <AvatorUpload
+        :url="userProfileAvator"
+        @selected="uploadAvator"
+      />
       <div class="form-group">
         <label for="username">First name</label>
         <input

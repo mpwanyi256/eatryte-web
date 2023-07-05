@@ -28,11 +28,19 @@ const registerMerchantAccount = async (
   try {
     context.commit("toggleLoading", true);
 
-    const response = await axios.post('/merchant/register', payload);
-
-    context.commit("setMerchantAccount", response.data.data);
+    axios.post('/merchant/register', payload)
+      .then((response) => {
+        if (response.status === 200) {
+          context.commit("setMerchantAccount", response.data.data);
+        }
+      })
+      .catch((error) => {
+        context.commit("app/toggleAlert", error.response.data.message, {
+          root: true,
+        });
+      });
   } catch(e: any) {
-    context.commit("app/toggleAlert", 'Sorry, you can only have one merchant Account.', {
+    context.commit("app/toggleAlert", 'Sorry, something wet wrong.', {
       root: true,
     });
   } finally {

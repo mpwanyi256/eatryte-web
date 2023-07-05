@@ -26,12 +26,12 @@
         >
       </div>
       <div class="form-group">
-        <label for="tin">Tin Number</label>
+        <label for="tin">Personal Tin Number</label>
         <input
           v-model.trim="tinNumber"
           type="text"
           name="tin"
-          placeholder="Tin Number"
+          placeholder="PersonalTin Number"
         >
       </div>
       <div class="form-group">
@@ -64,17 +64,6 @@
           variant="outlined"
           placeholder="Select country"
         />
-        <label for="type">Business type</label>
-        <v-select
-          v-model="businessType"
-          :items="BuzTypes"
-          name="type"
-          item-value="_id"
-          item-title="name"
-          density="compact"
-          variant="outlined"
-          placeholder="Select business type"
-        />
       </div>
       <div class="form-group">
         <button
@@ -104,9 +93,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<State>();
-    const BuzTypes = computed(
-      () => store.state.app.businessTypes
-    );
     const userAccount = computed(() => store.state.auth.user);
     const loading = computed(() => store.state.merchant.loading);
     const countries = computed(() => store.state.app.countries);
@@ -116,8 +102,6 @@ export default defineComponent({
     const description = ref<string>("");
     const tinNumber = ref<string>("");
     const contact = ref<string>("");
-    // const email = ref<string>("");
-    const businessType = ref<string>("");
     const country = ref<string>("");
 
     const isValidForm = computed(() => {
@@ -126,7 +110,6 @@ export default defineComponent({
         validator.isLength(tinNumber.value, { min: 3 }) &&
         validator.isLength(address.value, { min: 3 }) &&
         validator.isLength(contact.value, { min: 3 }) &&
-        validator.isLength(businessType.value, { min: 3 }) &&
         validator.isLength(country.value, { min: 3 })
       );
     });
@@ -135,9 +118,7 @@ export default defineComponent({
       if (isValidForm.value === false || !userAccount.value) return;
       const payload = {
         businessName: businessName.value,
-        businessType: businessType.value,
         address: address.value,
-        certificateOfRegistration: "",
         contactNumber: contact.value,
         description: description.value,
         tinNumber: tinNumber.value,
@@ -160,8 +141,6 @@ export default defineComponent({
       tinNumber,
       address,
       contact,
-      businessType,
-      BuzTypes,
       isValidForm,
       userAccount,
       loading,
