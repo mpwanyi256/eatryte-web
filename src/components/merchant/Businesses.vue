@@ -1,14 +1,14 @@
 <template>
   <div class="outlets">
     <OverviewHeader
-      title="Outlets"
-      sub-title="Manage outlets"
+      title="Businesses"
+      sub-title="Manage businesses"
     >
       <template #actions>
         <button class="outlets-create-btn">
           <v-icon left>
             mdi-plus
-          </v-icon>Add Outlet
+          </v-icon>Add business
         </button>
       </template>
     </OverviewHeader>

@@ -158,9 +158,10 @@ const signoutUser = async(context: Context) => {
   try {
     const response = (await axios.delete("/logout")) as AxiosResponse<any>;
     if (response.status === 200) {
-      context.commit("setUser", null);
+      context.commit("resetStore");
+      context.dispatch("merchant/resetMerchantData", { root: true });
       if (Router.currentRoute.value.name === "login") return;
-      Router.replace({ name: "home" });
+      Router.replace({ name: "login" });
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
     }

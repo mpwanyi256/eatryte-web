@@ -15,8 +15,12 @@ const getMerchantAccount = async (context: Context) => {
     const response = await axios.get('/merchant/account');
     if (response.status === 200) {
       context.commit("setMerchantAccount", response.data.data);
+    } else {
+      context.commit("setMerchantAccount", null);
     }
-  } catch {} finally {
+  } catch {
+    context.commit("setMerchantAccount", null);
+  } finally {
     context.commit("toggleLoading", false);
   }
 };

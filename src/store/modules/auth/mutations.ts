@@ -23,9 +23,16 @@ const setUser = (state: AuthModuleState, user: User | null) => {
   state.user = user;
 };
 
+const resetStore = (state: AuthModuleState) => {
+  state.user = null;
+  state.loading = false;
+  state.alertMessage = "";
+};
+
 export default {
   toggleAlert,
   setUser,
   setUpdatedProfile,
   toggleLoading,
+  resetStore,
 };

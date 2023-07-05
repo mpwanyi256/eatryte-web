@@ -50,9 +50,9 @@ export default defineComponent({
         icon: "mdi-cart-outline",
       },
       {
-        title: "Outlets",
-        name: "merchant-outlets",
-        description: "Manage all your outlets",
+        title: "Bisinesses",
+        name: "bisinesses",
+        description: "Manage all your bisinesses",
         icon: "mdi-store-marker",
       },
       {

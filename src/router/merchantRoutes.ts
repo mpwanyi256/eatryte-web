@@ -22,9 +22,9 @@ const machertRoutes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "outlets",
-        name: "merchant-outlets",
-        component: () => import("@/components/merchant/MerchantOutlets.vue"),
+        path: "bisinesses",
+        name: "bisinesses",
+        component: () => import("@/components/merchant/Businesses.vue"),
         meta: {
           title: "Merchant Outlets",
           icon: "mdi-dashboard",
