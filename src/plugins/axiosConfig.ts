@@ -30,12 +30,14 @@ axios.interceptors.response.use((res) => {
     return res;
 }, (err) => {
     const { response } = err;
+    const currentPath = router.currentRoute.value.name as string;
     if (response) {
         switch (response.status) {
             case 401:
                 // if you're not authorized, log out the user
-                store.dispatch('auth/signoutUser');
-                router.push({ name: 'login' });
+                if (!['login', 'signup'].includes(router.currentRoute.value.name as string)) {
+                    router.replace({ name: "login" });
+                }
                 break;
             // case 403:
             //     // if you're forbidden from accessing something, redirect to the home page

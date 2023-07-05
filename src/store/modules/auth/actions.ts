@@ -61,6 +61,7 @@ const emailAuthentication = async (context: Context, payload: EmailAuthPayload) 
 const getUser = async (context: Context) => {
   try {
     context.commit("toggleLoading", true);
+    router.replace({ name: "login" });
     if (localStorage.getItem('token') === null) {
       if (!['login', 'signup'].includes(router.currentRoute.value.name as string)) {
         router.replace({ name: "home" });
@@ -74,14 +75,14 @@ const getUser = async (context: Context) => {
       const { user } = response.data.data;
       context.commit("setUser", user);
 
-      if (currentPath === "login" || currentPath === "signup") {
-        router.replace({ name: "home" });
+      if (["login", "signup"].includes(currentPath)) {
+        router.replace({ name: "profile-info" });
       }
     } else {
-      router.replace({ name: "home" });
+      // router.replace({ name: "home" });
     }
   } catch(e: any) {
-    showAlert(context, e.message);
+    showAlert(context, "Please login to continue");
   } finally {
     context.commit("toggleLoading", false);
   }
